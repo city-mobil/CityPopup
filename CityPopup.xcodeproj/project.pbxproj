@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		26071B17256BCD80009F5078 /* CityPopup.h in Headers */ = {isa = PBXBuildFile; fileRef = 26071B15256BCD80009F5078 /* CityPopup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26071B25256BCE64009F5078 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B24256BCE64009F5078 /* AppDelegate.swift */; };
-		26071B27256BCE64009F5078 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B26256BCE64009F5078 /* SceneDelegate.swift */; };
-		26071B29256BCE64009F5078 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B28256BCE64009F5078 /* ViewController.swift */; };
-		26071B2C256BCE64009F5078 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26071B2A256BCE64009F5078 /* Main.storyboard */; };
 		26071B2E256BCE66009F5078 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26071B2D256BCE66009F5078 /* Assets.xcassets */; };
 		26071B31256BCE66009F5078 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26071B2F256BCE66009F5078 /* LaunchScreen.storyboard */; };
 		26071B96256BF0CB009F5078 /* CPAttributes+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B6A256BF0CB009F5078 /* CPAttributes+Position.swift */; };
@@ -47,6 +44,7 @@
 		26071BB4256BF0CB009F5078 /* PresentationDispatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B92256BF0CB009F5078 /* PresentationDispatchService.swift */; };
 		26071BB5256BF0CB009F5078 /* ImplementationInfix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B94256BF0CB009F5078 /* ImplementationInfix.swift */; };
 		26071BB6256BF0CB009F5078 /* AnimatedPressViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B95256BF0CB009F5078 /* AnimatedPressViewProtocol.swift */; };
+		26071BC9256C0482009F5078 /* AlertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071BC8256C0482009F5078 /* AlertsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,9 +53,6 @@
 		26071B16256BCD80009F5078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26071B22256BCE64009F5078 /* CityPopupExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityPopupExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26071B24256BCE64009F5078 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		26071B26256BCE64009F5078 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		26071B28256BCE64009F5078 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		26071B2B256BCE64009F5078 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		26071B2D256BCE66009F5078 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26071B30256BCE66009F5078 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26071B32256BCE66009F5078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,6 +90,7 @@
 		26071B94256BF0CB009F5078 /* ImplementationInfix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImplementationInfix.swift; sourceTree = "<group>"; };
 		26071B95256BF0CB009F5078 /* AnimatedPressViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedPressViewProtocol.swift; sourceTree = "<group>"; };
 		26071BBA256BFEF0009F5078 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		26071BC8256C0482009F5078 /* AlertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,9 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				26071B24256BCE64009F5078 /* AppDelegate.swift */,
-				26071B26256BCE64009F5078 /* SceneDelegate.swift */,
-				26071B28256BCE64009F5078 /* ViewController.swift */,
-				26071B2A256BCE64009F5078 /* Main.storyboard */,
+				26071BC8256C0482009F5078 /* AlertsViewController.swift */,
 				26071B2D256BCE66009F5078 /* Assets.xcassets */,
 				26071B2F256BCE66009F5078 /* LaunchScreen.storyboard */,
 				26071B32256BCE66009F5078 /* Info.plist */,
@@ -401,7 +395,6 @@
 			files = (
 				26071B31256BCE66009F5078 /* LaunchScreen.storyboard in Resources */,
 				26071B2E256BCE66009F5078 /* Assets.xcassets in Resources */,
-				26071B2C256BCE64009F5078 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,23 +445,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26071B29256BCE64009F5078 /* ViewController.swift in Sources */,
 				26071B25256BCE64009F5078 /* AppDelegate.swift in Sources */,
-				26071B27256BCE64009F5078 /* SceneDelegate.swift in Sources */,
+				26071BC9256C0482009F5078 /* AlertsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		26071B2A256BCE64009F5078 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				26071B2B256BCE64009F5078 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		26071B2F256BCE66009F5078 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -661,6 +645,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CityPopupExamples/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -679,6 +664,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CityPopupExamples/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

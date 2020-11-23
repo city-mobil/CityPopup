@@ -70,6 +70,7 @@ extension CityPopup {
     ///   - attributes: Attributes for the view.
     ///   - windowLevel: Popup display level. Default value is `.statusBar`.
     public func show(
+        // TODO: - (p.chilimov) view -> popup
         view: CPPopupViewProtocol,
         animator: CPAnimatorProtocol,
         attributes: CPAttributes,
