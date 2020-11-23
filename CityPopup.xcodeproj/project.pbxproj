@@ -14,6 +14,39 @@
 		26071B2C256BCE64009F5078 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26071B2A256BCE64009F5078 /* Main.storyboard */; };
 		26071B2E256BCE66009F5078 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26071B2D256BCE66009F5078 /* Assets.xcassets */; };
 		26071B31256BCE66009F5078 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26071B2F256BCE66009F5078 /* LaunchScreen.storyboard */; };
+		26071B96256BF0CB009F5078 /* CPAttributes+Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B6A256BF0CB009F5078 /* CPAttributes+Position.swift */; };
+		26071B97256BF0CB009F5078 /* CPAttributes+InteractionHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B6B256BF0CB009F5078 /* CPAttributes+InteractionHandling.swift */; };
+		26071B98256BF0CB009F5078 /* CPAttributes+Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B6C256BF0CB009F5078 /* CPAttributes+Priority.swift */; };
+		26071B99256BF0CB009F5078 /* CPColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B6D256BF0CB009F5078 /* CPColor.swift */; };
+		26071B9A256BF0CB009F5078 /* CPSlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B6F256BF0CB009F5078 /* CPSlideAnimator.swift */; };
+		26071B9B256BF0CB009F5078 /* CPFadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B70256BF0CB009F5078 /* CPFadeAnimator.swift */; };
+		26071B9C256BF0CB009F5078 /* CPAnimatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B71256BF0CB009F5078 /* CPAnimatorProtocol.swift */; };
+		26071B9D256BF0CB009F5078 /* CPAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B72256BF0CB009F5078 /* CPAttributes.swift */; };
+		26071B9E256BF0CB009F5078 /* CPDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B73256BF0CB009F5078 /* CPDirection.swift */; };
+		26071B9F256BF0CB009F5078 /* CPAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B76256BF0CB009F5078 /* CPAlertView.swift */; };
+		26071BA0256BF0CB009F5078 /* CPAlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B77256BF0CB009F5078 /* CPAlertStyle.swift */; };
+		26071BA1256BF0CB009F5078 /* CPAlertActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B78256BF0CB009F5078 /* CPAlertActionView.swift */; };
+		26071BA2256BF0CB009F5078 /* CPAlertActionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B79256BF0CB009F5078 /* CPAlertActionStyle.swift */; };
+		26071BA3256BF0CB009F5078 /* SimpleAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7A256BF0CB009F5078 /* SimpleAlertView.swift */; };
+		26071BA4256BF0CB009F5078 /* CPToastStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7C256BF0CB009F5078 /* CPToastStyle.swift */; };
+		26071BA5256BF0CB009F5078 /* CPToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7D256BF0CB009F5078 /* CPToastView.swift */; };
+		26071BA6256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */; };
+		26071BA7256BF0CB009F5078 /* CPPopupViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7F256BF0CB009F5078 /* CPPopupViewProtocol.swift */; };
+		26071BA8256BF0CB009F5078 /* CityPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B81256BF0CB009F5078 /* CityPopup.swift */; };
+		26071BA9256BF0CB009F5078 /* PresentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B84256BF0CB009F5078 /* PresentOperation.swift */; };
+		26071BAA256BF0CB009F5078 /* UIView+anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B86256BF0CB009F5078 /* UIView+anchors.swift */; };
+		26071BAB256BF0CB009F5078 /* UIView+embedInScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B87256BF0CB009F5078 /* UIView+embedInScrollView.swift */; };
+		26071BAC256BF0CB009F5078 /* UIColor+colorAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B88256BF0CB009F5078 /* UIColor+colorAdjustment.swift */; };
+		26071BAD256BF0CB009F5078 /* UIColor+dynamicColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B89256BF0CB009F5078 /* UIColor+dynamicColor.swift */; };
+		26071BAE256BF0CB009F5078 /* UIStackView+customSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B8A256BF0CB009F5078 /* UIStackView+customSpacing.swift */; };
+		26071BAF256BF0CB009F5078 /* PassthroughStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B8C256BF0CB009F5078 /* PassthroughStackView.swift */; };
+		26071BB0256BF0CB009F5078 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B8D256BF0CB009F5078 /* PassthroughView.swift */; };
+		26071BB1256BF0CB009F5078 /* PassthroughWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B8E256BF0CB009F5078 /* PassthroughWindow.swift */; };
+		26071BB2256BF0CB009F5078 /* PopupPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B90256BF0CB009F5078 /* PopupPresentation.swift */; };
+		26071BB3256BF0CB009F5078 /* DispatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B91256BF0CB009F5078 /* DispatchService.swift */; };
+		26071BB4256BF0CB009F5078 /* PresentationDispatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B92256BF0CB009F5078 /* PresentationDispatchService.swift */; };
+		26071BB5256BF0CB009F5078 /* ImplementationInfix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B94256BF0CB009F5078 /* ImplementationInfix.swift */; };
+		26071BB6256BF0CB009F5078 /* AnimatedPressViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B95256BF0CB009F5078 /* AnimatedPressViewProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +61,40 @@
 		26071B2D256BCE66009F5078 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26071B30256BCE66009F5078 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26071B32256BCE66009F5078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26071B6A256BF0CB009F5078 /* CPAttributes+Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CPAttributes+Position.swift"; sourceTree = "<group>"; };
+		26071B6B256BF0CB009F5078 /* CPAttributes+InteractionHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CPAttributes+InteractionHandling.swift"; sourceTree = "<group>"; };
+		26071B6C256BF0CB009F5078 /* CPAttributes+Priority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CPAttributes+Priority.swift"; sourceTree = "<group>"; };
+		26071B6D256BF0CB009F5078 /* CPColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPColor.swift; sourceTree = "<group>"; };
+		26071B6F256BF0CB009F5078 /* CPSlideAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPSlideAnimator.swift; sourceTree = "<group>"; };
+		26071B70256BF0CB009F5078 /* CPFadeAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPFadeAnimator.swift; sourceTree = "<group>"; };
+		26071B71256BF0CB009F5078 /* CPAnimatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAnimatorProtocol.swift; sourceTree = "<group>"; };
+		26071B72256BF0CB009F5078 /* CPAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAttributes.swift; sourceTree = "<group>"; };
+		26071B73256BF0CB009F5078 /* CPDirection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPDirection.swift; sourceTree = "<group>"; };
+		26071B76256BF0CB009F5078 /* CPAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAlertView.swift; sourceTree = "<group>"; };
+		26071B77256BF0CB009F5078 /* CPAlertStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAlertStyle.swift; sourceTree = "<group>"; };
+		26071B78256BF0CB009F5078 /* CPAlertActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAlertActionView.swift; sourceTree = "<group>"; };
+		26071B79256BF0CB009F5078 /* CPAlertActionStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAlertActionStyle.swift; sourceTree = "<group>"; };
+		26071B7A256BF0CB009F5078 /* SimpleAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleAlertView.swift; sourceTree = "<group>"; };
+		26071B7C256BF0CB009F5078 /* CPToastStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPToastStyle.swift; sourceTree = "<group>"; };
+		26071B7D256BF0CB009F5078 /* CPToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPToastView.swift; sourceTree = "<group>"; };
+		26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPViewWithLifecycleProtocol.swift; sourceTree = "<group>"; };
+		26071B7F256BF0CB009F5078 /* CPPopupViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPopupViewProtocol.swift; sourceTree = "<group>"; };
+		26071B81256BF0CB009F5078 /* CityPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityPopup.swift; sourceTree = "<group>"; };
+		26071B84256BF0CB009F5078 /* PresentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentOperation.swift; sourceTree = "<group>"; };
+		26071B86256BF0CB009F5078 /* UIView+anchors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+anchors.swift"; sourceTree = "<group>"; };
+		26071B87256BF0CB009F5078 /* UIView+embedInScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+embedInScrollView.swift"; sourceTree = "<group>"; };
+		26071B88256BF0CB009F5078 /* UIColor+colorAdjustment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+colorAdjustment.swift"; sourceTree = "<group>"; };
+		26071B89256BF0CB009F5078 /* UIColor+dynamicColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+dynamicColor.swift"; sourceTree = "<group>"; };
+		26071B8A256BF0CB009F5078 /* UIStackView+customSpacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+customSpacing.swift"; sourceTree = "<group>"; };
+		26071B8C256BF0CB009F5078 /* PassthroughStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughStackView.swift; sourceTree = "<group>"; };
+		26071B8D256BF0CB009F5078 /* PassthroughView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
+		26071B8E256BF0CB009F5078 /* PassthroughWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughWindow.swift; sourceTree = "<group>"; };
+		26071B90256BF0CB009F5078 /* PopupPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupPresentation.swift; sourceTree = "<group>"; };
+		26071B91256BF0CB009F5078 /* DispatchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchService.swift; sourceTree = "<group>"; };
+		26071B92256BF0CB009F5078 /* PresentationDispatchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationDispatchService.swift; sourceTree = "<group>"; };
+		26071B94256BF0CB009F5078 /* ImplementationInfix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImplementationInfix.swift; sourceTree = "<group>"; };
+		26071B95256BF0CB009F5078 /* AnimatedPressViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedPressViewProtocol.swift; sourceTree = "<group>"; };
+		26071BBA256BFEF0009F5078 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +121,7 @@
 				26071B14256BCD80009F5078 /* CityPopup */,
 				26071B23256BCE64009F5078 /* CityPopupExamples */,
 				26071B13256BCD80009F5078 /* Products */,
+				26071BB9256BFEEF009F5078 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +137,8 @@
 		26071B14256BCD80009F5078 /* CityPopup */ = {
 			isa = PBXGroup;
 			children = (
+				26071B82256BF0CB009F5078 /* Internal */,
+				26071B68256BF0CB009F5078 /* Public */,
 				26071B15256BCD80009F5078 /* CityPopup.h */,
 				26071B16256BCD80009F5078 /* Info.plist */,
 			);
@@ -87,6 +157,149 @@
 				26071B32256BCE66009F5078 /* Info.plist */,
 			);
 			path = CityPopupExamples;
+			sourceTree = "<group>";
+		};
+		26071B68256BF0CB009F5078 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				26071B69256BF0CB009F5078 /* Models */,
+				26071B74256BF0CB009F5078 /* Views */,
+				26071B80256BF0CB009F5078 /* Services */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		26071B69256BF0CB009F5078 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				26071B6A256BF0CB009F5078 /* CPAttributes+Position.swift */,
+				26071B6B256BF0CB009F5078 /* CPAttributes+InteractionHandling.swift */,
+				26071B6C256BF0CB009F5078 /* CPAttributes+Priority.swift */,
+				26071B6D256BF0CB009F5078 /* CPColor.swift */,
+				26071B6E256BF0CB009F5078 /* Animators */,
+				26071B72256BF0CB009F5078 /* CPAttributes.swift */,
+				26071B73256BF0CB009F5078 /* CPDirection.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		26071B6E256BF0CB009F5078 /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				26071B6F256BF0CB009F5078 /* CPSlideAnimator.swift */,
+				26071B70256BF0CB009F5078 /* CPFadeAnimator.swift */,
+				26071B71256BF0CB009F5078 /* CPAnimatorProtocol.swift */,
+			);
+			path = Animators;
+			sourceTree = "<group>";
+		};
+		26071B74256BF0CB009F5078 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26071B75256BF0CB009F5078 /* Alert */,
+				26071B7A256BF0CB009F5078 /* SimpleAlertView.swift */,
+				26071B7B256BF0CB009F5078 /* Toast */,
+				26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */,
+				26071B7F256BF0CB009F5078 /* CPPopupViewProtocol.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		26071B75256BF0CB009F5078 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				26071B76256BF0CB009F5078 /* CPAlertView.swift */,
+				26071B77256BF0CB009F5078 /* CPAlertStyle.swift */,
+				26071B78256BF0CB009F5078 /* CPAlertActionView.swift */,
+				26071B79256BF0CB009F5078 /* CPAlertActionStyle.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		26071B7B256BF0CB009F5078 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				26071B7C256BF0CB009F5078 /* CPToastStyle.swift */,
+				26071B7D256BF0CB009F5078 /* CPToastView.swift */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
+		26071B80256BF0CB009F5078 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				26071B81256BF0CB009F5078 /* CityPopup.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		26071B82256BF0CB009F5078 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				26071B83256BF0CB009F5078 /* Models */,
+				26071B85256BF0CB009F5078 /* Extensions */,
+				26071B8B256BF0CB009F5078 /* Views */,
+				26071B8F256BF0CB009F5078 /* Services */,
+				26071B93256BF0CB009F5078 /* Utility */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		26071B83256BF0CB009F5078 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				26071B84256BF0CB009F5078 /* PresentOperation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		26071B85256BF0CB009F5078 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				26071B86256BF0CB009F5078 /* UIView+anchors.swift */,
+				26071B87256BF0CB009F5078 /* UIView+embedInScrollView.swift */,
+				26071B88256BF0CB009F5078 /* UIColor+colorAdjustment.swift */,
+				26071B89256BF0CB009F5078 /* UIColor+dynamicColor.swift */,
+				26071B8A256BF0CB009F5078 /* UIStackView+customSpacing.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		26071B8B256BF0CB009F5078 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26071B8C256BF0CB009F5078 /* PassthroughStackView.swift */,
+				26071B8D256BF0CB009F5078 /* PassthroughView.swift */,
+				26071B8E256BF0CB009F5078 /* PassthroughWindow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		26071B8F256BF0CB009F5078 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				26071B90256BF0CB009F5078 /* PopupPresentation.swift */,
+				26071B91256BF0CB009F5078 /* DispatchService.swift */,
+				26071B92256BF0CB009F5078 /* PresentationDispatchService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		26071B93256BF0CB009F5078 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				26071B94256BF0CB009F5078 /* ImplementationInfix.swift */,
+				26071B95256BF0CB009F5078 /* AnimatedPressViewProtocol.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		26071BB9256BFEEF009F5078 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				26071BBA256BFEF0009F5078 /* UIKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +412,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26071B9E256BF0CB009F5078 /* CPDirection.swift in Sources */,
+				26071BB3256BF0CB009F5078 /* DispatchService.swift in Sources */,
+				26071BA3256BF0CB009F5078 /* SimpleAlertView.swift in Sources */,
+				26071B9C256BF0CB009F5078 /* CPAnimatorProtocol.swift in Sources */,
+				26071BB2256BF0CB009F5078 /* PopupPresentation.swift in Sources */,
+				26071BB6256BF0CB009F5078 /* AnimatedPressViewProtocol.swift in Sources */,
+				26071BA9256BF0CB009F5078 /* PresentOperation.swift in Sources */,
+				26071BAF256BF0CB009F5078 /* PassthroughStackView.swift in Sources */,
+				26071BA6256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift in Sources */,
+				26071BAB256BF0CB009F5078 /* UIView+embedInScrollView.swift in Sources */,
+				26071BA7256BF0CB009F5078 /* CPPopupViewProtocol.swift in Sources */,
+				26071BA2256BF0CB009F5078 /* CPAlertActionStyle.swift in Sources */,
+				26071B9F256BF0CB009F5078 /* CPAlertView.swift in Sources */,
+				26071BA5256BF0CB009F5078 /* CPToastView.swift in Sources */,
+				26071B96256BF0CB009F5078 /* CPAttributes+Position.swift in Sources */,
+				26071B9A256BF0CB009F5078 /* CPSlideAnimator.swift in Sources */,
+				26071B98256BF0CB009F5078 /* CPAttributes+Priority.swift in Sources */,
+				26071BA4256BF0CB009F5078 /* CPToastStyle.swift in Sources */,
+				26071BAE256BF0CB009F5078 /* UIStackView+customSpacing.swift in Sources */,
+				26071BA1256BF0CB009F5078 /* CPAlertActionView.swift in Sources */,
+				26071BAA256BF0CB009F5078 /* UIView+anchors.swift in Sources */,
+				26071BA8256BF0CB009F5078 /* CityPopup.swift in Sources */,
+				26071BB0256BF0CB009F5078 /* PassthroughView.swift in Sources */,
+				26071BAD256BF0CB009F5078 /* UIColor+dynamicColor.swift in Sources */,
+				26071BAC256BF0CB009F5078 /* UIColor+colorAdjustment.swift in Sources */,
+				26071BB5256BF0CB009F5078 /* ImplementationInfix.swift in Sources */,
+				26071BB1256BF0CB009F5078 /* PassthroughWindow.swift in Sources */,
+				26071BA0256BF0CB009F5078 /* CPAlertStyle.swift in Sources */,
+				26071BB4256BF0CB009F5078 /* PresentationDispatchService.swift in Sources */,
+				26071B99256BF0CB009F5078 /* CPColor.swift in Sources */,
+				26071B97256BF0CB009F5078 /* CPAttributes+InteractionHandling.swift in Sources */,
+				26071B9B256BF0CB009F5078 /* CPFadeAnimator.swift in Sources */,
+				26071B9D256BF0CB009F5078 /* CPAttributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
