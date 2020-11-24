@@ -53,7 +53,7 @@ extension AlertsViewController {
         alertView.addCover(coverImageView)
         
         CityPopup.shared.show(
-            view: alertView,
+            popup: alertView,
             animator: CPSlideAnimator(direction: .up),
             attributes: .init(
                 margins: .init(top: 24, left: 24, bottom: 24, right: 24)
