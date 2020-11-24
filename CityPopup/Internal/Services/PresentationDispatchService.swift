@@ -5,6 +5,8 @@
 //  Created by Чилимов Павел on 02.11.2020.
 //
 
+import Foundation
+
 protocol PresentationDispatchServiceProtocol: DispatchServiceProtocol {
     
     var delegate: PresentationDispatchServiceDelegate? { get set }

@@ -5,6 +5,8 @@
 //  Created by Георгий Сабанов on 25.09.2020.
 //
 
+import Foundation
+
 extension CPAttributes {
     
     public enum Priority {
