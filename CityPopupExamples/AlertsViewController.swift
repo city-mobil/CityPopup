@@ -38,10 +38,11 @@ extension AlertsViewController {
     @objc
     private func showAlerts() {
         // This alerts will be added to the queue which will show them according to it priority.
-        showSimpleAlert()
+        showThirstAlert()
+        showSecondAlert()
     }
     
-    private func showSimpleAlert() {
+    private func showThirstAlert() {
         // Create the alert view instance with title and message.
         // Specify height of cover view which will be added later.
         // Notes:
@@ -49,7 +50,7 @@ extension AlertsViewController {
         // - Specify height for cover view manually if the view's height can not be predicted.
         let alertView = CPAlertView(
             title: "First alert.",
-            message: "This alert is showing the cover image, title, message and some vertical actions.",
+            message: "This alert has been shown with slide animation and contains cover, title, message and some vertical actions.",
             style: .init(coverViewHeight: 100)
         )
         
@@ -73,7 +74,7 @@ extension AlertsViewController {
         // Add the image to the right side.
         // Notes:
         // - To keep the text in the middle of the action set `true` to `shouldFillOtherSide`,
-        // it will create an empty view with same size as the image view.
+        // it will create an empty view with same size as the image view;
         // - To support dark and light mode specify tintColor with dynamic color.
         docsLinkAction.add(image: #imageLiteral(resourceName: "Link"), toSide: .right, shouldFillOtherSide: true, tintColor: CPColor.black_white)
         // Add action to the alert and forbid alert dismiss on the action tap.
@@ -96,6 +97,116 @@ extension AlertsViewController {
             animator: CPSlideAnimator(direction: .up),
             attributes: .init(
                 margins: .init(top: 24, left: 24, bottom: 24, right: 24)
+            )
+        )
+    }
+    
+    private func showSecondAlert() {
+        let message = """
+        This alert has been shown with fade animation.
+        It is highly customized and it contains cover, title, message and two horizontal actions.
+        The alert will be dismissed automatically in 16 sec.
+        You can tap outside of the alert, the background of the controller view will change it color.
+        If you tap on the show button new alerts will be created and added to the queue.
+        """
+        // Create the alert view instance with title and message.
+        // Specify all available parameters in style.
+        // Some of them will be described below.
+        // Notes:
+        // - Specify `contentMargin` to make indents between the alert edges and it contents;
+        // - Specify `coverViewHeight` manually if the view's height can not be predicted;
+        // - Specify `actionsAxis` to display actions horizontally. Actions will be fitted and maybe compressed.
+        let alertView = CPAlertView(
+            title: "Second alert.",
+            message: message,
+            style: .init(
+                cornerRadius: 16,
+                backgroundColor: CPColor.white_black,
+                contentMargin: .init(top: 8, left: 8, bottom: 8, right: 8),
+                coverViewHeight: 100,
+                titleFont: .boldSystemFont(ofSize: 24),
+                titleTextAlignment: .left,
+                titleNumberOfLines: 1,
+                messageFont: .boldSystemFont(ofSize: 18),
+                messageTextAligment: .left,
+                messageNumberOfLines: 0,
+                actionsAxis: .horizontal(shouldFitIntoContainer: true),
+                spacingAfterCoverView: 32,
+                spacingAfterTitle: 8,
+                spacingAfterMessage: 16,
+                spacingBetweenActions: 4
+            )
+        )
+        
+        // Add cover view with some image.
+        let coverImageView = UIImageView(image: #imageLiteral(resourceName: "Cover_2"))
+        coverImageView.contentMode = .scaleAspectFill
+        coverImageView.clipsToBounds = true
+        coverImageView.layer.cornerRadius = 16
+        alertView.addCover(coverImageView)
+        
+        // Create custom action style.
+        // Specify all available parameters.
+        let customActionStyle = CPAlertActionStyle(
+            height: 64,
+            cornerRadius: 16,
+            backgroundColor: CPColor.black_white,
+            contentMargin: .init(top: 16, left: 16, bottom: 16, right: 16),
+            contentHorizontalSpacing: 4,
+            textFont: .boldSystemFont(ofSize: 18),
+            textColor: CPColor.white_black,
+            textAlignment: .justified
+        )
+        
+        // Create the action with custom style and with tap handler which will open the link.
+        let docsLinkAction = CPAlertActionView(text: "Docs", style: customActionStyle) {
+            // TODO: - (p.chilimov) Вставить ссылку на описание алертов
+            guard let url = URL(string: "https://github.com/city-mobil/CityPopup"),
+                  UIApplication.shared.canOpenURL(url)
+            else {
+                return
+            }
+            UIApplication.shared.openURL(url)
+        }
+        // Add the image to the right side.
+        // Note:
+        // - To support dark and light mode specify tintColor with dynamic color.
+        docsLinkAction.add(
+            image: #imageLiteral(resourceName: "Link"),
+            toSide: .right,
+            contentMode: .scaleAspectFit,
+            shouldFillOtherSide: false,
+            tintColor: CPColor.white_black
+        )
+        // Add action to the alert and forbid alert dismiss on the action tap.
+        alertView.addAction(docsLinkAction, dismissOnTap: false)
+        
+        // Create the action that do nothing and set the custom style.
+        let continueAction = CPAlertActionView(text: "Continue", style: customActionStyle)
+        // Add action to the alert. Dismiss the alert on action tap will be performed automatically.
+        alertView.addAction(continueAction)
+        
+        // Show the alert using the animator with fade animation.
+        // Specify all available parameters.
+        // Some of them will be described below.
+        // Notes:
+        // - The animator is using not only to show a popup but to hide by default;
+        // - Specify `autodismissDelay` to dismiss the alert automatically;
+        // - Specify `backgroundInteractionHandling` to be able to tap on views behind the alert;
+        // - Specify `position` to change the alert position;
+        // - Specify `tags` to be able to found this alert by tags;
+        // - Specify `shouldFitToContainer` to forbid alert crawling out of it container bounds.
+        CityPopup.shared.show(
+            popup: alertView,
+            animator: CPFadeAnimator(showDuration: 0.5, hideDuration: 0.5),
+            attributes: .init(
+                autodismissDelay: 16,
+                backgroundInteractionHandling: .passthrough(true),
+                position: .bottom,
+                margins: .init(top: 40, left: 40, bottom: 40, right: 40),
+                priority: .medium,
+                tags: ["customized_alert"],
+                shouldFitToContainer: true
             )
         )
     }
