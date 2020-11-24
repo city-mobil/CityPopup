@@ -21,7 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let alertsViewController = AlertsViewController()
         alertsViewController.tabBarItem = UITabBarItem(title: "Alerts", image: nil, selectedImage: nil)
         
-        tabBarController.viewControllers = [alertsViewController]
+        let toastsViewController = ToastsViewController()
+        toastsViewController.tabBarItem = UITabBarItem(title: "Toasts", image: nil, selectedImage: nil)
+
+        tabBarController.viewControllers = [alertsViewController, toastsViewController]
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = tabBarController
