@@ -65,18 +65,17 @@ extension CityPopup {
     
     /// Show the popup view on a window.
     /// - Parameters:
-    ///   - view: The popup view to show.
+    ///   - popup: The popup view to show.
     ///   - animator: Animator which will animate view's motion.
     ///   - attributes: Attributes for the view.
     ///   - windowLevel: Popup display level. Default value is `.statusBar`.
     public func show(
-        // TODO: - (p.chilimov) view -> popup
-        view: CPPopupViewProtocol,
+        popup: CPPopupViewProtocol,
         animator: CPAnimatorProtocol,
         attributes: CPAttributes,
         windowLevel: UIWindow.Level = .statusBar)
     {
-        show(view: view as UIView, animator: animator, attributes: attributes, windowLevel: windowLevel)
+        show(view: popup as UIView, animator: animator, attributes: attributes, windowLevel: windowLevel)
     }
     
     /// Show the view on the view controller.
@@ -95,19 +94,19 @@ extension CityPopup {
         show(view: view, onView: parentViewController.view, animator: animator, attributes: attributes)
     }
     
-    /// Show the view on the popup view controller.
+    /// Show the popup view on the view controller.
     /// - Parameters:
-    ///   - view: The popup view to show.
+    ///   - popup: The popup view to show.
     ///   - parentViewController: The view controller on which the view will be shown.
     ///   - animator: Animator which will animate view's motion.
     ///   - attributes: Attributes for the view.
     public func show(
-        view: CPPopupViewProtocol,
+        popup: CPPopupViewProtocol,
         onViewController parentViewController: UIViewController,
         animator: CPAnimatorProtocol,
         attributes: CPAttributes)
     {
-        show(view: view as UIView, onViewController: parentViewController, animator: animator, attributes: attributes)
+        show(view: popup as UIView, onViewController: parentViewController, animator: animator, attributes: attributes)
     }
     
     /// Setup background view for popups queue which uses only for decoration.

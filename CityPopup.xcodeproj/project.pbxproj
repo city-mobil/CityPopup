@@ -24,7 +24,6 @@
 		26071BA0256BF0CB009F5078 /* CPAlertStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B77256BF0CB009F5078 /* CPAlertStyle.swift */; };
 		26071BA1256BF0CB009F5078 /* CPAlertActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B78256BF0CB009F5078 /* CPAlertActionView.swift */; };
 		26071BA2256BF0CB009F5078 /* CPAlertActionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B79256BF0CB009F5078 /* CPAlertActionStyle.swift */; };
-		26071BA3256BF0CB009F5078 /* SimpleAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7A256BF0CB009F5078 /* SimpleAlertView.swift */; };
 		26071BA4256BF0CB009F5078 /* CPToastStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7C256BF0CB009F5078 /* CPToastStyle.swift */; };
 		26071BA5256BF0CB009F5078 /* CPToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7D256BF0CB009F5078 /* CPToastView.swift */; };
 		26071BA6256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */; };
@@ -95,7 +94,6 @@
 		26071B77256BF0CB009F5078 /* CPAlertStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAlertStyle.swift; sourceTree = "<group>"; };
 		26071B78256BF0CB009F5078 /* CPAlertActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAlertActionView.swift; sourceTree = "<group>"; };
 		26071B79256BF0CB009F5078 /* CPAlertActionStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAlertActionStyle.swift; sourceTree = "<group>"; };
-		26071B7A256BF0CB009F5078 /* SimpleAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleAlertView.swift; sourceTree = "<group>"; };
 		26071B7C256BF0CB009F5078 /* CPToastStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPToastStyle.swift; sourceTree = "<group>"; };
 		26071B7D256BF0CB009F5078 /* CPToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPToastView.swift; sourceTree = "<group>"; };
 		26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPViewWithLifecycleProtocol.swift; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				26071B75256BF0CB009F5078 /* Alert */,
-				26071B7A256BF0CB009F5078 /* SimpleAlertView.swift */,
 				26071B7B256BF0CB009F5078 /* Toast */,
 				26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */,
 				26071B7F256BF0CB009F5078 /* CPPopupViewProtocol.swift */,
@@ -436,7 +433,6 @@
 			files = (
 				26071B9E256BF0CB009F5078 /* CPDirection.swift in Sources */,
 				26071BB3256BF0CB009F5078 /* DispatchService.swift in Sources */,
-				26071BA3256BF0CB009F5078 /* SimpleAlertView.swift in Sources */,
 				26071B9C256BF0CB009F5078 /* CPAnimatorProtocol.swift in Sources */,
 				26071BB2256BF0CB009F5078 /* PopupPresentation.swift in Sources */,
 				26071BB6256BF0CB009F5078 /* AnimatedPressViewProtocol.swift in Sources */,
