@@ -8,6 +8,11 @@
 import UIKit
 import CityPopup
 
+/*
+ You can find here some examples of using the predefined alerts (CPAlertView).
+ The code below have many duplicates deliberately. This is for clarity of the example.
+ */
+
 final class AlertsViewController: UIViewController {
     
     // MARK: - Lifecycle
@@ -40,6 +45,7 @@ extension AlertsViewController {
         // This alerts will be added to the queue which will show them according to it priority.
         showThirstAlert()
         showSecondAlert()
+        showThirdAlert()
     }
     
     private func showThirstAlert() {
@@ -102,10 +108,62 @@ extension AlertsViewController {
     }
     
     private func showSecondAlert() {
+        // Create the alert view instance with message.
+        // Notes:
+        // - The `style` parameter has a lot of settings to customize the alert view;
+        // - Specify `actionsAxis` in style to display actions horizontally in scroll view.
+        let alertView = CPAlertView(
+            title: nil,
+            message: "Almost empty alert. You can scroll actions below.",
+            style: .init(actionsAxis: .horizontal(shouldFitIntoContainer: false))
+        )
+        
+        // Create the action with default style and with tap handler which will open the link.
+        let docsLinkAction = CPAlertActionView(text: "Docs") {
+            // TODO: - (p.chilimov) Вставить ссылку на описание алертов
+            guard let url = URL(string: "https://github.com/city-mobil/CityPopup"),
+                  UIApplication.shared.canOpenURL(url)
+            else {
+                return
+            }
+            UIApplication.shared.openURL(url)
+        }
+        // Add the image to the right side.
+        // Note:
+        // - To support dark and light mode specify tintColor with dynamic color.
+        docsLinkAction.add(image: #imageLiteral(resourceName: "Link"), toSide: .right, tintColor: CPColor.black_white)
+        // Add action to the alert and forbid alert dismiss on the action tap.
+        alertView.addAction(docsLinkAction, dismissOnTap: false)
+        
+        // Create the action that do nothing and has only image.
+        let nothingAction = CPAlertActionView(text: "Do nothing")
+        nothingAction.add(image: #imageLiteral(resourceName: "Cover"), toSide: .left, contentMode: .scaleAspectFill)
+        // Add action to the alert. Dismiss the alert on action tap will be performed automatically.
+        alertView.addAction(nothingAction, dismissOnTap: false)
+        
+        // Create the action that do nothing and has the `.cancel` style.
+        let continueAction = CPAlertActionView(text: "Continue", style: .cancel)
+        // Add action to the alert. Dismiss the alert on action tap will be performed automatically.
+        alertView.addAction(continueAction)
+        
+        // Show the alert using the animator with sliding down animation.
+        // Notes:
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // - The `attributes` parameter has a lot of settings to customize show operation.
+        CityPopup.shared.show(
+            popup: alertView,
+            animator: CPSlideAnimator(direction: .down),
+            attributes: .init(position: .top)
+        )
+    }
+    
+    private func showThirdAlert() {
         let message = """
         This alert has been shown with fade animation.
         It is highly customized and it contains cover, title, message and two horizontal actions.
-        The alert will be dismissed automatically in 16 sec.
+        The alert will be dismissed automatically in 24 sec.
         You can tap outside of the alert, the background of the controller view will change it color.
         If you tap on the show button new alerts will be created and added to the queue.
         """
@@ -117,7 +175,7 @@ extension AlertsViewController {
         // - Specify `coverViewHeight` manually if the view's height can not be predicted;
         // - Specify `actionsAxis` to display actions horizontally. Actions will be fitted and maybe compressed.
         let alertView = CPAlertView(
-            title: "Second alert.",
+            title: "Third alert.",
             message: message,
             style: .init(
                 cornerRadius: 16,
@@ -200,7 +258,7 @@ extension AlertsViewController {
             popup: alertView,
             animator: CPFadeAnimator(showDuration: 0.5, hideDuration: 0.5),
             attributes: .init(
-                autodismissDelay: 16,
+                autodismissDelay: 24,
                 backgroundInteractionHandling: .passthrough(true),
                 position: .bottom,
                 margins: .init(top: 40, left: 40, bottom: 40, right: 40),

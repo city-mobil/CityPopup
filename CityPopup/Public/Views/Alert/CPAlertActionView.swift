@@ -34,12 +34,12 @@ public final class CPAlertActionView: UIControl, AnimatedPressViewProtocol {
     }
     
     // MARK: - Private properties
-    private let text: String?
+    private let text: String
     private let style: CPAlertActionStyle
     private let handler: (() -> Void)?
     
     // MARK: - Init
-    public init(text: String?, style: CPAlertActionStyle = .default, handler: (() -> Void)? = nil) {
+    public init(text: String, style: CPAlertActionStyle = .default, handler: (() -> Void)? = nil) {
         self.text = text
         self.style = style
         self.handler = handler
@@ -174,14 +174,8 @@ extension CPAlertActionView {
         ])
         
         // Title
-        if let text = text {
-            textLabel.text = text
-            contentStackView.addArrangedSubview(textLabel)
-        }
-        
-        if contentStackView.arrangedSubviews.isEmpty {
-            assertionFailure("Content of an alert can not be empty")
-        }
+        textLabel.text = text
+        contentStackView.addArrangedSubview(textLabel)
     }
     
 }
