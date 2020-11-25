@@ -40,16 +40,8 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
         return activeOperation?.popupPresentationModel.view
     }
     
-    // MARK: - Private types
-    private struct BackgroundViewData {
-        let backgroundView: UIView
-        let animationDuration: TimeInterval
-        var isUsing = false
-    }
-    
     // MARK: - Private properties
     private let parentViewRepository: ParentViewRepository
-    private var backgroundViewData: BackgroundViewData?
     
     private lazy var presentationDispatchService: PresentationDispatchServiceProtocol = PresentationDispatchService() ~> {
         $0.delegate = self
@@ -96,12 +88,8 @@ extension CityPopup {
         animator: CPAnimatorProtocol,
         attributes: CPAttributes)
     {
-        if backgroundViewData?.isUsing == false {
-            backgroundViewData?.isUsing = true
-            set(backgroundView: backgroundViewData?.backgroundView, onMainView: parentViewRepository.parentView)
-        }
-        
-        show(view: view, onView: parentViewRepository.parentView, animator: animator, attributes: attributes)
+        let parentView = parentViewRepository.getParentView()
+        show(view: view, onView: parentView, animator: animator, attributes: attributes)
     }
     
     /// Show the popup view.
@@ -125,10 +113,7 @@ extension CityPopup {
     /// The background view will be keeped strongly.
     /// The framework controls next background view's components: `alpha`, `isUserInteractionEnabled`, `translatesAutoresizingMaskIntoConstraints`.
     public func setup(backgroundView: UIView, animationDuration: TimeInterval = 0.3) {
-        backgroundView.alpha = 0
-        backgroundView.isUserInteractionEnabled = false
-        backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        backgroundViewData = .init(backgroundView: backgroundView, animationDuration: animationDuration)
+        parentViewRepository.setup(backgroundView: backgroundView, animationDuration: animationDuration)
     }
     
     /// Hide popups by specified tags.
@@ -219,37 +204,6 @@ extension CityPopup {
         presentationDispatchService.addToQueue(task: operation, priority: attributes.priority)
     }
     
-    private func set(backgroundView: UIView?, onMainView mainView: UIView) {
-        guard let backgroundView = backgroundView else { return }
-        
-        mainView.addSubview(backgroundView)
-        mainView.bringSubviewToFront(backgroundView)
-        NSLayoutConstraint.activate([
-            backgroundView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
-            backgroundView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
-            backgroundView.topAnchor.constraint(equalTo: mainView.topAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor)
-        ])
-    }
-    
-    private func backgroundViewAnimate(shouldShow: Bool, completion: (() -> Void)? = nil) {
-        guard let backgroundViewData = backgroundViewData else {
-            completion?()
-            return
-        }
-        UIView.animate(
-            withDuration: backgroundViewData.animationDuration,
-            delay: 0,
-            options: .curveEaseInOut,
-            animations: {
-                backgroundViewData.backgroundView.alpha = shouldShow ? 1 : 0
-            },
-            completion: { _ in
-                completion?()
-            }
-        )
-    }
-    
     private func getOperations(byTags tags: [String], rule: IntersectionRule) -> [PresentOperation] {
         guard !tags.isEmpty else {
             assertionFailure("Tags can not be empty")
@@ -276,16 +230,15 @@ extension CityPopup {
 extension CityPopup {
     
     func presentationDispatchServiceDidStartOperation() {
-        backgroundViewAnimate(shouldShow: true)
+        parentViewRepository.backgroundViewAnimate(shouldShow: true)
     }
     
     func presentationDispatchServiceDidComplete(operation: PresentOperation, areThereActiveOperations: Bool) {
         guard !areThereActiveOperations else { return }
         
-        backgroundViewAnimate(shouldShow: false) { [weak self] in
-            self?.backgroundViewData?.backgroundView.removeFromSuperview()
-            self?.backgroundViewData?.isUsing = false
-            self?.parentViewRepository.removeCreatedWindow()
+        parentViewRepository.backgroundViewAnimate(shouldShow: false) { [weak parentViewRepository] in
+            parentViewRepository?.stopUsingBackground()
+            parentViewRepository?.removeCreatedWindow()
         }
     }
     
