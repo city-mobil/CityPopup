@@ -61,11 +61,7 @@ extension PresentationDispatchService {
         
         let activeOperations = operations(ofType: PresentOperation.self)
             .filter { $0 !== presentOperation }
-        let activeEqualWindows = activeOperations
-            .filter { $0.parentView === presentOperation.parentView }
         let areThereActiveOperations = !activeOperations.isEmpty
-        
-        guard activeEqualWindows.isEmpty else { return }
         
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.presentationDispatchServiceDidComplete(

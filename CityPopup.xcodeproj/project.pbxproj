@@ -45,6 +45,7 @@
 		26071BC9256C0482009F5078 /* AlertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071BC8256C0482009F5078 /* AlertsViewController.swift */; };
 		26071BD2256C1D40009F5078 /* CityPopup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; };
 		26071BD3256C1D40009F5078 /* CityPopup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26587FF3256E993800AB8992 /* ParentViewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26587FF2256E993800AB8992 /* ParentViewRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		26071B95256BF0CB009F5078 /* AnimatedPressViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedPressViewProtocol.swift; sourceTree = "<group>"; };
 		26071BBA256BFEF0009F5078 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		26071BC8256C0482009F5078 /* AlertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewController.swift; sourceTree = "<group>"; };
+		26587FF2256E993800AB8992 /* ParentViewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				26071B84256BF0CB009F5078 /* PresentOperation.swift */,
+				26587FF2256E993800AB8992 /* ParentViewRepository.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				26071BA8256BF0CB009F5078 /* CityPopup.swift in Sources */,
 				26071BB0256BF0CB009F5078 /* PassthroughView.swift in Sources */,
 				26071BAD256BF0CB009F5078 /* UIColor+dynamicColor.swift in Sources */,
+				26587FF3256E993800AB8992 /* ParentViewRepository.swift in Sources */,
 				26071BAC256BF0CB009F5078 /* UIColor+colorAdjustment.swift in Sources */,
 				26071BB5256BF0CB009F5078 /* ImplementationInfix.swift in Sources */,
 				26071BB1256BF0CB009F5078 /* PassthroughWindow.swift in Sources */,

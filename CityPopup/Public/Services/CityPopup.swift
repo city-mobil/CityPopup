@@ -18,8 +18,19 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
     }
     
     // MARK: - Public properties
-    public static let shared = CityPopup() ~> {
-        $0.presentationDispatchService.setMaxConcurrentOperationCount(to: 1)
+    /// Predefined instance which by default will be showing popup on a window at `.statusBar` level one by one.
+    /// - Important:
+    /// You can change maximum of concurrent operations count by `maxConcurrentOperationCount`.
+    /// To show popup on different level or on a controller use one of the init functions.
+    public static let shared = CityPopup()
+    
+    /// Maximum concurrent operations count.
+    /// If new value is greater than the old value, then additional popups will show.
+    /// If new value is lesser than the old value by N, then first N presented popups will be dismissed.
+    public var maxConcurrentOperationCount: Int {
+        didSet {
+            presentationDispatchService.setMaxConcurrentOperationCount(to: maxConcurrentOperationCount)
+        }
     }
     
     /// Get a popup which is showing.
@@ -33,83 +44,77 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
     private struct BackgroundViewData {
         let backgroundView: UIView
         let animationDuration: TimeInterval
+        var isUsing = false
     }
     
     // MARK: - Private properties
+    private let parentViewRepository: ParentViewRepository
+    private var backgroundViewData: BackgroundViewData?
+    
     private lazy var presentationDispatchService: PresentationDispatchServiceProtocol = PresentationDispatchService() ~> {
         $0.delegate = self
     }
-    private var windows: [UIWindow.Level : UIWindow] = [:]
-    private var backgroundViewData: BackgroundViewData?
     
-    // MARK: - Init
-    public init() {}
+    // MARK: - Public init
+    /// Use this init to show popups on a window at the `windowLevel`.
+    /// - Parameters:
+    ///   - windowLevel: Level of a window.
+    ///   - maxConcurrentOperationCount: Maximum concurrent operations count.
+    public init(showOnLevel windowLevel: UIWindow.Level = .statusBar, maxConcurrentOperationCount: Int = 1) {
+        parentViewRepository = ParentViewRepository(windowLevel: windowLevel)
+        self.maxConcurrentOperationCount = maxConcurrentOperationCount
+        commonInit(maxConcurrentOperationCount: maxConcurrentOperationCount)
+    }
+    
+    /// Use this init to show popups on the view which will be keeped weakly.
+    /// - Parameters:
+    ///   - view: Some view on which popups will be shown.
+    ///   - maxConcurrentOperationCount: Maximum concurrent operations count.
+    public init(showOnView view: UIView, maxConcurrentOperationCount: Int = 1) {
+        parentViewRepository = ParentViewRepository(view: view)
+        self.maxConcurrentOperationCount = maxConcurrentOperationCount
+        commonInit(maxConcurrentOperationCount: maxConcurrentOperationCount)
+    }
+    
+    // MARK: - Private init
+    private func commonInit(maxConcurrentOperationCount: Int) {
+        presentationDispatchService.setMaxConcurrentOperationCount(to: maxConcurrentOperationCount)
+    }
     
 }
 
 // MARK: - Public methods
 extension CityPopup {
     
-    /// Show the view on a window.
+    /// Show the view.
     /// - Parameters:
     ///   - view: The view to show.
     ///   - animator: Animator which will animate view's motion.
     ///   - attributes: Attributes for the view.
-    ///   - windowLevel: Popup display level. Default value is `.statusBar`.
     public func show(
         view: UIView,
         animator: CPAnimatorProtocol,
-        attributes: CPAttributes,
-        windowLevel: UIWindow.Level = .statusBar)
+        attributes: CPAttributes)
     {
-        let window = visibleWindow(at: windowLevel)
-        show(view: view, onView: window, animator: animator, attributes: attributes)
+        if backgroundViewData?.isUsing == false {
+            backgroundViewData?.isUsing = true
+            set(backgroundView: backgroundViewData?.backgroundView, onMainView: parentViewRepository.parentView)
+        }
+        
+        show(view: view, onView: parentViewRepository.parentView, animator: animator, attributes: attributes)
     }
     
-    /// Show the popup view on a window.
+    /// Show the popup view.
     /// - Parameters:
     ///   - popup: The popup view to show.
     ///   - animator: Animator which will animate view's motion.
     ///   - attributes: Attributes for the view.
-    ///   - windowLevel: Popup display level. Default value is `.statusBar`.
     public func show(
         popup: CPPopupViewProtocol,
         animator: CPAnimatorProtocol,
-        attributes: CPAttributes,
-        windowLevel: UIWindow.Level = .statusBar)
-    {
-        show(view: popup as UIView, animator: animator, attributes: attributes, windowLevel: windowLevel)
-    }
-    
-    /// Show the view on the view controller.
-    /// - Parameters:
-    ///   - view: The view to show.
-    ///   - parentViewController: The view controller on which the view will be shown.
-    ///   - animator: Animator which will animate view's motion.
-    ///   - attributes: Attributes for the view.
-    public func show(
-        view: UIView,
-        onViewController parentViewController: UIViewController,
-        animator: CPAnimatorProtocol,
         attributes: CPAttributes)
     {
-        set(backgroundView: backgroundViewData?.backgroundView, onMainView: parentViewController.view)
-        show(view: view, onView: parentViewController.view, animator: animator, attributes: attributes)
-    }
-    
-    /// Show the popup view on the view controller.
-    /// - Parameters:
-    ///   - popup: The popup view to show.
-    ///   - parentViewController: The view controller on which the view will be shown.
-    ///   - animator: Animator which will animate view's motion.
-    ///   - attributes: Attributes for the view.
-    public func show(
-        popup: CPPopupViewProtocol,
-        onViewController parentViewController: UIViewController,
-        animator: CPAnimatorProtocol,
-        attributes: CPAttributes)
-    {
-        show(view: popup as UIView, onViewController: parentViewController, animator: animator, attributes: attributes)
+        show(view: popup as UIView, animator: animator, attributes: attributes)
     }
     
     /// Setup background view for popups queue which uses only for decoration.
@@ -117,7 +122,8 @@ extension CityPopup {
     ///   - backgroundView: Some view you wanted to see as a background. There is no background view by default.
     ///   - animationDuration: Duration of appearing and disappearing animations.
     /// - Important:
-    /// The lib controls next background view's components: `alpha`, `isUserInteractionEnabled`, `translatesAutoresizingMaskIntoConstraints`
+    /// The background view will be keeped strongly.
+    /// The framework controls next background view's components: `alpha`, `isUserInteractionEnabled`, `translatesAutoresizingMaskIntoConstraints`.
     public func setup(backgroundView: UIView, animationDuration: TimeInterval = 0.3) {
         backgroundView.alpha = 0
         backgroundView.isUserInteractionEnabled = false
@@ -213,29 +219,6 @@ extension CityPopup {
         presentationDispatchService.addToQueue(task: operation, priority: attributes.priority)
     }
     
-    private func visibleWindow(at level: UIWindow.Level) -> UIWindow {
-        let invisibleWindow = window(at: level)
-        invisibleWindow.makeKeyAndVisible()
-        return invisibleWindow
-    }
-    
-    private func window(at level: UIWindow.Level) -> UIWindow {
-        if let window = windows[level] {
-            return window
-        }
-        
-        return createNewWindow(withBackgroundView: backgroundViewData?.backgroundView, atLevel: level)
-    }
-    
-    private func createNewWindow(withBackgroundView backgroundView: UIView?, atLevel level: UIWindow.Level) -> UIWindow {
-        let window = PassthroughWindow(frame: UIScreen.main.bounds)
-        window.windowLevel = level
-        windows[level] = window
-        
-        set(backgroundView: backgroundView, onMainView: window)
-        return window
-    }
-    
     private func set(backgroundView: UIView?, onMainView mainView: UIView) {
         guard let backgroundView = backgroundView else { return }
         
@@ -297,15 +280,12 @@ extension CityPopup {
     }
     
     func presentationDispatchServiceDidComplete(operation: PresentOperation, areThereActiveOperations: Bool) {
+        guard !areThereActiveOperations else { return }
+        
         backgroundViewAnimate(shouldShow: false) { [weak self] in
-            if !areThereActiveOperations {
-                self?.backgroundViewData?.backgroundView.removeFromSuperview()
-            }
-            // Remove self created window
-            if let index = self?.windows.firstIndex(where: { $0.value === operation.parentView }) {
-                operation.parentView.removeFromSuperview()
-                self?.windows.remove(at: index)
-            }
+            self?.backgroundViewData?.backgroundView.removeFromSuperview()
+            self?.backgroundViewData?.isUsing = false
+            self?.parentViewRepository.removeCreatedWindow()
         }
     }
     
