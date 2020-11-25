@@ -5,6 +5,8 @@
 //  Created by Георгий Сабанов on 09.10.2020.
 //
 
+import Foundation
+
 public protocol CPPopupViewProtocol: CPViewWithLifecycleProtocol {}
 
 // MARK: - Public extension

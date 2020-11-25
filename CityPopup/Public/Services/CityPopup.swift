@@ -42,6 +42,9 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
     private var windows: [UIWindow.Level : UIWindow] = [:]
     private var backgroundViewData: BackgroundViewData?
     
+    // MARK: - Init
+    public init() {}
+    
 }
 
 // MARK: - Public methods

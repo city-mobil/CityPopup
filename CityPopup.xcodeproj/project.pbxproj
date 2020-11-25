@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26071B17256BCD80009F5078 /* CityPopup.h in Headers */ = {isa = PBXBuildFile; fileRef = 26071B15256BCD80009F5078 /* CityPopup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26071B25256BCE64009F5078 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B24256BCE64009F5078 /* AppDelegate.swift */; };
 		26071B2E256BCE66009F5078 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26071B2D256BCE66009F5078 /* Assets.xcassets */; };
 		26071B31256BCE66009F5078 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26071B2F256BCE66009F5078 /* LaunchScreen.storyboard */; };
@@ -74,7 +73,6 @@
 
 /* Begin PBXFileReference section */
 		26071B12256BCD80009F5078 /* CityPopup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CityPopup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		26071B15256BCD80009F5078 /* CityPopup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityPopup.h; sourceTree = "<group>"; };
 		26071B16256BCD80009F5078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26071B22256BCE64009F5078 /* CityPopupExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityPopupExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26071B24256BCE64009F5078 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 			children = (
 				26071B82256BF0CB009F5078 /* Internal */,
 				26071B68256BF0CB009F5078 /* Public */,
-				26071B15256BCD80009F5078 /* CityPopup.h */,
 				26071B16256BCD80009F5078 /* Info.plist */,
 			);
 			path = CityPopup;
@@ -327,7 +324,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26071B17256BCD80009F5078 /* CityPopup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
