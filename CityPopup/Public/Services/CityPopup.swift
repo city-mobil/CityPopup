@@ -41,7 +41,7 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
     }
     
     // MARK: - Private properties
-    private let parentViewRepository: ParentViewRepository
+    private let parentViewService: ParentViewService
     
     private lazy var presentationDispatchService: PresentationDispatchServiceProtocol = PresentationDispatchService() ~> {
         $0.delegate = self
@@ -53,7 +53,7 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
     ///   - windowLevel: Level of a window.
     ///   - maxConcurrentOperationCount: Maximum concurrent operations count.
     public init(showOnLevel windowLevel: UIWindow.Level = .statusBar, maxConcurrentOperationCount: Int = 1) {
-        parentViewRepository = ParentViewRepository(windowLevel: windowLevel)
+        parentViewService = ParentViewService(windowLevel: windowLevel)
         self.maxConcurrentOperationCount = maxConcurrentOperationCount
         commonInit(maxConcurrentOperationCount: maxConcurrentOperationCount)
     }
@@ -63,7 +63,7 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
     ///   - view: Some view on which popups will be shown.
     ///   - maxConcurrentOperationCount: Maximum concurrent operations count.
     public init(showOnView view: UIView, maxConcurrentOperationCount: Int = 1) {
-        parentViewRepository = ParentViewRepository(view: view)
+        parentViewService = ParentViewService(view: view)
         self.maxConcurrentOperationCount = maxConcurrentOperationCount
         commonInit(maxConcurrentOperationCount: maxConcurrentOperationCount)
     }
@@ -88,7 +88,7 @@ extension CityPopup {
         animator: CPAnimatorProtocol,
         attributes: CPAttributes)
     {
-        let parentView = parentViewRepository.getParentView()
+        let parentView = parentViewService.getParentView()
         show(view: view, onView: parentView, animator: animator, attributes: attributes)
     }
     
@@ -113,7 +113,7 @@ extension CityPopup {
     /// The background view will be keeped strongly.
     /// The framework controls next background view's components: `alpha`, `isUserInteractionEnabled`, `translatesAutoresizingMaskIntoConstraints`.
     public func setup(backgroundView: UIView, animationDuration: TimeInterval = 0.3) {
-        parentViewRepository.setup(backgroundView: backgroundView, animationDuration: animationDuration)
+        parentViewService.setup(backgroundView: backgroundView, animationDuration: animationDuration)
     }
     
     /// Hide popups by specified tags.
@@ -230,15 +230,15 @@ extension CityPopup {
 extension CityPopup {
     
     func presentationDispatchServiceDidStartOperation() {
-        parentViewRepository.backgroundViewAnimate(shouldShow: true)
+        parentViewService.backgroundViewAnimate(shouldShow: true)
     }
     
     func presentationDispatchServiceDidComplete(operation: PresentOperation, areThereActiveOperations: Bool) {
         guard !areThereActiveOperations else { return }
         
-        parentViewRepository.backgroundViewAnimate(shouldShow: false) { [weak parentViewRepository] in
-            parentViewRepository?.stopUsingBackground()
-            parentViewRepository?.removeCreatedWindow()
+        parentViewService.backgroundViewAnimate(shouldShow: false) { [weak parentViewService] in
+            parentViewService?.stopUsingBackground()
+            parentViewService?.removeCreatedWindow()
         }
     }
     

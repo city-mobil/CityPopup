@@ -1,5 +1,5 @@
 //
-//  ParentViewRepository.swift
+//  ParentViewService.swift
 //  CityPopup
 //
 //  Created by Чилимов Павел on 25.11.2020.
@@ -7,8 +7,9 @@
 
 import UIKit
 
-/// Repository that will keep weak link on the view or create a window at the level.
-final class ParentViewRepository {
+/// Service that will keep weak link on the view or create a window at the level.
+/// It also manage some operations over the parent view.
+final class ParentViewService {
     
     // MARK: - Private types
     private struct BackgroundViewData {
@@ -35,7 +36,7 @@ final class ParentViewRepository {
 }
 
 // MARK: - Internal methods
-extension ParentViewRepository {
+extension ParentViewService {
     
     /// Get parent view. If there are no user's view then a window will be created and made key and visible.
     /// - Important:
@@ -85,7 +86,7 @@ extension ParentViewRepository {
 }
 
 // MARK: - Private methods
-extension ParentViewRepository {
+extension ParentViewService {
     
     private func getWindow() -> UIWindow {
         if let currentWindow = self.window {
