@@ -167,33 +167,34 @@ extension AlertsViewController {
         You can tap outside of the alert, the background of the controller view will change it color.
         If you tap on the show button new alerts will be created and added to the queue.
         """
-        // Create the alert view instance with title and message.
-        // Specify all available parameters in style.
+        // Specify all available parameters for style.
         // Some of them will be described below.
         // Notes:
         // - Specify `contentMargin` to make indents between the alert edges and it contents;
         // - Specify `coverViewHeight` manually if the view's height can not be predicted;
         // - Specify `actionsAxis` to display actions horizontally. Actions will be fitted and maybe compressed.
+        let alertStyle = CPAlertStyle(
+            cornerRadius: 16,
+            backgroundColor: CPColor.white_black,
+            contentMargin: .init(top: 8, left: 8, bottom: 8, right: 8),
+            coverViewHeight: 100,
+            titleFont: .boldSystemFont(ofSize: 24),
+            titleTextAlignment: .left,
+            titleNumberOfLines: 1,
+            messageFont: .boldSystemFont(ofSize: 18),
+            messageTextAligment: .left,
+            messageNumberOfLines: 0,
+            actionsAxis: .horizontal(shouldFitIntoContainer: true),
+            spacingAfterCoverView: 32,
+            spacingAfterTitle: 8,
+            spacingAfterMessage: 16,
+            spacingBetweenActions: 4
+        )
+        // Create the alert view instance with title and message.
         let alertView = CPAlertView(
             title: "Third alert.",
             message: message,
-            style: .init(
-                cornerRadius: 16,
-                backgroundColor: CPColor.white_black,
-                contentMargin: .init(top: 8, left: 8, bottom: 8, right: 8),
-                coverViewHeight: 100,
-                titleFont: .boldSystemFont(ofSize: 24),
-                titleTextAlignment: .left,
-                titleNumberOfLines: 1,
-                messageFont: .boldSystemFont(ofSize: 18),
-                messageTextAligment: .left,
-                messageNumberOfLines: 0,
-                actionsAxis: .horizontal(shouldFitIntoContainer: true),
-                spacingAfterCoverView: 32,
-                spacingAfterTitle: 8,
-                spacingAfterMessage: 16,
-                spacingBetweenActions: 4
-            )
+            style: alertStyle
         )
         
         // Add cover view with some image.
@@ -244,28 +245,30 @@ extension AlertsViewController {
         // Add action to the alert. Dismiss the alert on action tap will be performed automatically.
         alertView.addAction(continueAction)
         
-        // Show the alert using the animator with fade animation.
-        // Specify all available parameters.
+        // Specify all available parameters for attributes.
         // Some of them will be described below.
         // Notes:
-        // - The animator is using not only to show a popup but to hide by default;
         // - Specify `autodismissDelay` to dismiss the alert automatically;
         // - Specify `backgroundInteractionHandling` to be able to tap on views behind the alert;
         // - Specify `position` to change the alert position;
         // - Specify `tags` to be able to found this alert by tags;
         // - Specify `shouldFitToContainer` to forbid alert crawling out of it container bounds.
+        let attributes = CPAttributes(
+            autodismissDelay: 24,
+            backgroundInteractionHandling: .passthrough(true),
+            position: .bottom,
+            margins: .init(top: 40, left: 40, bottom: 40, right: 40),
+            priority: .medium,
+            tags: ["customized_alert"],
+            shouldFitToContainer: true
+        )
+        // Show the alert using the animator with fade animation.
+        // Note:
+        // - The animator is using not only to show a popup but to hide by default.
         CityPopup.shared.show(
             popup: alertView,
             animator: CPFadeAnimator(showDuration: 0.5, hideDuration: 0.5),
-            attributes: .init(
-                autodismissDelay: 24,
-                backgroundInteractionHandling: .passthrough(true),
-                position: .bottom,
-                margins: .init(top: 40, left: 40, bottom: 40, right: 40),
-                priority: .medium,
-                tags: ["customized_alert"],
-                shouldFitToContainer: true
-            )
+            attributes: attributes
         )
     }
     
