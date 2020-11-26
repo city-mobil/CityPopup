@@ -19,17 +19,7 @@ final class ToastsViewController: UIViewController {
         // Call a background setup.
         setupBackgroundForPopups()
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.backgroundColor = UIColor(
-            red: CGFloat.random(in: 0...1),
-            green: CGFloat.random(in: 0...1),
-            blue: CGFloat.random(in: 0...1),
-            alpha: 1
-        )
-    }
-    
+        
 }
 
 // MARK: - Private methods
@@ -38,7 +28,11 @@ extension ToastsViewController {
     @objc
     private func showToasts() {
         // This toasts will be added to the queue which will show them according to it priority.
+        showAchievementToast()
+        showAchievementToastRTL()
+        showAchievementToastLTR()
         showSimpleToast()
+        showToastWithBottomAlignmentAndAutodismiss()
     }
     
     private func showSimpleToast() {
@@ -65,13 +59,12 @@ extension ToastsViewController {
         toastView.add(leadingView: leadingImageView, width: 32, height: 32)
 
         // Add actions for toast
-        toastView.tapHandler = { [weak self] in
-            self?.showToastWithBottomAlignmentAndAutodismiss()
-            toastView.hide(usingAnimator: CPSlideAnimator(direction: .down))
+        toastView.tapHandler = {
+            print("Toast simple tap action")
         }
         
         // Add swipe to hide recognition to toast
-        toastView.setHideSwipeGestureEnabled()
+        toastView.setHideSwipeGestureEnabled(withDirection: .up)
                 
         // Show the toast using the animator with sliding up animation.
         // Specify margins to a container of the toast.
@@ -96,7 +89,7 @@ extension ToastsViewController {
         // - The `style` parameter has a lot of settings to customize the toast view;
         let toastView = CPToastView(
             title: "Second toast.",
-            message: "This toast is showing the leading view, title and message. It is aligned at the bottom of the screen and autodismisses in 3 seconds. Text alignment is center",
+            message: "This toast is showing title and message. It is aligned at the bottom of the screen and autodismisses in 3 seconds. Text alignment is center",
             style: .init(
                 titleTextAlignment: .center,
                 titleNumberOfLines: 2,
@@ -105,19 +98,7 @@ extension ToastsViewController {
                 verticalSpacingAfterTitle: 4
             )
         )
-        
-        // Add leading view with some image.
-        let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Cover"))
-        leadingImageView.contentMode = .scaleAspectFill
-        leadingImageView.clipsToBounds = true
-        leadingImageView.layer.cornerRadius = 8
-        toastView.add(leadingView: leadingImageView, width: 32, height: 32)
-        
-        // Add actions for toast
-        toastView.tapHandler = {
-            
-        }
-        
+                
         // Add swipe to hide recognition to toast with '.down' direction
         toastView.setHideSwipeGestureEnabled(withDirection: .down)
         
@@ -138,6 +119,158 @@ extension ToastsViewController {
             )
         )
     }
+    
+    func showAchievementToast() {
+        // Configure toast styles.
+        let toastStyle = CPToastStyle(
+            cornerRadius: 8,
+            backgroundColor: UIColor.black.withAlphaComponent(0.8),
+            contentMargin: .init(top: 16, left: 16, bottom: 16, right: 16),
+            titleFont: .systemFont(ofSize: 16, weight: .bold),
+            titleTextAlignment: .natural,
+            titleNumberOfLines: 2,
+            titleTextColor: .white,
+            messageFont: .systemFont(ofSize: 14, weight: .regular),
+            messageTextAligment: .natural,
+            messageNumberOfLines: 0,
+            messageTextColor: .white,
+            horizontalSpacingAfterLeadingContainer: 16,
+            verticalSpacingAfterTitle: 4,
+            horizontalSpacingAfterTitle: 8
+        )
+        
+        // Create the toast view instance with title, message and leading view.
+        let toastView = CPToastView(title: "Achievement unlocked", message: "Popup ninja", style: toastStyle)
+        
+        // Add leading view with some image.
+        let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Star"))
+        leadingImageView.contentMode = .center
+        leadingImageView.clipsToBounds = true
+        toastView.add(leadingView: leadingImageView, width: 32)
+        
+        // Add swipe to hide recognition to toast with '.up' direction
+        toastView.setHideSwipeGestureEnabled(withDirection: .up)
+        
+        // Show the toast using the animator with sliding up animation.
+        // Specify margins to a container of the toast.
+        // Notes:
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // - The `attributes` parameter has a lot of settings to customize show operation.
+        CityPopup.shared.show(
+            popup: toastView,
+            animator: CPSlideAnimator(direction: .down),
+            attributes: .init(
+                position: .top,
+                margins: .init(top: 24, left: 24, bottom: 24, right: 24)
+            )
+        )
+    }
+    
+
+    func showAchievementToastRTL() {
+        // Configure toast styles.
+        let toastStyle = CPToastStyle(
+            cornerRadius: 8,
+            backgroundColor: UIColor.black.withAlphaComponent(0.8),
+            contentMargin: .init(top: 16, left: 16, bottom: 16, right: 16),
+            titleFont: .systemFont(ofSize: 16, weight: .bold),
+            titleTextAlignment: .natural,
+            titleNumberOfLines: 2,
+            titleTextColor: .white,
+            messageFont: .systemFont(ofSize: 14, weight: .regular),
+            messageTextAligment: .natural,
+            messageNumberOfLines: 0,
+            messageTextColor: .white,
+            horizontalSpacingAfterLeadingContainer: 16,
+            verticalSpacingAfterTitle: 4,
+            horizontalSpacingAfterTitle: 8
+        )
+        
+        // Create the toast view instance with title, message and leading view.
+        let toastView = CPToastView(title: "Achievement unlocked", message: "Popup ninja Right-To-Left", style: toastStyle)
+        
+        // Add leading view with some image.
+        let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Star"))
+        leadingImageView.contentMode = .center
+        leadingImageView.clipsToBounds = true
+        toastView.add(leadingView: leadingImageView, width: 32)
+
+        // Leading and trailing views support language directions.
+        toastView.semanticContentAttribute = .forceRightToLeft
+
+        // Add swipe to hide recognition to toast with '.up' direction
+        toastView.setHideSwipeGestureEnabled(withDirection: .up)
+        
+        // Show the toast using the animator with sliding up animation.
+        // Specify margins to a container of the toast.
+        // Notes:
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // - The `attributes` parameter has a lot of settings to customize show operation.
+        CityPopup.shared.show(
+            popup: toastView,
+            animator: CPSlideAnimator(direction: .down),
+            attributes: .init(
+                position: .top,
+                margins: .init(top: 24, left: 24, bottom: 24, right: 24)
+            )
+        )
+    }
+    
+    func showAchievementToastLTR() {
+        // Configure toast styles.
+        let toastStyle = CPToastStyle(
+            cornerRadius: 8,
+            backgroundColor: UIColor.black.withAlphaComponent(0.8),
+            contentMargin: .init(top: 16, left: 16, bottom: 16, right: 16),
+            titleFont: .systemFont(ofSize: 16, weight: .bold),
+            titleTextAlignment: .natural,
+            titleNumberOfLines: 2,
+            titleTextColor: .white,
+            messageFont: .systemFont(ofSize: 14, weight: .regular),
+            messageTextAligment: .natural,
+            messageNumberOfLines: 0,
+            messageTextColor: .white,
+            horizontalSpacingAfterLeadingContainer: 16,
+            verticalSpacingAfterTitle: 4,
+            horizontalSpacingAfterTitle: 8
+        )
+        
+        // Create the toast view instance with title, message and leading view.
+        let toastView = CPToastView(title: "Achievement unlocked", message: "Popup ninja Left-To-Right", style: toastStyle)
+        
+        // Add leading view with some image.
+        let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Star"))
+        leadingImageView.contentMode = .center
+        leadingImageView.clipsToBounds = true
+        toastView.add(leadingView: leadingImageView, width: 32)
+        
+        // Leading and trailing views support language directions.
+        toastView.semanticContentAttribute = .forceLeftToRight
+        
+        // Add swipe to hide recognition to toast with '.up' direction
+        toastView.setHideSwipeGestureEnabled(withDirection: .up)
+        
+        // Show the toast using the animator with sliding up animation.
+        // Specify margins to a container of the toast.
+        // Notes:
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // - The `attributes` parameter has a lot of settings to customize show operation.
+        CityPopup.shared.show(
+            popup: toastView,
+            animator: CPSlideAnimator(direction: .down),
+            attributes: .init(
+                position: .top,
+                margins: .init(top: 24, left: 24, bottom: 24, right: 24)
+            )
+        )
+    }
+
     
 }
 

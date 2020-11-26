@@ -18,11 +18,13 @@ public struct CPToastStyle {
     let titleFont: UIFont
     let titleTextAlignment: NSTextAlignment
     let titleNumberOfLines: Int
-    
+    let titleTextColor: UIColor?
+
     let messageFont: UIFont
     let messageTextAligment: NSTextAlignment
     let messageNumberOfLines: Int
-    
+    let messageTextColor: UIColor?
+
     let horizontalSpacingAfterLeadingContainer: CGFloat
     let verticalSpacingAfterTitle: CGFloat
     let horizontalSpacingAfterTitle: CGFloat
@@ -35,9 +37,11 @@ public struct CPToastStyle {
         titleFont: UIFont = .systemFont(ofSize: 18),
         titleTextAlignment: NSTextAlignment = .center,
         titleNumberOfLines: Int = 0,
+        titleTextColor: UIColor? = nil,
         messageFont: UIFont = .systemFont(ofSize: 14),
         messageTextAligment: NSTextAlignment = .center,
         messageNumberOfLines: Int = 0,
+        messageTextColor: UIColor? = nil,
         horizontalSpacingAfterLeadingContainer: CGFloat = 8,
         verticalSpacingAfterTitle: CGFloat = 8,
         horizontalSpacingAfterTitle: CGFloat = 8)
@@ -48,9 +52,11 @@ public struct CPToastStyle {
         self.titleFont = titleFont
         self.titleTextAlignment = titleTextAlignment
         self.titleNumberOfLines = titleNumberOfLines
+        self.titleTextColor = titleTextColor
         self.messageFont = messageFont
         self.messageTextAligment = messageTextAligment
         self.messageNumberOfLines = messageNumberOfLines
+        self.messageTextColor = messageTextColor
         self.horizontalSpacingAfterLeadingContainer = horizontalSpacingAfterLeadingContainer
         self.verticalSpacingAfterTitle = verticalSpacingAfterTitle
         self.horizontalSpacingAfterTitle = horizontalSpacingAfterTitle
