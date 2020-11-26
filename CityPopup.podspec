@@ -10,7 +10,6 @@ Pod::Spec.new do |spec|
   This framework is suitable both for those who just need to show some information, and for those who want to implement non-standard animation along with a complex view, as it is highly customizable.
   DESC
   spec.homepage               = "https://github.com/city-mobil/CityPopup"
-  spec.license                = "MIT (example)"
   spec.license                = { :type => "MIT", :file => "LICENSE" }
   spec.author                 = {
     "Pavel Chilimov" => "chilimovpasha@gmail.com",
@@ -21,8 +20,23 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target  = "9.0"
   spec.swift_version          = "5.3"
   spec.source                 = { :git => "https://github.com/city-mobil/CityPopup.git", :tag => spec.version.to_s }
-  spec.source_files           = "CityPopup/**/*.{swift}"
   spec.framework              = "UIKit"
   spec.requires_arc           = true
+
+  spec.default_subspec = "Core"
+
+  spec.subspec "Core" do |core|
+    core.source_files = "CityPopup/Core/**/*.{swift}"
+  end
+
+  spec.subspec "Toast" do |toast|
+    toast.source_files = "CityPopup/Toast/**/*.{swift}"
+    toast.dependency "CityPopup/Core"
+  end
+
+  spec.subspec "Alert" do |alert|
+    alert.source_files = "CityPopup/Alert/**/*.{swift}"
+    alert.dependency "CityPopup/Core"
+  end
 
 end
