@@ -28,11 +28,12 @@ extension ToastsViewController {
     @objc
     private func showToasts() {
         // This toasts will be added to the queue which will show them according to it priority.
-        showAchievementToast()
-        showAchievementToastRTL()
-        showAchievementToastLTR()
         showSimpleToast()
         showToastWithBottomAlignmentAndAutodismiss()
+        showAchievementToastRTL()
+        showAchievementToastLTR()
+        //Popups show in respect of their priority.
+        showAchievementToastHighPriority()
     }
     
     private func showSimpleToast() {
@@ -120,7 +121,7 @@ extension ToastsViewController {
         )
     }
     
-    func showAchievementToast() {
+    func showAchievementToastHighPriority() {
         // Configure toast styles.
         let toastStyle = CPToastStyle(
             cornerRadius: 8,
@@ -140,7 +141,7 @@ extension ToastsViewController {
         )
         
         // Create the toast view instance with title, message and leading view.
-        let toastView = CPToastView(title: "Achievement unlocked", message: "Popup ninja", style: toastStyle)
+        let toastView = CPToastView(title: "Achievement unlocked", message: "High priority popup ninja", style: toastStyle)
         
         // Add leading view with some image.
         let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Star"))
@@ -163,7 +164,8 @@ extension ToastsViewController {
             animator: CPSlideAnimator(direction: .down),
             attributes: .init(
                 position: .top,
-                margins: .init(top: 24, left: 24, bottom: 24, right: 24)
+                margins: .init(top: 24, left: 24, bottom: 24, right: 24),
+                priority: .high
             )
         )
     }
