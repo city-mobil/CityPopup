@@ -73,7 +73,21 @@ final class PresentOperation: Operation {
     
     override func main() {
         delegate?.presentOperationDidStart()
-        showPopupOnMainQueue()
+        
+        popupPresentationModel.onClose = { [weak self] in
+            guard let self = self, !self.isCancelled else { return }
+            self.cancel()
+            self.delegate?.presentOperationDidComplete(operation: self)
+        }
+        
+        semaphore = DispatchSemaphore(value: 0)
+        let underlyingQueue = OperationQueue.current?.underlyingQueue
+        showPopupOnMainQueue { [weak self, weak underlyingQueue] in
+            underlyingQueue?.async {
+                self?.semaphore.signal()
+            }
+        }
+        semaphore.wait()
         
         guard !isCancelled else {
             hidePopupOnMainQueue()
@@ -81,11 +95,6 @@ final class PresentOperation: Operation {
         }
         
         semaphore = DispatchSemaphore(value: 0)
-        popupPresentationModel.onClose = { [weak self] in
-            guard let self = self, !self.isCancelled else { return }
-            self.cancel()
-            self.delegate?.presentOperationDidComplete(operation: self)
-        }
         if let autodismissDelay: TimeInterval = popupPresentationModel.attributes.autodismissDelay {
             _ = semaphore.wait(timeout: .now() + autodismissDelay)
             hidePopupOnMainQueue()
@@ -107,37 +116,27 @@ final class PresentOperation: Operation {
 // MARK: - Private methods
 extension PresentOperation {
     
-    private func showPopupOnMainQueue() {
-        semaphore = DispatchSemaphore(value: 0)
-        
+    private func showPopupOnMainQueue(completion: @escaping () -> Void) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
             self.popupPresentationModel.show(
                 on: self.parentView,
-                completion: {
-                    DispatchQueue.global().async { [weak self] in
-                        guard let self = self, !self.isCancelled else { return }
-                        self.semaphore.signal()
-                    }
-                }
+                completion: completion
             )
         }
-        
-        semaphore.wait()
     }
     
     private func hidePopupOnMainQueue() {
         guard !isCancelled else {
-            DispatchQueue.main.async {
-                // TODO: - Здесь похоже течем, если self будет виком, то попап не удалится
-                self.popupPresentationModel.close()
+            DispatchQueue.main.async { [weak self] in
+                self?.popupPresentationModel.close()
             }
             return
         }
         semaphore = DispatchSemaphore(value: 0)
-        DispatchQueue.main.async {
-            self.popupPresentationModel.hide()
+        DispatchQueue.main.async { [weak self] in
+            self?.popupPresentationModel.hide()
         }
         semaphore.wait()
     }
