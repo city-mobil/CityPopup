@@ -16,7 +16,7 @@ public struct CPFlipAnimator: CPAnimatorProtocol {
     
     public init(
         direction: CPDirection = .up,
-        showDuration: TimeInterval = 1,//0.3,
+        showDuration: TimeInterval = 0.3,
         hideDuration: TimeInterval = 0.3)
     {
         self.direction = direction
@@ -32,27 +32,25 @@ extension CPFlipAnimator {
     public func performShowAnimation(view: UIView, completion: @escaping () -> Void) {
         view.isHidden = true
         view.clipsToBounds = false
-        
-        print(view.frame)
-        
-        DispatchQueue.main.async {
+
+
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
             UIView.transition(
                 with: view,
                 duration: showDuration,
-                options: [.curveEaseInOut, .transitionCurlDown],
+                options: [.curveEaseInOut, .transitionFlipFromTop],
                 animations: {
-                    view.layoutIfNeeded()
                     view.isHidden = false
                 },
                 completion: { _ in
                     completion()
                 }
             )
-        }
+//        }
     }
     
     public func performHideAnimation(view: UIView, completion: @escaping () -> Void) {
-        
+        completion()
     }
     
 }

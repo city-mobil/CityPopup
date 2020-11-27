@@ -72,11 +72,10 @@ extension PopupPresentation {
             shouldConsiderLayoutGuide: attributes.margins != nil,
             shouldFitToContainer: attributes.shouldFitToContainer
         )
-        parent.layoutIfNeeded()
         
         let lifecycle = view as? CPViewWithLifecycleProtocol
         lifecycle?.willAppear()
-        view.layoutIfNeeded()
+        container.layoutIfNeeded()
         
         animator.performShowAnimation(view: view) {
             lifecycle?.didAppear()
