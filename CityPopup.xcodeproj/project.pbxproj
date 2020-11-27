@@ -160,8 +160,9 @@
 		26071B14256BCD80009F5078 /* CityPopup */ = {
 			isa = PBXGroup;
 			children = (
-				26071B82256BF0CB009F5078 /* Internal */,
-				26071B68256BF0CB009F5078 /* Public */,
+				26071B75256BF0CB009F5078 /* Alert */,
+				26071B7B256BF0CB009F5078 /* Toast */,
+				26717F19256FC6E90024F2B2 /* Core */,
 				26071B16256BCD80009F5078 /* Info.plist */,
 			);
 			path = CityPopup;
@@ -216,8 +217,6 @@
 		26071B74256BF0CB009F5078 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				26071B75256BF0CB009F5078 /* Alert */,
-				26071B7B256BF0CB009F5078 /* Toast */,
 				26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */,
 				26071B7F256BF0CB009F5078 /* CPPopupViewProtocol.swift */,
 			);
@@ -321,6 +320,15 @@
 				26071BBA256BFEF0009F5078 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		26717F19256FC6E90024F2B2 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				26071B82256BF0CB009F5078 /* Internal */,
+				26071B68256BF0CB009F5078 /* Public */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
