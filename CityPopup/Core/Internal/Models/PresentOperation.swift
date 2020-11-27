@@ -109,18 +109,21 @@ extension PresentOperation {
     
     private func showPopupOnMainQueue() {
         semaphore = DispatchSemaphore(value: 0)
-        DispatchQueue.main.async {
-            // TODO: - Здесь похоже течем, если self будет виком, то попап не удалится
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
             self.popupPresentationModel.show(
                 on: self.parentView,
-                completion: { [weak self] in
-                    DispatchQueue.global().async {
+                completion: {
+                    DispatchQueue.global().async { [weak self] in
                         guard let self = self, !self.isCancelled else { return }
                         self.semaphore.signal()
                     }
                 }
             )
         }
+        
         semaphore.wait()
     }
     
