@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PassthroughView: UIView {
+final class PassthroughView: UIView {
     
     var shouldPassthrough: Bool = true
     var backgroundTapDetected: (() -> Void)?
