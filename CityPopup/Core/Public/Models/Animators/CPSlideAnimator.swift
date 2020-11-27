@@ -51,6 +51,7 @@ extension CPSlideAnimator {
         translate(view: view)
         
         animate(
+            duration: showDuration,
             animations: {
                 view.transform = .identity
                 
@@ -64,6 +65,7 @@ extension CPSlideAnimator {
     
     public func performHideAnimation(view: UIView, completion: @escaping () -> Void) {
         animate(
+            duration: hideDuration,
             animations: {
                 translate(view: view)
                 
@@ -105,9 +107,9 @@ extension CPSlideAnimator {
         view.transform = transform
     }
     
-    private func animate(animations: @escaping () -> Void, completion: @escaping () -> Void) {
+    private func animate(duration: TimeInterval, animations: @escaping () -> Void, completion: @escaping () -> Void) {
         UIView.animate(
-            withDuration: showDuration,
+            withDuration: duration,
             delay: 0,
             usingSpringWithDamping: 1,
             initialSpringVelocity: 0,
