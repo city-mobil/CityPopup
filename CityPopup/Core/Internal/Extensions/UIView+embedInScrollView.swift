@@ -15,7 +15,7 @@ extension UIView {
         scrollingByAxis axis: NSLayoutConstraint.Axis,
         backgroundColor: UIColor?)
     {
-        let scrollView = UIScrollView()
+        let scrollView = SwipeableScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = backgroundColor
         

@@ -46,6 +46,7 @@
 		26071BD2256C1D40009F5078 /* CityPopup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; };
 		26071BD3256C1D40009F5078 /* CityPopup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		26587FF3256E993800AB8992 /* ParentViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26587FF2256E993800AB8992 /* ParentViewService.swift */; };
+		26717F14256FA9BE0024F2B2 /* SwipeableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		26071BBA256BFEF0009F5078 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		26071BC8256C0482009F5078 /* AlertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewController.swift; sourceTree = "<group>"; };
 		26587FF2256E993800AB8992 /* ParentViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewService.swift; sourceTree = "<group>"; };
+		26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +289,7 @@
 				26071B8C256BF0CB009F5078 /* PassthroughStackView.swift */,
 				26071B8D256BF0CB009F5078 /* PassthroughView.swift */,
 				26071B8E256BF0CB009F5078 /* PassthroughWindow.swift */,
+				26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				26071BA6256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift in Sources */,
 				26071BAB256BF0CB009F5078 /* UIView+embedInScrollView.swift in Sources */,
 				26071BA7256BF0CB009F5078 /* CPPopupViewProtocol.swift in Sources */,
+				26717F14256FA9BE0024F2B2 /* SwipeableScrollView.swift in Sources */,
 				26071BA2256BF0CB009F5078 /* CPAlertActionStyle.swift in Sources */,
 				26071B9F256BF0CB009F5078 /* CPAlertView.swift in Sources */,
 				26071BA5256BF0CB009F5078 /* CPToastView.swift in Sources */,
