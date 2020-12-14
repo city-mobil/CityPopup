@@ -21,12 +21,17 @@ public struct CPFlipAnimator: CPAnimatorProtocol {
     private let shouldUseFadeAnimation: Bool
     private let isHideAnimationDirectionInverted: Bool
     
+    private var blackoutView = PassthroughView() ~> {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .darkGray
+    }
+    
     // MARK: - Init
     public init(
         direction: CPDirection = .up,
         showDuration: TimeInterval = 0.3,
         hideDuration: TimeInterval = 0.3,
-        shouldUseFadeAnimation: Bool = true,
+        shouldUseFadeAnimation: Bool = false,
         isHideAnimationDirectionInverted: Bool = false)
     {
         self.direction = direction
@@ -46,6 +51,9 @@ extension CPFlipAnimator {
             view.alpha = 0
         }
         
+        blackoutView.frame = view.bounds
+        view.addSubview(blackoutView)
+        
         flip(view: view)
         view.isHidden = false
         
@@ -55,6 +63,7 @@ extension CPFlipAnimator {
             options: [.curveEaseInOut],
             animations: {
                 view.layer.transform = CATransform3DIdentity
+                blackoutView.alpha = 0
                 
                 if shouldUseFadeAnimation {
                     view.alpha = 1
@@ -73,6 +82,7 @@ extension CPFlipAnimator {
             options: [.curveEaseInOut, .beginFromCurrentState],
             animations: {
                 flip(view: view, isHideAnimationDirectionInverted: isHideAnimationDirectionInverted)
+                blackoutView.alpha = 1
                 
                 if shouldUseFadeAnimation {
                     view.alpha = 0
