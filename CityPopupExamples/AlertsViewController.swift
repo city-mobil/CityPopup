@@ -146,15 +146,15 @@ extension AlertsViewController {
         // Add action to the alert. Dismiss the alert on action tap will be performed automatically.
         alertView.addAction(continueAction)
         
-        // Show the alert using the animator with sliding down animation.
+        // Show the alert using the animator with flip up animation.
         // Notes:
         // - The animator is using not only to show a popup but to hide by default;
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
-        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // - CPFlipAnimator has another parameters for init, feel free to use it on need;
+        // - CPFlipAnimator will hide the popup with reverse direction by default;
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: alertView,
-            animator: CPSlideAnimator(direction: .down),
+            animator: CPFlipAnimator(),
             attributes: .init(position: .top)
         )
     }
