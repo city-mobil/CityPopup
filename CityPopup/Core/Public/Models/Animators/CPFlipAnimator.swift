@@ -27,6 +27,12 @@ public struct CPFlipAnimator: CPAnimatorProtocol {
     }
     
     // MARK: - Init
+    /// - Parameters:
+    ///   - direction: Direction for show animation. Direction for hide animation will be inverted.
+    ///   - showDuration: Duration of show animation.
+    ///   - hideDuration: Duration of hide animation.
+    ///   - shouldUseFadeAnimation: Specify will be fade animation used or not.
+    ///   - isHideAnimationDirectionInverted: Specify will be direction inverted for hide animation or not.
     public init(
         direction: CPDirection = .up,
         showDuration: TimeInterval = 0.3,
