@@ -45,10 +45,10 @@ extension CPSlideAnimator {
     public func performShowAnimation(view: UIView, completion: @escaping () -> Void) {
         if shouldUseFadeAnimation {
             view.alpha = 0
-            view.isHidden = false
         }
         
         translate(view: view)
+        view.isHidden = false
         
         animate(
             duration: showDuration,

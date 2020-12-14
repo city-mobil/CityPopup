@@ -13,15 +13,19 @@ public struct CPFlipAnimator: CPAnimatorProtocol {
     private let direction: CPDirection
     private let showDuration: TimeInterval
     private let hideDuration: TimeInterval
+    private let isHideAnimationDirectionInverted: Bool
     
+    // MARK: - Init
     public init(
         direction: CPDirection = .up,
         showDuration: TimeInterval = 0.3,
-        hideDuration: TimeInterval = 0.3)
+        hideDuration: TimeInterval = 0.3,
+        isHideAnimationDirectionInverted: Bool = true)
     {
         self.direction = direction
         self.showDuration = showDuration
         self.hideDuration = hideDuration
+        self.isHideAnimationDirectionInverted = isHideAnimationDirectionInverted
     }
     
 }
@@ -30,27 +34,30 @@ public struct CPFlipAnimator: CPAnimatorProtocol {
 extension CPFlipAnimator {
     
     public func performShowAnimation(view: UIView, completion: @escaping () -> Void) {
-        view.isHidden = true
-        view.clipsToBounds = false
-
-
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
-            UIView.transition(
-                with: view,
-                duration: showDuration,
-                options: [.curveEaseInOut, .transitionFlipFromTop],
-                animations: {
-                    view.isHidden = false
-                },
-                completion: { _ in
-                    completion()
-                }
-            )
-//        }
+        UIView.transition(
+            with: view,
+            duration: showDuration,
+            options: [transitionFlipOption()],
+            animations: {
+                view.isHidden = false
+            },
+            completion: { _ in
+                completion()
+            }
+        )
     }
     
     public func performHideAnimation(view: UIView, completion: @escaping () -> Void) {
-        completion()
+        let transitionOption = transitionFlipOption(isHideAnimationDirectionInverted: isHideAnimationDirectionInverted)
+        UIView.transition(
+            from: view,
+            to: UIView(),
+            duration: hideDuration,
+            options: [transitionOption, .showHideTransitionViews],
+            completion: { _ in
+                completion()
+            }
+        )
     }
     
 }
@@ -58,29 +65,22 @@ extension CPFlipAnimator {
 // MARK: - Private methods
 extension CPFlipAnimator {
     
-    private func translate(view: UIView) {
-        let transform: CGAffineTransform
+    private func transitionFlipOption(isHideAnimationDirectionInverted: Bool = false) -> UIView.AnimationOptions {
+        let direction = isHideAnimationDirectionInverted ? self.direction.inverted : self.direction
+        
         switch direction {
-        case .up:
-            let superviewHeight = view.superview?.frame.height ?? 0
-            let translation = superviewHeight - view.frame.origin.y
-            transform = .init(translationX: 0, y: translation)
-            
         case .down:
-            let translation = view.frame.height + view.frame.origin.y
-            transform = .init(translationX: 0, y: -translation)
+            return .transitionFlipFromTop
             
         case .left:
-            let superviewWidth = view.superview?.frame.width ?? 0
-            let translation = superviewWidth - view.frame.origin.x
-            transform = .init(translationX: translation, y: 0)
+            return .transitionFlipFromRight
             
         case .right:
-            let translation = view.frame.width + view.frame.origin.x
-            transform = .init(translationX: -translation, y: 0)
+            return .transitionFlipFromLeft
+            
+        case .up:
+            return .transitionFlipFromBottom
         }
-        
-        view.transform = transform
     }
     
 }

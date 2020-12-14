@@ -77,9 +77,13 @@ extension PopupPresentation {
         lifecycle?.willAppear()
         container.layoutIfNeeded()
         
-        animator.performShowAnimation(view: view) {
-            lifecycle?.didAppear()
-            completion()
+        DispatchQueue.main.async { [weak self, weak lifecycle] in
+            guard let self = self else { return }
+
+            self.animator.performShowAnimation(view: self.view) {
+                lifecycle?.didAppear()
+                completion()
+            }
         }
     }
     
@@ -113,8 +117,10 @@ extension PopupPresentation {
     private func putIntoContainer(_ view: UIView, shouldConsiderLayoutGuide: Bool, shouldFitToContainer: Bool) {
         guard !container.subviews.contains(view), view.superview == nil else { return }
         
-        container.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        
+        container.addSubview(view)
         
         if shouldFitToContainer {
             fitToContainer(view: view, shouldConsiderLayoutGuide: shouldConsiderLayoutGuide)

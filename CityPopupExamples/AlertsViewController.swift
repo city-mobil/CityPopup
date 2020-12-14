@@ -100,7 +100,7 @@ extension AlertsViewController {
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: alertView,
-            animator: CPFlipAnimator(direction: .up),
+            animator: CPSlideAnimator(direction: .up),
             attributes: .init(
                 margins: .init(top: 24, left: 24, bottom: 24, right: 24)
             )
