@@ -77,13 +77,9 @@ extension PopupPresentation {
         lifecycle?.willAppear()
         container.layoutIfNeeded()
         
-        DispatchQueue.main.async { [weak self, weak lifecycle] in
-            guard let self = self else { return }
-
-            self.animator.performShowAnimation(view: self.view) {
-                lifecycle?.didAppear()
-                completion()
-            }
+        animator.performShowAnimation(view: view) {
+            lifecycle?.didAppear()
+            completion()
         }
     }
     
