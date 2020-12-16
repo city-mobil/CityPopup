@@ -66,16 +66,16 @@ final class PopupPresentation: PopupPresentationProtocol {
 extension PopupPresentation {
     
     func show(on parent: UIView, completion: @escaping () -> Void) {
+        setupContainerLayout(on: parent, margins: attributes.margins)
         putIntoContainer(
             view,
             shouldConsiderLayoutGuide: attributes.margins != nil,
             shouldFitToContainer: attributes.shouldFitToContainer
         )
-        setupContainerLayout(on: parent, margins: attributes.margins)
-        parent.layoutIfNeeded()
         
         let lifecycle = view as? CPViewWithLifecycleProtocol
         lifecycle?.willAppear()
+        container.layoutIfNeeded()
         
         animator.performShowAnimation(view: view) {
             lifecycle?.didAppear()
@@ -113,8 +113,10 @@ extension PopupPresentation {
     private func putIntoContainer(_ view: UIView, shouldConsiderLayoutGuide: Bool, shouldFitToContainer: Bool) {
         guard !container.subviews.contains(view), view.superview == nil else { return }
         
-        container.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        
+        container.addSubview(view)
         
         if shouldFitToContainer {
             fitToContainer(view: view, shouldConsiderLayoutGuide: shouldConsiderLayoutGuide)

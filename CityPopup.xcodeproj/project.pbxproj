@@ -45,6 +45,7 @@
 		26071BC9256C0482009F5078 /* AlertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071BC8256C0482009F5078 /* AlertsViewController.swift */; };
 		26071BD2256C1D40009F5078 /* CityPopup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; };
 		26071BD3256C1D40009F5078 /* CityPopup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2647E2D12570F55B008CBBB4 /* CPFlipAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647E2D02570F55B008CBBB4 /* CPFlipAnimator.swift */; };
 		26587FF3256E993800AB8992 /* ParentViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26587FF2256E993800AB8992 /* ParentViewService.swift */; };
 		26717F14256FA9BE0024F2B2 /* SwipeableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */; };
 /* End PBXBuildFile section */
@@ -115,6 +116,7 @@
 		26071B95256BF0CB009F5078 /* AnimatedPressViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedPressViewProtocol.swift; sourceTree = "<group>"; };
 		26071BBA256BFEF0009F5078 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		26071BC8256C0482009F5078 /* AlertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewController.swift; sourceTree = "<group>"; };
+		2647E2D02570F55B008CBBB4 /* CPFlipAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPFlipAnimator.swift; sourceTree = "<group>"; };
 		26587FF2256E993800AB8992 /* ParentViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewService.swift; sourceTree = "<group>"; };
 		26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -193,11 +195,11 @@
 		26071B69256BF0CB009F5078 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				26071B6E256BF0CB009F5078 /* Animators */,
 				26071B6A256BF0CB009F5078 /* CPAttributes+Position.swift */,
 				26071B6B256BF0CB009F5078 /* CPAttributes+InteractionHandling.swift */,
 				26071B6C256BF0CB009F5078 /* CPAttributes+Priority.swift */,
 				26071B6D256BF0CB009F5078 /* CPColor.swift */,
-				26071B6E256BF0CB009F5078 /* Animators */,
 				26071B72256BF0CB009F5078 /* CPAttributes.swift */,
 				26071B73256BF0CB009F5078 /* CPDirection.swift */,
 			);
@@ -209,6 +211,7 @@
 			children = (
 				26071B6F256BF0CB009F5078 /* CPSlideAnimator.swift */,
 				26071B70256BF0CB009F5078 /* CPFadeAnimator.swift */,
+				2647E2D02570F55B008CBBB4 /* CPFlipAnimator.swift */,
 				26071B71256BF0CB009F5078 /* CPAnimatorProtocol.swift */,
 			);
 			path = Animators;
@@ -472,6 +475,7 @@
 				26071BA0256BF0CB009F5078 /* CPAlertStyle.swift in Sources */,
 				26071BB4256BF0CB009F5078 /* PresentationDispatchService.swift in Sources */,
 				26071B99256BF0CB009F5078 /* CPColor.swift in Sources */,
+				2647E2D12570F55B008CBBB4 /* CPFlipAnimator.swift in Sources */,
 				26071B97256BF0CB009F5078 /* CPAttributes+InteractionHandling.swift in Sources */,
 				26071B9B256BF0CB009F5078 /* CPFadeAnimator.swift in Sources */,
 				26071B9D256BF0CB009F5078 /* CPAttributes.swift in Sources */,
