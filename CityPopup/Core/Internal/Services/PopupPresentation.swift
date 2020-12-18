@@ -12,7 +12,7 @@ protocol PopupPresentationProtocol: AnyObject {
     var view: UIView { get }
     var animator: CPAnimatorProtocol { get }
     var attributes: CPAttributes { get }
-    var onClose: (() -> Void)? { get set }
+    var delegate: PopupPresentationDelegate? { get set }
     
     func show(on parent: UIView, completion: @escaping () -> Void)
     func hide(completion: (() -> Void)?)
@@ -28,13 +28,20 @@ extension PopupPresentationProtocol {
     
 }
 
+protocol PopupPresentationDelegate: AnyObject {
+    
+    func hideAnimationWillPerformed()
+    func hideAnimationDidPerformed()
+    
+}
+
 final class PopupPresentation: PopupPresentationProtocol {
     
     // MARK: - PopupPresentationProtocol
     let view: UIView
     let animator: CPAnimatorProtocol
     let attributes: CPAttributes
-    var onClose: (() -> Void)?
+    weak var delegate: PopupPresentationDelegate?
     
     // MARK: - Private properties
     private let container = PassthroughView() ~> {
@@ -43,6 +50,7 @@ final class PopupPresentation: PopupPresentationProtocol {
     private var popupView: CPPopupViewProtocol? {
         return view as? CPPopupViewProtocol
     }
+    private var isHiding = false
     
     // MARK: - Init
     init(
@@ -89,7 +97,7 @@ extension PopupPresentation {
     
     func close() {
         container.removeFromSuperview()
-        onClose?()
+        delegate?.hideAnimationDidPerformed()
     }
     
 }
@@ -198,11 +206,15 @@ extension PopupPresentation {
     }
     
     private func hide(animator: CPHideAnimatorProtocol? = nil, completion: (() -> Void)? = nil) {
+        guard !isHiding else { return }
+        isHiding = true
+        
         let lifecycle = view as? CPViewWithLifecycleProtocol
         lifecycle?.willDisappear()
         
         let dismissAnimator = animator ?? self.animator
         
+        delegate?.hideAnimationWillPerformed()
         dismissAnimator.performHideAnimation(view: view) { [weak self, weak lifecycle] in
             self?.close()
             lifecycle?.didDisappear()

@@ -10,11 +10,12 @@ import UIKit
 protocol PresentOperationDelegate: AnyObject {
     
     func presentOperationDidStart()
+    func presentOperationWillComplete(operation: Operation)
     func presentOperationDidComplete(operation: Operation)
     
 }
 
-final class PresentOperation: Operation {
+final class PresentOperation: Operation, PopupPresentationDelegate {
     
     // MARK: - Private types
     private enum State: String {
@@ -67,18 +68,15 @@ final class PresentOperation: Operation {
             state = .finished
             return
         }
+        
+        popupPresentationModel.delegate = self
         state = .executing
+        
         main()
     }
     
     override func main() {
         delegate?.presentOperationDidStart()
-        
-        popupPresentationModel.onClose = { [weak self] in
-            guard let self = self, !self.isCancelled else { return }
-            self.cancel()
-            self.delegate?.presentOperationDidComplete(operation: self)
-        }
         
         semaphore = DispatchSemaphore(value: 0)
         let underlyingQueue = OperationQueue.current?.underlyingQueue
@@ -128,17 +126,28 @@ extension PresentOperation {
     }
     
     private func hidePopupOnMainQueue() {
-        guard !isCancelled else {
-            DispatchQueue.main.async { [weak self] in
-                self?.popupPresentationModel.close()
-            }
-            return
-        }
+        guard !isCancelled else { return }
+        
         semaphore = DispatchSemaphore(value: 0)
         DispatchQueue.main.async { [weak self] in
             self?.popupPresentationModel.hide()
         }
         semaphore.wait()
+    }
+    
+}
+
+// MARK: - PopupPresentationDelegate
+extension PresentOperation {
+    
+    func hideAnimationWillPerformed() {
+        delegate?.presentOperationWillComplete(operation: self)
+    }
+    
+    func hideAnimationDidPerformed() {
+        guard !isCancelled else { return }
+        cancel()
+        delegate?.presentOperationDidComplete(operation: self)
     }
     
 }
