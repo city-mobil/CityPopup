@@ -23,6 +23,13 @@ protocol PresentationDispatchServiceDelegate: AnyObject {
     
     /// An operation did start by presentation dispatch service. Called on main queue.
     func presentationDispatchServiceDidStartOperation()
+    
+    /// The operation will complete by presentation dispatch service. Called on main queue.
+    /// - Parameters:
+    ///   - operation: The operation wich will be completed.
+    ///   - areThereActiveOperations: Inicate are there any active present operation or not.
+    func presentationDispatchServiceWillComplete(operation: PresentOperation, areThereActiveOperations: Bool)
+    
     /// The operation did complete by presentation dispatch service. Called on main queue.
     /// - Parameters:
     ///   - operation: Completed operation.
@@ -56,12 +63,23 @@ extension PresentationDispatchService {
         }
     }
     
+    func presentOperationWillComplete(operation: Operation) {
+        guard let presentOperation = operation as? PresentOperation else { return }
+        
+        let areThereActiveOperations = calculateAreThereActiveOperations(forPresentOperation: presentOperation)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.presentationDispatchServiceWillComplete(
+                operation: presentOperation,
+                areThereActiveOperations: areThereActiveOperations
+            )
+        }
+    }
+    
     func presentOperationDidComplete(operation: Operation) {
         guard let presentOperation = operation as? PresentOperation else { return }
         
-        let activeOperations = operations(ofType: PresentOperation.self)
-            .filter { $0 !== presentOperation }
-        let areThereActiveOperations = !activeOperations.isEmpty
+        let areThereActiveOperations = calculateAreThereActiveOperations(forPresentOperation: presentOperation)
         
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.presentationDispatchServiceDidComplete(
@@ -69,6 +87,17 @@ extension PresentationDispatchService {
                 areThereActiveOperations: areThereActiveOperations
             )
         }
+    }
+    
+}
+
+// MARK: - Private methods
+extension PresentationDispatchService {
+    
+    private func calculateAreThereActiveOperations(forPresentOperation presentOperation: PresentOperation) -> Bool {
+        let activeOperations = operations(ofType: PresentOperation.self)
+            .filter { $0 !== presentOperation }
+        return !activeOperations.isEmpty
     }
     
 }

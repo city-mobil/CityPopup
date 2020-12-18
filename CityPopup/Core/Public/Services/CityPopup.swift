@@ -233,13 +233,16 @@ extension CityPopup {
         parentViewService.backgroundViewAnimate(shouldShow: true)
     }
     
-    func presentationDispatchServiceDidComplete(operation: PresentOperation, areThereActiveOperations: Bool) {
+    func presentationDispatchServiceWillComplete(operation: PresentOperation, areThereActiveOperations: Bool) {
         guard !areThereActiveOperations else { return }
-        
         parentViewService.backgroundViewAnimate(shouldShow: false) { [weak parentViewService] in
             parentViewService?.stopUsingBackground()
-            parentViewService?.removeCreatedWindow()
         }
+    }
+    
+    func presentationDispatchServiceDidComplete(operation: PresentOperation, areThereActiveOperations: Bool) {
+        guard !areThereActiveOperations else { return }
+        parentViewService.removeCreatedWindow()
     }
     
 }

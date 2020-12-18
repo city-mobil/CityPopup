@@ -62,7 +62,7 @@ extension ParentViewService {
         UIView.animate(
             withDuration: backgroundViewData.animationDuration,
             delay: 0,
-            options: .curveEaseInOut,
+            options: [.curveEaseInOut, .beginFromCurrentState],
             animations: {
                 backgroundViewData.backgroundView.alpha = shouldShow ? 1 : 0
             },
