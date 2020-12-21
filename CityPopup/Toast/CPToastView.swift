@@ -182,8 +182,13 @@ extension CPToastView {
     
     public override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         super.endTracking(touch, with: event)
-        pressAnimationShouldEnd(withTouch: touch)
-        moveAnimationShouldFinished(withTouch: touch)
+        
+        // If moving direction exists then the swipe should be handled
+        if movingDirection == nil {
+            pressAnimationShouldEnd(withTouch: touch)
+        } else {
+            moveAnimationShouldFinished(withTouch: touch)
+        }
     }
     
     public override func cancelTracking(with event: UIEvent?) {

@@ -85,8 +85,8 @@ extension CityPopup {
     ///   - attributes: Attributes for the view.
     public func show(
         view: UIView,
-        animator: CPAnimatorProtocol,
-        attributes: CPAttributes)
+        animator: CPAnimatorProtocol = CPFadeAnimator(),
+        attributes: CPAttributes = .init())
     {
         let parentView = parentViewService.getParentView()
         show(view: view, onView: parentView, animator: animator, attributes: attributes)
@@ -99,15 +99,15 @@ extension CityPopup {
     ///   - attributes: Attributes for the view.
     public func show(
         popup: CPPopupViewProtocol,
-        animator: CPAnimatorProtocol,
-        attributes: CPAttributes)
+        animator: CPAnimatorProtocol = CPFadeAnimator(),
+        attributes: CPAttributes = .init())
     {
         show(view: popup as UIView, animator: animator, attributes: attributes)
     }
     
-    /// Setup background view for popups queue which uses only for decoration.
+    /// Setup background view for popups queue which uses only for decoration. There is no background view by default.
     /// - Parameters:
-    ///   - backgroundView: Some view you wanted to see as a background. There is no background view by default.
+    ///   - backgroundView: Some view you wanted to see as a background.
     ///   - animationDuration: Duration of appearing and disappearing animations.
     /// - Important:
     /// The background view will be keeped strongly.
