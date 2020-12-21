@@ -52,8 +52,15 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
     /// - Parameters:
     ///   - windowLevel: Level of a window.
     ///   - maxConcurrentOperationCount: Maximum concurrent operations count.
-    public init(showOnLevel windowLevel: UIWindow.Level = .statusBar, maxConcurrentOperationCount: Int = 1) {
-        parentViewService = ParentViewService(windowLevel: windowLevel)
+    ///   - preferredStatusBarStyle: Set the status bar style if presented view controller has not default style.
+    /// - Important:
+    /// Do not forget save an instance address of CityPopup to not break some logic (i.e. background's logic will not work).
+    public init(
+        showOnLevel windowLevel: UIWindow.Level = .statusBar,
+        maxConcurrentOperationCount: Int = 1,
+        preferredStatusBarStyle: UIStatusBarStyle = UIApplication.shared.statusBarStyle)
+    {
+        parentViewService = ParentViewService(windowLevel: windowLevel, preferredStatusBarStyle: preferredStatusBarStyle)
         self.maxConcurrentOperationCount = maxConcurrentOperationCount
         commonInit(maxConcurrentOperationCount: maxConcurrentOperationCount)
     }
@@ -62,6 +69,8 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
     /// - Parameters:
     ///   - view: Some view on which popups will be shown.
     ///   - maxConcurrentOperationCount: Maximum concurrent operations count.
+    /// - Important:
+    /// Do not forget save an instance address of CityPopup to not break some logic (i.e. background's logic will not work).
     public init(showOnView view: UIView, maxConcurrentOperationCount: Int = 1) {
         parentViewService = ParentViewService(view: view)
         self.maxConcurrentOperationCount = maxConcurrentOperationCount
