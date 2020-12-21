@@ -48,6 +48,7 @@
 		2647E2D12570F55B008CBBB4 /* CPFlipAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647E2D02570F55B008CBBB4 /* CPFlipAnimator.swift */; };
 		26587FF3256E993800AB8992 /* ParentViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26587FF2256E993800AB8992 /* ParentViewService.swift */; };
 		26717F14256FA9BE0024F2B2 /* SwipeableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */; };
+		26A8A99425909DAC0004EA66 /* StatusBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8A99325909DAC0004EA66 /* StatusBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		2647E2D02570F55B008CBBB4 /* CPFlipAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPFlipAnimator.swift; sourceTree = "<group>"; };
 		26587FF2256E993800AB8992 /* ParentViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewService.swift; sourceTree = "<group>"; };
 		26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableScrollView.swift; sourceTree = "<group>"; };
+		26A8A99325909DAC0004EA66 /* StatusBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 				26071B83256BF0CB009F5078 /* Models */,
 				26071B85256BF0CB009F5078 /* Extensions */,
 				26071B8B256BF0CB009F5078 /* Views */,
+				26A8A99225909D950004EA66 /* ViewControllers */,
 				26071B8F256BF0CB009F5078 /* Services */,
 				26071B93256BF0CB009F5078 /* Utility */,
 			);
@@ -332,6 +335,14 @@
 				26071B68256BF0CB009F5078 /* Public */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		26A8A99225909D950004EA66 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				26A8A99325909DAC0004EA66 /* StatusBarViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,6 +487,7 @@
 				26071BB4256BF0CB009F5078 /* PresentationDispatchService.swift in Sources */,
 				26071B99256BF0CB009F5078 /* CPColor.swift in Sources */,
 				2647E2D12570F55B008CBBB4 /* CPFlipAnimator.swift in Sources */,
+				26A8A99425909DAC0004EA66 /* StatusBarViewController.swift in Sources */,
 				26071B97256BF0CB009F5078 /* CPAttributes+InteractionHandling.swift in Sources */,
 				26071B9B256BF0CB009F5078 /* CPFadeAnimator.swift in Sources */,
 				26071B9D256BF0CB009F5078 /* CPAttributes.swift in Sources */,

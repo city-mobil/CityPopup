@@ -21,12 +21,14 @@ final class ParentViewService {
     // MARK: - Private properties
     private weak var view: UIView?
     private var windowLevel: UIWindow.Level?
+    private var preferredStatusBarStyle: UIStatusBarStyle?
     private var window: UIWindow?
     private var backgroundViewData: BackgroundViewData?
     
     // MARK: - Init
-    init(windowLevel: UIWindow.Level) {
+    init(windowLevel: UIWindow.Level, preferredStatusBarStyle: UIStatusBarStyle) {
         self.windowLevel = windowLevel
+        self.preferredStatusBarStyle = preferredStatusBarStyle
     }
     
     init(view: UIView) {
@@ -96,6 +98,9 @@ extension ParentViewService {
             let newWindow = createWindow(atLevel: windowLevel ?? .normal)
             newWindow.makeKeyAndVisible()
             self.window = newWindow
+            
+            assignStatusBarIfNeeded(toWindow: newWindow)
+            
             return newWindow
         }
     }
@@ -123,6 +128,21 @@ extension ParentViewService {
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func assignStatusBarIfNeeded(toWindow window: UIWindow) {
+        guard let preferredStatusBarStyle = preferredStatusBarStyle else { return }
+        
+        switch preferredStatusBarStyle {
+        case .darkContent, .lightContent:
+            window.rootViewController = StatusBarViewController(statusBarStyle: preferredStatusBarStyle)
+            
+        case .default:
+            break
+            
+        @unknown default:
+            break
+        }
     }
     
 }
