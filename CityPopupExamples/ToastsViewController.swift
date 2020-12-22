@@ -72,7 +72,7 @@ extension ToastsViewController {
                 
         // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
-        // Note:
+        // Notes:
         // - The animator is using not only to show a popup but to hide by default.
         // - CPSlideAnimator has another parameters for init, feel free to use it on need.
         // - CPSlideAnimator will hide the popup with reverse direction by default.
@@ -128,7 +128,7 @@ extension ToastsViewController {
         // Configure toast styles.
         let toastStyle = CPToastStyle(
             cornerRadius: 8,
-            backgroundColor: UIColor.black.withAlphaComponent(0.8),
+            backgroundColor: CPColor.black_white.withAlphaComponent(0.8),
             contentMargin: .init(top: 16, left: 16, bottom: 16, right: 16),
             titleFont: .systemFont(ofSize: 16, weight: .bold),
             titleTextAlignment: .natural,
@@ -137,7 +137,7 @@ extension ToastsViewController {
             messageFont: .systemFont(ofSize: 14, weight: .regular),
             messageTextAligment: .natural,
             messageNumberOfLines: 0,
-            messageTextColor: .white,
+            messageTextColor: CPColor.white_black,
             horizontalSpacingAfterLeadingContainer: 16,
             verticalSpacingAfterTitle: 4,
             horizontalSpacingAfterTitle: 8
@@ -157,7 +157,7 @@ extension ToastsViewController {
         
         // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
-        // Note:
+        // Notes:
         // - The animator is using not only to show a popup but to hide by default.
         // - CPSlideAnimator has another parameters for init, feel free to use it on need.
         // - CPSlideAnimator will hide the popup with reverse direction by default.
@@ -177,7 +177,7 @@ extension ToastsViewController {
         // Configure toast styles.
         let toastStyle = CPToastStyle(
             cornerRadius: 8,
-            backgroundColor: UIColor.black.withAlphaComponent(0.8),
+            backgroundColor: CPColor.black_white.withAlphaComponent(0.8),
             contentMargin: .init(top: 16, left: 16, bottom: 16, right: 16),
             titleFont: .systemFont(ofSize: 16, weight: .bold),
             titleTextAlignment: .natural,
@@ -186,7 +186,7 @@ extension ToastsViewController {
             messageFont: .systemFont(ofSize: 14, weight: .regular),
             messageTextAligment: .natural,
             messageNumberOfLines: 0,
-            messageTextColor: .white,
+            messageTextColor: CPColor.white_black,
             horizontalSpacingAfterLeadingContainer: 16,
             verticalSpacingAfterTitle: 4,
             horizontalSpacingAfterTitle: 8
@@ -206,7 +206,7 @@ extension ToastsViewController {
         
         // Show the toast using the animator with sliding right animation.
         // Specify margins to a container of the toast.
-        // Note:
+        // Notes:
         // - The animator is using not only to show a popup but to hide by default.
         // - CPSlideAnimator has another parameters for init, feel free to use it on need.
         // - CPSlideAnimator will hide the popup with reverse direction by default.
@@ -222,12 +222,12 @@ extension ToastsViewController {
         )
     }
     
-    //Show toast with right-to-left text direction.
+    /// Show toast with right-to-left text direction.
     func showAchievementToastRTL() {
         // Configure toast styles.
         let toastStyle = CPToastStyle(
             cornerRadius: 8,
-            backgroundColor: UIColor.black.withAlphaComponent(0.8),
+            backgroundColor: CPColor.black_white.withAlphaComponent(0.8),
             contentMargin: .init(top: 16, left: 16, bottom: 16, right: 16),
             titleFont: .systemFont(ofSize: 16, weight: .bold),
             titleTextAlignment: .natural,
@@ -236,7 +236,7 @@ extension ToastsViewController {
             messageFont: .systemFont(ofSize: 14, weight: .regular),
             messageTextAligment: .natural,
             messageNumberOfLines: 0,
-            messageTextColor: .white,
+            messageTextColor: CPColor.white_black,
             horizontalSpacingAfterLeadingContainer: 16,
             verticalSpacingAfterTitle: 4,
             horizontalSpacingAfterTitle: 8
@@ -259,7 +259,7 @@ extension ToastsViewController {
         
         // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
-        // Note:
+        // Notes:
         // - The animator is using not only to show a popup but to hide by default.
         // - CPSlideAnimator has another parameters for init, feel free to use it on need.
         // - CPSlideAnimator will hide the popup with reverse direction by default.
@@ -274,12 +274,12 @@ extension ToastsViewController {
         )
     }
     
-    //Show toast with left-to-right text direction.
+    /// Show toast with left-to-right text direction.
     func showAchievementToastLTR() {
         // Configure toast styles.
         let toastStyle = CPToastStyle(
             cornerRadius: 8,
-            backgroundColor: UIColor.black.withAlphaComponent(0.8),
+            backgroundColor: CPColor.black_white.withAlphaComponent(0.8),
             contentMargin: .init(top: 16, left: 16, bottom: 16, right: 16),
             titleFont: .systemFont(ofSize: 16, weight: .bold),
             titleTextAlignment: .natural,
@@ -288,7 +288,7 @@ extension ToastsViewController {
             messageFont: .systemFont(ofSize: 14, weight: .regular),
             messageTextAligment: .natural,
             messageNumberOfLines: 0,
-            messageTextColor: .white,
+            messageTextColor: CPColor.white_black,
             horizontalSpacingAfterLeadingContainer: 16,
             verticalSpacingAfterTitle: 4,
             horizontalSpacingAfterTitle: 8
@@ -311,7 +311,7 @@ extension ToastsViewController {
         
         // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
-        // Note:
+        // Notes:
         // - The animator is using not only to show a popup but to hide by default.
         // - CPSlideAnimator has another parameters for init, feel free to use it on need.
         // - CPSlideAnimator will hide the popup with reverse direction by default.
