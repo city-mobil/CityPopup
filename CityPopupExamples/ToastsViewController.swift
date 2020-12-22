@@ -73,9 +73,9 @@ extension ToastsViewController {
         // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
         // Notes:
-        // - The animator is using not only to show a popup but to hide by default.
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
-        // - CPSlideAnimator will hide the popup with reverse direction by default.
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -108,10 +108,10 @@ extension ToastsViewController {
         
         // Show the toast using the animator with sliding up animation.
         // Specify margins to a container of the toast.
-        // Note:
-        // - The animator is using not only to show a popup but to hide by default.
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
-        // - CPSlideAnimator will hide the popup with reverse direction by default.
+        // Notes:
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -158,9 +158,9 @@ extension ToastsViewController {
         // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
         // Notes:
-        // - The animator is using not only to show a popup but to hide by default.
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
-        // - CPSlideAnimator will hide the popup with reverse direction by default.
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -207,9 +207,9 @@ extension ToastsViewController {
         // Show the toast using the animator with sliding right animation.
         // Specify margins to a container of the toast.
         // Notes:
-        // - The animator is using not only to show a popup but to hide by default.
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
-        // - CPSlideAnimator will hide the popup with reverse direction by default.
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -260,9 +260,9 @@ extension ToastsViewController {
         // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
         // Notes:
-        // - The animator is using not only to show a popup but to hide by default.
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
-        // - CPSlideAnimator will hide the popup with reverse direction by default.
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -312,9 +312,9 @@ extension ToastsViewController {
         // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
         // Notes:
-        // - The animator is using not only to show a popup but to hide by default.
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
-        // - CPSlideAnimator will hide the popup with reverse direction by default.
+        // - The animator is using not only to show a popup but to hide by default;
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
+        // - CPSlideAnimator will hide the popup with reverse direction by default;
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
