@@ -42,6 +42,7 @@ public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressVie
     private lazy var titleLabel = UILabel() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = style.titleFont
+        $0.textColor = style.titleTextColor
         $0.textAlignment = style.titleTextAlignment
         $0.numberOfLines = style.titleNumberOfLines
         $0.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -49,6 +50,7 @@ public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressVie
     private lazy var messageLabel = UILabel() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = style.messageFont
+        $0.textColor = style.messageTextColor
         $0.textAlignment = style.messageTextAligment
         $0.numberOfLines = style.messageNumberOfLines
     }
@@ -212,7 +214,7 @@ extension CPToastView {
         widthAnchor.constraint(greaterThanOrEqualToConstant: Spec.minimumWidth).isActive = true
         
         // Content
-        contentStackView.backgroundColor = backgroundColor
+        contentStackView.backgroundColor = .clear
         addSubview(contentStackView)
         NSLayoutConstraint.activate([
             contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: style.contentMargin.left),
@@ -222,7 +224,7 @@ extension CPToastView {
         ])
         
         // Texts
-        textsStackView.backgroundColor = backgroundColor
+        textsStackView.backgroundColor = .clear
         contentStackView.addArrangedSubview(textsStackView)
         
         // Title
@@ -271,7 +273,7 @@ extension CPToastView {
         let container = PassthroughView()
         container.translatesAutoresizingMaskIntoConstraints = false
         container.shouldPassthrough = true
-        container.backgroundColor = backgroundColor
+        container.backgroundColor = .clear
         
         if shouldInsertFirst {
             contentStackView.insertArrangedSubview(container, at: 0)
