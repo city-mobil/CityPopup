@@ -32,14 +32,17 @@ extension ToastsViewController {
         showToastWithBottomAlignmentAndAutodismiss()
         showAchievementToastRTL()
         showAchievementToastLTR()
-        //Popups show in respect of their priority.
+        // Popups show in respect of their priority.
         showAchievementToastHighPriority()
+        
+        // You can also change the popup animation.
+        showAchievementToastSwipeLeft()
     }
     
     private func showSimpleToast() {
         // Create the toast view instance with title, message and leading view.
-        // Notes:
-        // - The `style` parameter has a lot of settings to customize the toast view;
+        // Note:
+        // - The `style` parameter has a lot of settings to customize the toast view.
         let toastView = CPToastView(
             title: "First toast.",
             message: "This toast is showing the leading view, title and message.",
@@ -59,7 +62,7 @@ extension ToastsViewController {
         leadingImageView.layer.cornerRadius = 8
         toastView.add(leadingView: leadingImageView, width: 32, height: 32)
 
-        // Add actions for toast
+        // Add tap action for toast
         toastView.tapHandler = {
             print("Toast simple tap action")
         }
@@ -67,12 +70,12 @@ extension ToastsViewController {
         // Add swipe to hide recognition to toast
         toastView.setHideSwipeGestureEnabled(withDirection: .up)
                 
-        // Show the toast using the animator with sliding up animation.
+        // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
-        // Notes:
-        // - The animator is using not only to show a popup but to hide by default;
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
-        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // Note:
+        // - The animator is using not only to show a popup but to hide by default.
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
+        // - CPSlideAnimator will hide the popup with reverse direction by default.
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -86,8 +89,8 @@ extension ToastsViewController {
     
     private func showToastWithBottomAlignmentAndAutodismiss() {
         // Create the toast view instance with title, message and leading view.
-        // Notes:
-        // - The `style` parameter has a lot of settings to customize the toast view;
+        // Note:
+        // - The `style` parameter has a lot of settings to customize the toast view.
         let toastView = CPToastView(
             title: "Second toast.",
             message: "This toast is showing title and message. It is aligned at the bottom of the screen and autodismisses in 3 seconds. Text alignment is center",
@@ -105,10 +108,10 @@ extension ToastsViewController {
         
         // Show the toast using the animator with sliding up animation.
         // Specify margins to a container of the toast.
-        // Notes:
-        // - The animator is using not only to show a popup but to hide by default;
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
-        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // Note:
+        // - The animator is using not only to show a popup but to hide by default.
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
+        // - CPSlideAnimator will hide the popup with reverse direction by default.
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -152,12 +155,12 @@ extension ToastsViewController {
         // Add swipe to hide recognition to toast with '.up' direction
         toastView.setHideSwipeGestureEnabled(withDirection: .up)
         
-        // Show the toast using the animator with sliding up animation.
+        // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
-        // Notes:
-        // - The animator is using not only to show a popup but to hide by default;
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
-        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // Note:
+        // - The animator is using not only to show a popup but to hide by default.
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
+        // - CPSlideAnimator will hide the popup with reverse direction by default.
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -170,7 +173,56 @@ extension ToastsViewController {
         )
     }
     
-
+    func showAchievementToastSwipeLeft() {
+        // Configure toast styles.
+        let toastStyle = CPToastStyle(
+            cornerRadius: 8,
+            backgroundColor: UIColor.black.withAlphaComponent(0.8),
+            contentMargin: .init(top: 16, left: 16, bottom: 16, right: 16),
+            titleFont: .systemFont(ofSize: 16, weight: .bold),
+            titleTextAlignment: .natural,
+            titleNumberOfLines: 2,
+            titleTextColor: .white,
+            messageFont: .systemFont(ofSize: 14, weight: .regular),
+            messageTextAligment: .natural,
+            messageNumberOfLines: 0,
+            messageTextColor: .white,
+            horizontalSpacingAfterLeadingContainer: 16,
+            verticalSpacingAfterTitle: 4,
+            horizontalSpacingAfterTitle: 8
+        )
+        
+        // Create the toast view instance with title, message and leading view.
+        let toastView = CPToastView(title: "Achievement unlocked", message: "Left side animation popup", style: toastStyle)
+        
+        // Add leading view with some image.
+        let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Star"))
+        leadingImageView.contentMode = .center
+        leadingImageView.clipsToBounds = true
+        toastView.add(leadingView: leadingImageView, width: 32)
+        
+        // Add swipe to hide recognition to toast with '.left' direction
+        toastView.setHideSwipeGestureEnabled(withDirection: .left)
+        
+        // Show the toast using the animator with sliding right animation.
+        // Specify margins to a container of the toast.
+        // Note:
+        // - The animator is using not only to show a popup but to hide by default.
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
+        // - CPSlideAnimator will hide the popup with reverse direction by default.
+        // - The `attributes` parameter has a lot of settings to customize show operation.
+        CityPopup.shared.show(
+            popup: toastView,
+            animator: CPSlideAnimator(direction: .right),
+            attributes: .init(
+                position: .top,
+                margins: .init(top: 24, left: 24, bottom: 24, right: 24),
+                priority: .high
+            )
+        )
+    }
+    
+    //Show toast with right-to-left text direction.
     func showAchievementToastRTL() {
         // Configure toast styles.
         let toastStyle = CPToastStyle(
@@ -205,12 +257,12 @@ extension ToastsViewController {
         // Add swipe to hide recognition to toast with '.up' direction
         toastView.setHideSwipeGestureEnabled(withDirection: .up)
         
-        // Show the toast using the animator with sliding up animation.
+        // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
-        // Notes:
-        // - The animator is using not only to show a popup but to hide by default;
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
-        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // Note:
+        // - The animator is using not only to show a popup but to hide by default.
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
+        // - CPSlideAnimator will hide the popup with reverse direction by default.
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -222,6 +274,7 @@ extension ToastsViewController {
         )
     }
     
+    //Show toast with left-to-right text direction.
     func showAchievementToastLTR() {
         // Configure toast styles.
         let toastStyle = CPToastStyle(
@@ -256,12 +309,12 @@ extension ToastsViewController {
         // Add swipe to hide recognition to toast with '.up' direction
         toastView.setHideSwipeGestureEnabled(withDirection: .up)
         
-        // Show the toast using the animator with sliding up animation.
+        // Show the toast using the animator with sliding down animation.
         // Specify margins to a container of the toast.
-        // Notes:
-        // - The animator is using not only to show a popup but to hide by default;
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
-        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // Note:
+        // - The animator is using not only to show a popup but to hide by default.
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
+        // - CPSlideAnimator will hide the popup with reverse direction by default.
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: toastView,
@@ -272,7 +325,6 @@ extension ToastsViewController {
             )
         )
     }
-
     
 }
 

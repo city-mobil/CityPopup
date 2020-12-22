@@ -51,8 +51,8 @@ extension AlertsViewController {
     private func showThirstAlert() {
         // Create the alert view instance with title and message.
         // Specify height of cover view which will be added later.
-        // Notes:
-        // - The `style` parameter has a lot of settings to customize the alert view;
+        // Note:
+        // - The `style` parameter has a lot of settings to customize the alert view.
         // - Specify height for cover view manually if the view's height can not be predicted.
         let alertView = CPAlertView(
             title: "First alert.",
@@ -78,9 +78,9 @@ extension AlertsViewController {
             UIApplication.shared.openURL(url)
         }
         // Add the image to the right side.
-        // Notes:
+        // Note:
         // - To keep the text in the middle of the action set `true` to `shouldFillOtherSide`,
-        // it will create an empty view with same size as the image view;
+        // it will create an empty view with same size as the image view.
         // - To support dark and light mode specify tintColor with dynamic color.
         docsLinkAction.add(image: #imageLiteral(resourceName: "Link"), toSide: .right, shouldFillOtherSide: true, tintColor: CPColor.black_white)
         // Add action to the alert and forbid alert dismiss on the action tap.
@@ -93,10 +93,10 @@ extension AlertsViewController {
         
         // Show the alert using the animator with sliding up animation.
         // Specify margins to a container of the alert.
-        // Notes:
-        // - The animator is using not only to show a popup but to hide by default;
-        // - CPSlideAnimator has another parameters for init, feel free to use it on need;
-        // - CPSlideAnimator will hide the popup with reverse direction by default;
+        // Note:
+        // - The animator is using not only to show a popup but to hide by default.
+        // - CPSlideAnimator has another parameters for init, feel free to use it on need.
+        // - CPSlideAnimator will hide the popup with reverse direction by default.
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: alertView,
@@ -109,8 +109,8 @@ extension AlertsViewController {
     
     private func showSecondAlert() {
         // Create the alert view instance with message.
-        // Notes:
-        // - The `style` parameter has a lot of settings to customize the alert view;
+        // Note:
+        // - The `style` parameter has a lot of settings to customize the alert view.
         // - Specify `actionsAxis` in style to display actions horizontally in scroll view.
         let alertView = CPAlertView(
             title: nil,
@@ -147,10 +147,10 @@ extension AlertsViewController {
         alertView.addAction(continueAction)
         
         // Show the alert using the animator with flip up animation.
-        // Notes:
-        // - The animator is using not only to show a popup but to hide by default;
-        // - CPFlipAnimator has another parameters for init, feel free to use it on need;
-        // - CPFlipAnimator will hide the popup with reverse direction by default;
+        // Note:
+        // - The animator is using not only to show a popup but to hide by default.
+        // - CPFlipAnimator has another parameters for init, feel free to use it on need.
+        // - CPFlipAnimator will hide the popup with reverse direction by default.
         // - The `attributes` parameter has a lot of settings to customize show operation.
         CityPopup.shared.show(
             popup: alertView,
@@ -169,9 +169,9 @@ extension AlertsViewController {
         """
         // Specify all available parameters for style.
         // Some of them will be described below.
-        // Notes:
-        // - Specify `contentMargin` to make indents between the alert edges and it contents;
-        // - Specify `coverViewHeight` manually if the view's height can not be predicted;
+        // Note:
+        // - Specify `contentMargin` to make indents between the alert edges and it contents.
+        // - Specify `coverViewHeight` manually if the view's height can not be predicted.
         // - Specify `actionsAxis` to display actions horizontally. Actions will be fitted and maybe compressed.
         let alertStyle = CPAlertStyle(
             cornerRadius: 16,
@@ -247,11 +247,11 @@ extension AlertsViewController {
         
         // Specify all available parameters for attributes.
         // Some of them will be described below.
-        // Notes:
-        // - Specify `autodismissDelay` to dismiss the alert automatically;
-        // - Specify `backgroundInteractionHandling` to be able to tap on views behind the alert;
-        // - Specify `position` to change the alert position;
-        // - Specify `tags` to be able to found this alert by tags;
+        // Note:
+        // - Specify `autodismissDelay` to dismiss the alert automatically.
+        // - Specify `backgroundInteractionHandling` to be able to tap on views behind the alert.
+        // - Specify `position` to change the alert position.
+        // - Specify `tags` to be able to found this alert by tags.
         // - Specify `shouldFitToContainer` to forbid alert crawling out of it container bounds.
         let attributes = CPAttributes(
             autodismissDelay: 24,
