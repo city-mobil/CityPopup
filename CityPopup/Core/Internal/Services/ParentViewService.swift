@@ -25,6 +25,8 @@ final class ParentViewService {
     private var window: UIWindow?
     private var backgroundViewData: BackgroundViewData?
     
+    private let isOSUnder12Version = ProcessInfo().operatingSystemVersion.majorVersion < 12
+    
     // MARK: - Init
     init(windowLevel: UIWindow.Level, preferredStatusBarStyle: UIStatusBarStyle?) {
         self.windowLevel = windowLevel
@@ -83,6 +85,11 @@ extension ParentViewService {
         guard let window = window else { return }
         window.removeFromSuperview()
         self.window = nil
+        
+        // Fix web view display from popup on different window
+        if isOSUnder12Version {
+            UIApplication.shared.delegate?.window??.makeKeyAndVisible()
+        }
     }
     
 }
@@ -100,6 +107,11 @@ extension ParentViewService {
             newWindow.isHidden = false
             newWindow.rootViewController = StatusBarViewController(statusBarStyle: preferredStatusBarStyle)
             self.window = newWindow
+            
+            // Fix web view display from popup on different window
+            if isOSUnder12Version {
+                newWindow.makeKeyAndVisible()
+            }
             
             return newWindow
         }
