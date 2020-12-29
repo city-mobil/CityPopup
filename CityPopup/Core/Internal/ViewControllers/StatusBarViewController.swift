@@ -9,13 +9,37 @@ import UIKit
 
 final class StatusBarViewController: UIViewController {
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return statusBarStyle
+    // MARK: - Private properties
+    private let statusBarStyle: UIStatusBarStyle?
+    
+    private var statusBarStyleBasedOnMode: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            switch traitCollection.userInterfaceStyle {
+            case .unspecified:
+                return .default
+                
+            case .light:
+                return .darkContent
+                
+            case .dark:
+                return .lightContent
+                
+            @unknown default:
+                return .default
+            }
+            
+        } else {
+            return .default
+        }
     }
     
-    private let statusBarStyle: UIStatusBarStyle
+    // MARK: - Overrides
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyle ?? statusBarStyleBasedOnMode
+    }
     
-    init(statusBarStyle: UIStatusBarStyle) {
+    // MARK: - Init
+    init(statusBarStyle: UIStatusBarStyle?) {
         self.statusBarStyle = statusBarStyle
         super.init(nibName: nil, bundle: nil)
     }

@@ -25,8 +25,10 @@ final class ParentViewService {
     private var window: UIWindow?
     private var backgroundViewData: BackgroundViewData?
     
+    private let isOSUnder12Version = ProcessInfo().operatingSystemVersion.majorVersion < 12
+    
     // MARK: - Init
-    init(windowLevel: UIWindow.Level, preferredStatusBarStyle: UIStatusBarStyle) {
+    init(windowLevel: UIWindow.Level, preferredStatusBarStyle: UIStatusBarStyle?) {
         self.windowLevel = windowLevel
         self.preferredStatusBarStyle = preferredStatusBarStyle
     }
@@ -83,6 +85,11 @@ extension ParentViewService {
         guard let window = window else { return }
         window.removeFromSuperview()
         self.window = nil
+        
+        // Fix web view display from popup on different window
+        if isOSUnder12Version {
+            UIApplication.shared.delegate?.window??.makeKeyAndVisible()
+        }
     }
     
 }
@@ -95,20 +102,19 @@ extension ParentViewService {
             return currentWindow
             
         } else {
-            let newWindow = createWindow(atLevel: windowLevel ?? .normal)
-            newWindow.makeKeyAndVisible()
+            let newWindow = PassthroughWindow(frame: UIScreen.main.bounds)
+            newWindow.windowLevel = windowLevel ?? .normal
+            newWindow.isHidden = false
+            newWindow.rootViewController = StatusBarViewController(statusBarStyle: preferredStatusBarStyle)
             self.window = newWindow
             
-            assignStatusBarIfNeeded(toWindow: newWindow)
+            // Fix web view display from popup on different window
+            if isOSUnder12Version {
+                newWindow.makeKeyAndVisible()
+            }
             
             return newWindow
         }
-    }
-    
-    private func createWindow(atLevel level: UIWindow.Level) -> UIWindow {
-        let window = PassthroughWindow(frame: UIScreen.main.bounds)
-        window.windowLevel = level
-        return window
     }
     
     private func layoutBackgroundView(onView view: UIView) {
@@ -128,21 +134,6 @@ extension ParentViewService {
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-    }
-    
-    private func assignStatusBarIfNeeded(toWindow window: UIWindow) {
-        guard let preferredStatusBarStyle = preferredStatusBarStyle else { return }
-        
-        switch preferredStatusBarStyle {
-        case .darkContent, .lightContent:
-            window.rootViewController = StatusBarViewController(statusBarStyle: preferredStatusBarStyle)
-            
-        case .default:
-            break
-            
-        @unknown default:
-            break
-        }
     }
     
 }

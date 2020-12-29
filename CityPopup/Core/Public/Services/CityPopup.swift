@@ -52,13 +52,13 @@ public final class CityPopup: PresentationDispatchServiceDelegate {
     /// - Parameters:
     ///   - windowLevel: Level of a window.
     ///   - maxConcurrentOperationCount: Maximum concurrent operations count.
-    ///   - preferredStatusBarStyle: Set the status bar style if presented view controller has not default style.
+    ///   - preferredStatusBarStyle: Set the status bar style otherwise it will depend on UI mode (dark/light).
     /// - Important:
     /// Do not forget save an instance address of CityPopup to not break some logic (i.e. background's logic will not work).
     public init(
         showOnLevel windowLevel: UIWindow.Level = .statusBar,
         maxConcurrentOperationCount: Int = 1,
-        preferredStatusBarStyle: UIStatusBarStyle = UIApplication.shared.statusBarStyle)
+        preferredStatusBarStyle: UIStatusBarStyle? = nil)
     {
         parentViewService = ParentViewService(windowLevel: windowLevel, preferredStatusBarStyle: preferredStatusBarStyle)
         self.maxConcurrentOperationCount = maxConcurrentOperationCount
