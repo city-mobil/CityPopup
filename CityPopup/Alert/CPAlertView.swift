@@ -23,6 +23,7 @@ public final class CPAlertView: UIView, CPPopupViewProtocol {
     private lazy var titleLabel = UILabel() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = style.titleFont
+        $0.textColor = style.titleColor
         $0.textAlignment = style.titleTextAlignment
         $0.numberOfLines = style.titleNumberOfLines
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -30,6 +31,7 @@ public final class CPAlertView: UIView, CPPopupViewProtocol {
     private lazy var messageLabel = UILabel() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = style.messageFont
+        $0.textColor = style.messageColor
         $0.textAlignment = style.messageTextAligment
         $0.numberOfLines = style.messageNumberOfLines
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
