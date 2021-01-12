@@ -16,6 +16,15 @@ public protocol CPToastViewDelegate: AnyObject {
     
 }
 
+public extension CPToastViewDelegate {
+    
+    func toastViewWillAppear(_ toastView: CPToastView) {}
+    func toastViewDidAppear(_ toastView: CPToastView) {}
+    func toastViewWillDisappear(_ toastView: CPToastView) {}
+    func toastViewDidDisappear(_ toastView: CPToastView) {}
+    
+}
+
 public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressViewProtocol {
     
     // MARK: - Private types

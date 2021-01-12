@@ -16,6 +16,15 @@ public protocol CPAlertViewDelegate: AnyObject {
     
 }
 
+public extension CPAlertViewDelegate {
+    
+    func alertViewWillAppear(_ alertView: CPAlertView) {}
+    func alertViewDidAppear(_ alertView: CPAlertView) {}
+    func alertViewWillDisappear(_ alertView: CPAlertView) {}
+    func alertViewDidDisappear(_ alertView: CPAlertView) {}
+    
+}
+
 public final class CPAlertView: UIView, CPPopupViewProtocol {
     
     // MARK: - Private types
