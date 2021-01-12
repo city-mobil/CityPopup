@@ -7,12 +7,24 @@
 
 import UIKit
 
+public protocol CPAlertViewDelegate: AnyObject {
+    
+    func alertViewWillAppear(_ alertView: CPAlertView)
+    func alertViewDidAppear(_ alertView: CPAlertView)
+    func alertViewWillDisappear(_ alertView: CPAlertView)
+    func alertViewDidDisappear(_ alertView: CPAlertView)
+    
+}
+
 public final class CPAlertView: UIView, CPPopupViewProtocol {
     
     // MARK: - Private types
     private enum Spec {
         static let minimumWidth: CGFloat = 200
     }
+    
+    // MARK: - Public properties
+    public weak var delegate: CPAlertViewDelegate?
     
     // MARK: - Private subviews
     private lazy var contentStackView = UIStackView() ~> {
@@ -124,7 +136,20 @@ extension CPAlertView {
 extension CPAlertView {
     
     public func willAppear() {
+        delegate?.alertViewWillAppear(self)
         setupLayout()
+    }
+    
+    public func didAppear() {
+        delegate?.alertViewDidAppear(self)
+    }
+    
+    public func willDisappear() {
+        delegate?.alertViewWillDisappear(self)
+    }
+    
+    public func didDisappear() {
+        delegate?.alertViewDidDisappear(self)
     }
     
 }
