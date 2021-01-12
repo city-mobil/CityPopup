@@ -7,6 +7,15 @@
 
 import UIKit
 
+public protocol CPToastViewDelegate: AnyObject {
+    
+    func toastViewWillAppear(_ toastView: CPToastView)
+    func toastViewDidAppear(_ toastView: CPToastView)
+    func toastViewWillDisappear(_ toastView: CPToastView)
+    func toastViewDidDisappear(_ toastView: CPToastView)
+    
+}
+
 public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressViewProtocol {
     
     // MARK: - Private types
@@ -29,6 +38,7 @@ public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressVie
     // MARK: - Public properties
     /// Handle tap on the toast.
     public var tapHandler: (() -> Void)?
+    public weak var delegate: CPToastViewDelegate?
     
     // MARK: - Private subviews
     private lazy var contentStackView = PassthroughStackView() ~> {
@@ -164,11 +174,21 @@ extension CPToastView {
 extension CPToastView {
     
     public func willAppear() {
+        delegate?.toastViewWillAppear(self)
         setupLayout()
     }
     
     public func didAppear() {
+        delegate?.toastViewDidAppear(self)
         initialCenterPosition = center
+    }
+    
+    public func willDisappear() {
+        delegate?.toastViewWillDisappear(self)
+    }
+    
+    public func didDisappear() {
+        delegate?.toastViewDidDisappear(self)
     }
     
 }

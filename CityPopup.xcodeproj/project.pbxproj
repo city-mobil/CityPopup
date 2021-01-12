@@ -45,11 +45,11 @@
 		26071BC9256C0482009F5078 /* AlertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071BC8256C0482009F5078 /* AlertsViewController.swift */; };
 		26071BD2256C1D40009F5078 /* CityPopup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; };
 		26071BD3256C1D40009F5078 /* CityPopup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9BCCA1F4256D4CAD00422D5F /* ToastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCCA1F3256D4CAD00422D5F /* ToastsViewController.swift */; };
 		2647E2D12570F55B008CBBB4 /* CPFlipAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647E2D02570F55B008CBBB4 /* CPFlipAnimator.swift */; };
 		26587FF3256E993800AB8992 /* ParentViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26587FF2256E993800AB8992 /* ParentViewService.swift */; };
 		26717F14256FA9BE0024F2B2 /* SwipeableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */; };
 		26A8A99425909DAC0004EA66 /* StatusBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8A99325909DAC0004EA66 /* StatusBarViewController.swift */; };
+		9BCCA1F4256D4CAD00422D5F /* ToastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCCA1F3256D4CAD00422D5F /* ToastsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,11 +118,11 @@
 		26071B95256BF0CB009F5078 /* AnimatedPressViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedPressViewProtocol.swift; sourceTree = "<group>"; };
 		26071BBA256BFEF0009F5078 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		26071BC8256C0482009F5078 /* AlertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewController.swift; sourceTree = "<group>"; };
-		9BCCA1F3256D4CAD00422D5F /* ToastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastsViewController.swift; sourceTree = "<group>"; };
 		2647E2D02570F55B008CBBB4 /* CPFlipAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPFlipAnimator.swift; sourceTree = "<group>"; };
 		26587FF2256E993800AB8992 /* ParentViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewService.swift; sourceTree = "<group>"; };
 		26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableScrollView.swift; sourceTree = "<group>"; };
 		26A8A99325909DAC0004EA66 /* StatusBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewController.swift; sourceTree = "<group>"; };
+		9BCCA1F3256D4CAD00422D5F /* ToastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,8 +245,8 @@
 		26071B7B256BF0CB009F5078 /* Toast */ = {
 			isa = PBXGroup;
 			children = (
-				26071B7C256BF0CB009F5078 /* CPToastStyle.swift */,
 				26071B7D256BF0CB009F5078 /* CPToastView.swift */,
+				26071B7C256BF0CB009F5078 /* CPToastStyle.swift */,
 			);
 			path = Toast;
 			sourceTree = "<group>";
