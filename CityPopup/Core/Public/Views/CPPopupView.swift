@@ -14,7 +14,7 @@ public protocol CPPopupViewDelegate: AnyObject {
     func popupViewWillDisappear(_ popupView: CPPopupView)
     func popupViewDidDisappear(_ popupView: CPPopupView)
     
-    func popupViewBackgroundTapPerformed()
+    func popupViewBackgroundTapPerformed(_ popupView: CPPopupView)
     
 }
 
@@ -25,7 +25,7 @@ public extension CPPopupViewDelegate {
     func popupViewWillDisappear(_ popupView: CPPopupView) {}
     func popupViewDidDisappear(_ popupView: CPPopupView) {}
     
-    func popupViewBackgroundTapPerformed() {}
+    func popupViewBackgroundTapPerformed(_ popupView: CPPopupView) {}
     
 }
 
@@ -46,7 +46,7 @@ open class CPPopupView: UIControl {
     }
     
     open func backgroundTapPerformed() {
-        delegate?.popupViewBackgroundTapPerformed()
+        delegate?.popupViewBackgroundTapPerformed(self)
     }
     
     // MARK: - Open lifecycle methods
