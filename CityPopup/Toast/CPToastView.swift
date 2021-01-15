@@ -7,25 +7,7 @@
 
 import UIKit
 
-public protocol CPToastViewDelegate: AnyObject {
-    
-    func toastViewWillAppear(_ toastView: CPToastView)
-    func toastViewDidAppear(_ toastView: CPToastView)
-    func toastViewWillDisappear(_ toastView: CPToastView)
-    func toastViewDidDisappear(_ toastView: CPToastView)
-    
-}
-
-public extension CPToastViewDelegate {
-    
-    func toastViewWillAppear(_ toastView: CPToastView) {}
-    func toastViewDidAppear(_ toastView: CPToastView) {}
-    func toastViewWillDisappear(_ toastView: CPToastView) {}
-    func toastViewDidDisappear(_ toastView: CPToastView) {}
-    
-}
-
-public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressViewProtocol {
+public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
     
     // MARK: - Private types
     private enum Spec {
@@ -47,7 +29,6 @@ public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressVie
     // MARK: - Public properties
     /// Handle tap on the toast.
     public var tapHandler: (() -> Void)?
-    public weak var delegate: CPToastViewDelegate?
     
     // MARK: - Private subviews
     private lazy var contentStackView = PassthroughStackView() ~> {
@@ -109,6 +90,17 @@ public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressVie
         backgroundColor = style.backgroundColor
         layer.cornerRadius = style.cornerRadius
         clipsToBounds = true
+    }
+    
+    // MARK: - Lifecycle
+    public override func willAppear() {
+        super.willAppear()
+        setupLayout()
+    }
+    
+    public override func didAppear() {
+        super.didAppear()
+        initialCenterPosition = center
     }
     
 }
@@ -175,29 +167,6 @@ extension CPToastView {
                 return false
             }
         )
-    }
-    
-}
-
-// MARK: - PopupViewProtocol
-extension CPToastView {
-    
-    public func willAppear() {
-        delegate?.toastViewWillAppear(self)
-        setupLayout()
-    }
-    
-    public func didAppear() {
-        delegate?.toastViewDidAppear(self)
-        initialCenterPosition = center
-    }
-    
-    public func willDisappear() {
-        delegate?.toastViewWillDisappear(self)
-    }
-    
-    public func didDisappear() {
-        delegate?.toastViewDidDisappear(self)
     }
     
 }

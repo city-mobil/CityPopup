@@ -107,7 +107,7 @@ extension CityPopup {
     ///   - animator: Animator which will animate view's motion.
     ///   - attributes: Attributes for the view.
     public func show(
-        popup: CPPopupViewProtocol,
+        popup: CPPopupView,
         animator: CPAnimatorProtocol = CPFadeAnimator(),
         attributes: CPAttributes = .init())
     {

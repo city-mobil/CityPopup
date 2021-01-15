@@ -7,33 +7,12 @@
 
 import UIKit
 
-public protocol CPAlertViewDelegate: AnyObject {
-    
-    func alertViewWillAppear(_ alertView: CPAlertView)
-    func alertViewDidAppear(_ alertView: CPAlertView)
-    func alertViewWillDisappear(_ alertView: CPAlertView)
-    func alertViewDidDisappear(_ alertView: CPAlertView)
-    
-}
-
-public extension CPAlertViewDelegate {
-    
-    func alertViewWillAppear(_ alertView: CPAlertView) {}
-    func alertViewDidAppear(_ alertView: CPAlertView) {}
-    func alertViewWillDisappear(_ alertView: CPAlertView) {}
-    func alertViewDidDisappear(_ alertView: CPAlertView) {}
-    
-}
-
-public final class CPAlertView: UIView, CPPopupViewProtocol {
+public final class CPAlertView: CPPopupView {
     
     // MARK: - Private types
     private enum Spec {
         static let minimumWidth: CGFloat = 200
     }
-    
-    // MARK: - Public properties
-    public weak var delegate: CPAlertViewDelegate?
     
     // MARK: - Private subviews
     private lazy var contentStackView = UIStackView() ~> {
@@ -92,6 +71,12 @@ public final class CPAlertView: UIView, CPPopupViewProtocol {
         clipsToBounds = true
     }
     
+    // MARK: - Lifecycle
+    public override func willAppear() {
+        super.willAppear()
+        setupLayout()
+    }
+    
 }
 
 // MARK: - Public methods
@@ -137,28 +122,6 @@ extension CPAlertView {
     ///   - dismissOnTap: A flag to determine will be the alert dismissed on actions tap.
     public func addActions(_ actions: [UIControl], dismissOnTap: Bool = true) {
         actions.forEach { self.addAction($0, dismissOnTap: dismissOnTap) }
-    }
-    
-}
-
-// MARK: - PopupViewProtocol
-extension CPAlertView {
-    
-    public func willAppear() {
-        delegate?.alertViewWillAppear(self)
-        setupLayout()
-    }
-    
-    public func didAppear() {
-        delegate?.alertViewDidAppear(self)
-    }
-    
-    public func willDisappear() {
-        delegate?.alertViewWillDisappear(self)
-    }
-    
-    public func didDisappear() {
-        delegate?.alertViewDidDisappear(self)
     }
     
 }

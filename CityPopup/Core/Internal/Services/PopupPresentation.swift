@@ -47,8 +47,8 @@ final class PopupPresentation: PopupPresentationProtocol {
     private let container = PassthroughView() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private var popupView: CPPopupViewProtocol? {
-        return view as? CPPopupViewProtocol
+    private var popupView: CPPopupView? {
+        return view as? CPPopupView
     }
     private var isHiding = false
     
@@ -81,12 +81,11 @@ extension PopupPresentation {
             shouldFitToContainer: attributes.shouldFitToContainer
         )
         
-        let lifecycle = view as? CPViewWithLifecycleProtocol
-        lifecycle?.willAppear()
+        popupView?.willAppear()
         container.layoutIfNeeded()
         
-        animator.performShowAnimation(view: view) {
-            lifecycle?.didAppear()
+        animator.performShowAnimation(view: view) { [weak self] in
+            self?.popupView?.didAppear()
             completion()
         }
     }
@@ -110,6 +109,7 @@ extension PopupPresentation {
         case .dismiss:
             container.shouldPassthrough = false
             container.backgroundTapDetected = { [weak self] in
+                self?.popupView?.backgroundTapPerformed()
                 self?.hide()
             }
             
@@ -209,15 +209,14 @@ extension PopupPresentation {
         guard !isHiding else { return }
         isHiding = true
         
-        let lifecycle = view as? CPViewWithLifecycleProtocol
-        lifecycle?.willDisappear()
+        popupView?.willDisappear()
         
         let dismissAnimator = animator ?? self.animator
         
         delegate?.hideAnimationWillPerformed()
-        dismissAnimator.performHideAnimation(view: view) { [weak self, weak lifecycle] in
+        dismissAnimator.performHideAnimation(view: view) { [weak self] in
             self?.close()
-            lifecycle?.didDisappear()
+            self?.popupView?.didDisappear()
             completion?()
         }
     }
