@@ -30,9 +30,10 @@ final class PresentOperation: Operation, PopupPresentationDelegate {
     let popupPresentationModel: PopupPresentationProtocol
     let parentView: UIView
     weak var delegate: PresentOperationDelegate?
-    private(set) var semaphore = DispatchSemaphore(value: 0)
     
     // MARK: - Private properties
+    private let semaphore = DispatchSemaphore(value: 0)
+    private var underlyingQueue: DispatchQueue?
     private var state = State.ready {
         willSet {
             willChangeValue(forKey: newValue.keyPath)
@@ -64,6 +65,9 @@ final class PresentOperation: Operation, PopupPresentationDelegate {
     }
     
     override func start() {
+        // Remember operation queue to freeze it on need safely
+        underlyingQueue = OperationQueue.current?.underlyingQueue ?? DispatchQueue.global()
+        
         guard !isCancelled else {
             state = .finished
             return
@@ -78,8 +82,6 @@ final class PresentOperation: Operation, PopupPresentationDelegate {
     override func main() {
         delegate?.presentOperationDidStart()
         
-        semaphore = DispatchSemaphore(value: 0)
-        let underlyingQueue = OperationQueue.current?.underlyingQueue
         showPopupOnMainQueue { [weak self, weak underlyingQueue] in
             underlyingQueue?.async {
                 self?.semaphore.signal()
@@ -92,12 +94,9 @@ final class PresentOperation: Operation, PopupPresentationDelegate {
             return
         }
         
-        semaphore = DispatchSemaphore(value: 0)
         if let autodismissDelay: TimeInterval = popupPresentationModel.attributes.autodismissDelay {
             _ = semaphore.wait(timeout: .now() + autodismissDelay)
             hidePopupOnMainQueue()
-        } else {
-            semaphore.wait()
         }
     }
     
@@ -105,8 +104,23 @@ final class PresentOperation: Operation, PopupPresentationDelegate {
         guard !isCancelled else { return }
         super.cancel()
         
-        semaphore.signal()
         state = .finished
+    }
+    
+}
+
+// MARK: - Internal methods
+extension PresentOperation {
+    
+    func hidePopup() {
+        underlyingQueue?.async { [weak self] in
+            guard let self = self,
+                  !self.isCancelled
+            else {
+                return
+            }
+            self.hidePopupOnMainQueue()
+        }
     }
     
 }
@@ -126,13 +140,9 @@ extension PresentOperation {
     }
     
     private func hidePopupOnMainQueue() {
-        guard !isCancelled else { return }
-        
-        semaphore = DispatchSemaphore(value: 0)
         DispatchQueue.main.async { [weak self] in
             self?.popupPresentationModel.hide()
         }
-        semaphore.wait()
     }
     
 }
@@ -141,13 +151,22 @@ extension PresentOperation {
 extension PresentOperation {
     
     func hideAnimationWillPerformed() {
-        delegate?.presentOperationWillComplete(operation: self)
+        underlyingQueue?.async { [weak self] in
+            guard let self = self else { return }
+            self.delegate?.presentOperationWillComplete(operation: self)
+        }
     }
     
     func hideAnimationDidPerformed() {
-        guard !isCancelled else { return }
-        cancel()
-        delegate?.presentOperationDidComplete(operation: self)
+        underlyingQueue?.async { [weak self] in
+            guard let self = self,
+                  !self.isCancelled
+            else {
+                return
+            }
+            self.cancel()
+            self.delegate?.presentOperationDidComplete(operation: self)
+        }
     }
     
 }

@@ -16,7 +16,6 @@ protocol PopupPresentationProtocol: AnyObject {
     
     func show(on parent: UIView, completion: @escaping () -> Void)
     func hide(completion: (() -> Void)?)
-    func close()
     
 }
 
@@ -92,11 +91,6 @@ extension PopupPresentation {
     
     func hide(completion: (() -> Void)? = nil) {
         hide(animator: nil, completion: completion)
-    }
-    
-    func close() {
-        container.removeFromSuperview()
-        delegate?.hideAnimationDidPerformed()
     }
     
 }
@@ -215,8 +209,9 @@ extension PopupPresentation {
         
         delegate?.hideAnimationWillPerformed()
         dismissAnimator.performHideAnimation(view: view) { [weak self] in
-            self?.close()
+            self?.container.removeFromSuperview()
             self?.popupView?.didDisappear()
+            self?.delegate?.hideAnimationDidPerformed()
             completion?()
         }
     }
