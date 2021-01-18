@@ -83,6 +83,7 @@ extension ParentViewService {
     
     func removeCreatedWindow() {
         guard let window = window else { return }
+        window.isHidden = true
         window.removeFromSuperview()
         self.window = nil
         
