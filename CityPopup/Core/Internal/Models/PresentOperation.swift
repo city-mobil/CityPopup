@@ -115,13 +115,11 @@ final class PresentOperation: Operation, PopupPresentationDelegate {
 extension PresentOperation {
     
     func hidePopup() {
-        underlyingQueue?.async { [weak self] in
-            guard let self = self,
-                  !self.isCancelled
-            else {
-                return
-            }
-            self.hidePopupOnMainQueue()
+        if let underlyingQueue = underlyingQueue {
+            performPopupHiding(onQueue: underlyingQueue)
+        } else {
+            // Mark the operation as canceled
+            super.cancel()
         }
     }
     
@@ -146,6 +144,17 @@ extension PresentOperation {
                 on: self.parentView,
                 completion: completion
             )
+        }
+    }
+    
+    private func performPopupHiding(onQueue queue: DispatchQueue) {
+        queue.async { [weak self] in
+            guard let self = self,
+                  !self.isCancelled
+            else {
+                return
+            }
+            self.hidePopupOnMainQueue()
         }
     }
     

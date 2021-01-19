@@ -103,6 +103,8 @@ extension PresentationDispatchService {
     private func calculateAreThereActiveOperations(forPresentOperation presentOperation: PresentOperation) -> Bool {
         let activeOperations = operations(ofType: PresentOperation.self)
             .filter { $0 !== presentOperation }
+            .filter { !$0.isCancelled }
+        
         return !activeOperations.isEmpty
     }
     
