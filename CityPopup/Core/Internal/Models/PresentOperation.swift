@@ -89,13 +89,12 @@ final class PresentOperation: Operation, PopupPresentationDelegate {
         }
         semaphore.wait()
         
-        guard !isCancelled else {
-            hidePopupOnMainQueue()
-            return
-        }
+        guard !isCancelled else { return }
         
         if let autodismissDelay: TimeInterval = popupPresentationModel.attributes.autodismissDelay {
-            _ = semaphore.wait(timeout: .now() + autodismissDelay)
+            let _ = semaphore.wait(timeout: .now() + autodismissDelay)
+            
+            guard !isCancelled else { return }
             hidePopupOnMainQueue()
         }
     }
@@ -105,6 +104,9 @@ final class PresentOperation: Operation, PopupPresentationDelegate {
         super.cancel()
         
         state = .finished
+        // To make sure that the thread will be unlocked in the end to release memory,
+        // cause the autodismiss logic freezes the thread with some timeout.
+        semaphore.signal()
     }
     
 }
@@ -121,6 +123,14 @@ extension PresentOperation {
             }
             self.hidePopupOnMainQueue()
         }
+    }
+    
+    func makeCopy() -> PresentOperation {
+        let operation = PresentOperation(popupPresentationModel: popupPresentationModel, parentView: parentView)
+        operation.queuePriority = queuePriority
+        operation.delegate = delegate
+        
+        return operation
     }
     
 }

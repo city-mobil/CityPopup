@@ -10,10 +10,8 @@ import Foundation
 protocol DispatchServiceProtocol: AnyObject {
     
     /// Add an operation to the operation queue.
-    /// - Parameters:
-    ///   - task: Operation to process.
-    ///   - priority: Operation priority in the queue.
-    func addToQueue(task: Operation, priority: Operation.QueuePriority)
+    /// - Parameter task: Operation to process.
+    func addToQueue(task: Operation)
     
     /// Set maximum concurrent operations count. If new value is greater than the old value, then additional popups will show. If new value is lesser than the old value by N, then first N presented popups will be dismissed.
     /// - Parameter maxConcurrentOperationCount: Maximum concurrent operations count
@@ -41,8 +39,7 @@ class DispatchService: DispatchServiceProtocol {
 // MARK: - DispatchServiceProtocol
 extension DispatchService {
     
-    func addToQueue(task: Operation, priority: Operation.QueuePriority) {
-        task.queuePriority = priority
+    func addToQueue(task: Operation) {
         operationQueue.addOperation(task)
     }
     

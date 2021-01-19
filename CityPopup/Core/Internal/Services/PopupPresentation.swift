@@ -213,7 +213,14 @@ extension PopupPresentation {
             self?.popupView?.didDisappear()
             self?.delegate?.hideAnimationDidPerformed()
             completion?()
+            
+            self?.reset()
         }
+    }
+    
+    /// Reset state to reuse (used for required priority when operation should delay)
+    private func reset() {
+        isHiding = false
     }
     
 }

@@ -11,7 +11,7 @@ public struct CPSlideAnimator: CPAnimatorProtocol {
     
     // MARK: - Private properties
     private let direction: CPDirection
-    private var translation: CGFloat?
+    private let translation: CGFloat?
     private let showDuration: TimeInterval
     private let hideDuration: TimeInterval
     private let shouldUseFadeAnimation: Bool
