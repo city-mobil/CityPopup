@@ -113,10 +113,9 @@ extension CPSlideAnimator {
             delay: 0,
             usingSpringWithDamping: 1,
             initialSpringVelocity: 0,
-            options: .curveEaseInOut,
+            options: [.curveEaseInOut, .beginFromCurrentState],
             animations: animations,
-            completion: { isCompleted in
-                guard isCompleted else { return }
+            completion: { _ in
                 completion()
             }
         )

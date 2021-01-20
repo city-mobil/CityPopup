@@ -89,7 +89,10 @@ final class PresentOperation: Operation, PopupPresentationDelegate {
         }
         semaphore.wait()
         
-        guard !isCancelled else { return }
+        guard !isCancelled else {
+            hidePopupOnMainQueue()
+            return
+        }
         
         if let autodismissDelay: TimeInterval = popupPresentationModel.attributes.autodismissDelay {
             let _ = semaphore.wait(timeout: .now() + autodismissDelay)
@@ -178,13 +181,13 @@ extension PresentOperation {
     
     func hideAnimationDidPerformed() {
         underlyingQueue?.async { [weak self] in
-            guard let self = self,
-                  !self.isCancelled
-            else {
-                return
-            }
-            self.cancel()
+            guard let self = self else { return }
+            
             self.delegate?.presentOperationDidComplete(operation: self)
+            
+            if !self.isCancelled {
+                self.cancel()
+            }
         }
     }
     
