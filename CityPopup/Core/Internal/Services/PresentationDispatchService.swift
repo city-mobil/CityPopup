@@ -49,7 +49,13 @@ extension PresentationDispatchService {
     
     func addToQueue(task: PresentOperation, priority: CPAttributes.Priority) {
         task.delegate = self
-        super.addToQueue(task: task, priority: priority)
+        task.queuePriority = priority.operationQueuePriority
+        
+        addToQueue(task: task)
+        
+        if case .required(let shouldDelayExecutingOperations) = priority {
+            handleRequiredOperation(shouldDelayExecutingOperations: shouldDelayExecutingOperations)
+        }
     }
     
 }
@@ -97,7 +103,22 @@ extension PresentationDispatchService {
     private func calculateAreThereActiveOperations(forPresentOperation presentOperation: PresentOperation) -> Bool {
         let activeOperations = operations(ofType: PresentOperation.self)
             .filter { $0 !== presentOperation }
+            .filter { !$0.isCancelled }
+        
         return !activeOperations.isEmpty
+    }
+    
+    private func handleRequiredOperation(shouldDelayExecutingOperations: Bool) {
+        operations(ofType: PresentOperation.self)
+            .filter { $0.isExecuting }
+            .filter { $0.queuePriority != .veryHigh }
+            .forEach { operation in
+                operation.hidePopup()
+                
+                if shouldDelayExecutingOperations {
+                    addToQueue(task: operation.makeCopy())
+                }
+            }
     }
     
 }

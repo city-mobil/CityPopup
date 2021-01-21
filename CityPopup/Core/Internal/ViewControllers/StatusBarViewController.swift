@@ -42,6 +42,7 @@ final class StatusBarViewController: UIViewController {
     init(statusBarStyle: UIStatusBarStyle?) {
         self.statusBarStyle = statusBarStyle
         super.init(nibName: nil, bundle: nil)
+        view.isUserInteractionEnabled = false
     }
     
     required init?(coder: NSCoder) {

@@ -25,8 +25,6 @@
 		26071BA2256BF0CB009F5078 /* CPAlertActionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B79256BF0CB009F5078 /* CPAlertActionStyle.swift */; };
 		26071BA4256BF0CB009F5078 /* CPToastStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7C256BF0CB009F5078 /* CPToastStyle.swift */; };
 		26071BA5256BF0CB009F5078 /* CPToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7D256BF0CB009F5078 /* CPToastView.swift */; };
-		26071BA6256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */; };
-		26071BA7256BF0CB009F5078 /* CPPopupViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B7F256BF0CB009F5078 /* CPPopupViewProtocol.swift */; };
 		26071BA8256BF0CB009F5078 /* CityPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B81256BF0CB009F5078 /* CityPopup.swift */; };
 		26071BA9256BF0CB009F5078 /* PresentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B84256BF0CB009F5078 /* PresentOperation.swift */; };
 		26071BAA256BF0CB009F5078 /* UIView+anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071B86256BF0CB009F5078 /* UIView+anchors.swift */; };
@@ -45,11 +43,12 @@
 		26071BC9256C0482009F5078 /* AlertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26071BC8256C0482009F5078 /* AlertsViewController.swift */; };
 		26071BD2256C1D40009F5078 /* CityPopup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; };
 		26071BD3256C1D40009F5078 /* CityPopup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 26071B12256BCD80009F5078 /* CityPopup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9BCCA1F4256D4CAD00422D5F /* ToastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCCA1F3256D4CAD00422D5F /* ToastsViewController.swift */; };
 		2647E2D12570F55B008CBBB4 /* CPFlipAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2647E2D02570F55B008CBBB4 /* CPFlipAnimator.swift */; };
 		26587FF3256E993800AB8992 /* ParentViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26587FF2256E993800AB8992 /* ParentViewService.swift */; };
 		26717F14256FA9BE0024F2B2 /* SwipeableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */; };
+		267BAA6725B0897600B16657 /* CPPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267BAA6625B0897500B16657 /* CPPopupView.swift */; };
 		26A8A99425909DAC0004EA66 /* StatusBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A8A99325909DAC0004EA66 /* StatusBarViewController.swift */; };
+		9BCCA1F4256D4CAD00422D5F /* ToastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCCA1F3256D4CAD00422D5F /* ToastsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,8 +98,6 @@
 		26071B79256BF0CB009F5078 /* CPAlertActionStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPAlertActionStyle.swift; sourceTree = "<group>"; };
 		26071B7C256BF0CB009F5078 /* CPToastStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPToastStyle.swift; sourceTree = "<group>"; };
 		26071B7D256BF0CB009F5078 /* CPToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPToastView.swift; sourceTree = "<group>"; };
-		26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPViewWithLifecycleProtocol.swift; sourceTree = "<group>"; };
-		26071B7F256BF0CB009F5078 /* CPPopupViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CPPopupViewProtocol.swift; sourceTree = "<group>"; };
 		26071B81256BF0CB009F5078 /* CityPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityPopup.swift; sourceTree = "<group>"; };
 		26071B84256BF0CB009F5078 /* PresentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentOperation.swift; sourceTree = "<group>"; };
 		26071B86256BF0CB009F5078 /* UIView+anchors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+anchors.swift"; sourceTree = "<group>"; };
@@ -118,11 +115,12 @@
 		26071B95256BF0CB009F5078 /* AnimatedPressViewProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatedPressViewProtocol.swift; sourceTree = "<group>"; };
 		26071BBA256BFEF0009F5078 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		26071BC8256C0482009F5078 /* AlertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewController.swift; sourceTree = "<group>"; };
-		9BCCA1F3256D4CAD00422D5F /* ToastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastsViewController.swift; sourceTree = "<group>"; };
 		2647E2D02570F55B008CBBB4 /* CPFlipAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPFlipAnimator.swift; sourceTree = "<group>"; };
 		26587FF2256E993800AB8992 /* ParentViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewService.swift; sourceTree = "<group>"; };
 		26717F13256FA9BE0024F2B2 /* SwipeableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableScrollView.swift; sourceTree = "<group>"; };
+		267BAA6625B0897500B16657 /* CPPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CPPopupView.swift; sourceTree = "<group>"; };
 		26A8A99325909DAC0004EA66 /* StatusBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarViewController.swift; sourceTree = "<group>"; };
+		9BCCA1F3256D4CAD00422D5F /* ToastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,8 +223,7 @@
 		26071B74256BF0CB009F5078 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				26071B7E256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift */,
-				26071B7F256BF0CB009F5078 /* CPPopupViewProtocol.swift */,
+				267BAA6625B0897500B16657 /* CPPopupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,8 +242,8 @@
 		26071B7B256BF0CB009F5078 /* Toast */ = {
 			isa = PBXGroup;
 			children = (
-				26071B7C256BF0CB009F5078 /* CPToastStyle.swift */,
 				26071B7D256BF0CB009F5078 /* CPToastView.swift */,
+				26071B7C256BF0CB009F5078 /* CPToastStyle.swift */,
 			);
 			path = Toast;
 			sourceTree = "<group>";
@@ -465,9 +462,7 @@
 				26071BB6256BF0CB009F5078 /* AnimatedPressViewProtocol.swift in Sources */,
 				26071BA9256BF0CB009F5078 /* PresentOperation.swift in Sources */,
 				26071BAF256BF0CB009F5078 /* PassthroughStackView.swift in Sources */,
-				26071BA6256BF0CB009F5078 /* CPViewWithLifecycleProtocol.swift in Sources */,
 				26071BAB256BF0CB009F5078 /* UIView+embedInScrollView.swift in Sources */,
-				26071BA7256BF0CB009F5078 /* CPPopupViewProtocol.swift in Sources */,
 				26717F14256FA9BE0024F2B2 /* SwipeableScrollView.swift in Sources */,
 				26071BA2256BF0CB009F5078 /* CPAlertActionStyle.swift in Sources */,
 				26071B9F256BF0CB009F5078 /* CPAlertView.swift in Sources */,
@@ -480,6 +475,7 @@
 				26071BA1256BF0CB009F5078 /* CPAlertActionView.swift in Sources */,
 				26071BAA256BF0CB009F5078 /* UIView+anchors.swift in Sources */,
 				26071BA8256BF0CB009F5078 /* CityPopup.swift in Sources */,
+				267BAA6725B0897600B16657 /* CPPopupView.swift in Sources */,
 				26071BB0256BF0CB009F5078 /* PassthroughView.swift in Sources */,
 				26071BAD256BF0CB009F5078 /* UIColor+dynamicColor.swift in Sources */,
 				26587FF3256E993800AB8992 /* ParentViewService.swift in Sources */,

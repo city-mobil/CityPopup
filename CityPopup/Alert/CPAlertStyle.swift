@@ -26,10 +26,12 @@ public struct CPAlertStyle {
     let coverViewHeight: CGFloat?
     
     let titleFont: UIFont
+    let titleColor: UIColor
     let titleTextAlignment: NSTextAlignment
     let titleNumberOfLines: Int
     
     let messageFont: UIFont
+    let messageColor: UIColor
     let messageTextAligment: NSTextAlignment
     let messageNumberOfLines: Int
     
@@ -47,9 +49,11 @@ public struct CPAlertStyle {
         contentMargin: UIEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24),
         coverViewHeight: CGFloat? = nil,
         titleFont: UIFont = .boldSystemFont(ofSize: 24),
+        titleColor: UIColor = CPColor.black_white,
         titleTextAlignment: NSTextAlignment = .center,
         titleNumberOfLines: Int = 0,
         messageFont: UIFont = .systemFont(ofSize: 16),
+        messageColor: UIColor = CPColor.black_white,
         messageTextAligment: NSTextAlignment = .center,
         messageNumberOfLines: Int = 0,
         actionsAxis: ActionsAxis = .vertical,
@@ -63,9 +67,11 @@ public struct CPAlertStyle {
         self.contentMargin = contentMargin
         self.coverViewHeight = coverViewHeight
         self.titleFont = titleFont
+        self.titleColor = titleColor
         self.titleTextAlignment = titleTextAlignment
         self.titleNumberOfLines = titleNumberOfLines
         self.messageFont = messageFont
+        self.messageColor = messageColor
         self.messageTextAligment = messageTextAligment
         self.messageNumberOfLines = messageNumberOfLines
         self.actionsAxis = actionsAxis

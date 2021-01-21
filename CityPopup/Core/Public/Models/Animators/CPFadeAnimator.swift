@@ -42,8 +42,7 @@ extension CPFadeAnimator {
     public func performHideAnimation(view: UIView, completion: @escaping () -> Void) {
         UIView.animate(withDuration: hideDuration) {
             view.alpha = 0
-        } completion: { isCompleted in
-            guard isCompleted else { return }
+        } completion: { _ in
             completion()
         }
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressViewProtocol {
+public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
     
     // MARK: - Private types
     private enum Spec {
@@ -92,6 +92,17 @@ public final class CPToastView: UIControl, CPPopupViewProtocol, AnimatedPressVie
         clipsToBounds = true
     }
     
+    // MARK: - Lifecycle
+    public override func willAppear() {
+        super.willAppear()
+        setupLayout()
+    }
+    
+    public override func didAppear() {
+        super.didAppear()
+        initialCenterPosition = center
+    }
+    
 }
 
 // MARK: - Public methods
@@ -156,19 +167,6 @@ extension CPToastView {
                 return false
             }
         )
-    }
-    
-}
-
-// MARK: - PopupViewProtocol
-extension CPToastView {
-    
-    public func willAppear() {
-        setupLayout()
-    }
-    
-    public func didAppear() {
-        initialCenterPosition = center
     }
     
 }

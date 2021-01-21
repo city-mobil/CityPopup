@@ -15,7 +15,7 @@ final class SwipeableScrollView: UIScrollView {
             return true
             
         default:
-            return touchesShouldCancel(in: view)
+            return super.touchesShouldCancel(in: view)
         }
     }
     

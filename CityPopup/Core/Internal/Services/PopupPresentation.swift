@@ -16,7 +16,6 @@ protocol PopupPresentationProtocol: AnyObject {
     
     func show(on parent: UIView, completion: @escaping () -> Void)
     func hide(completion: (() -> Void)?)
-    func close()
     
 }
 
@@ -47,8 +46,8 @@ final class PopupPresentation: PopupPresentationProtocol {
     private let container = PassthroughView() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    private var popupView: CPPopupViewProtocol? {
-        return view as? CPPopupViewProtocol
+    private var popupView: CPPopupView? {
+        return view as? CPPopupView
     }
     private var isHiding = false
     
@@ -81,23 +80,17 @@ extension PopupPresentation {
             shouldFitToContainer: attributes.shouldFitToContainer
         )
         
-        let lifecycle = view as? CPViewWithLifecycleProtocol
-        lifecycle?.willAppear()
+        popupView?.willAppear()
         container.layoutIfNeeded()
         
-        animator.performShowAnimation(view: view) {
-            lifecycle?.didAppear()
+        animator.performShowAnimation(view: view) { [weak self] in
+            self?.popupView?.didAppear()
             completion()
         }
     }
     
     func hide(completion: (() -> Void)? = nil) {
         hide(animator: nil, completion: completion)
-    }
-    
-    func close() {
-        container.removeFromSuperview()
-        delegate?.hideAnimationDidPerformed()
     }
     
 }
@@ -110,6 +103,7 @@ extension PopupPresentation {
         case .dismiss:
             container.shouldPassthrough = false
             container.backgroundTapDetected = { [weak self] in
+                self?.popupView?.backgroundTapPerformed()
                 self?.hide()
             }
             
@@ -209,17 +203,24 @@ extension PopupPresentation {
         guard !isHiding else { return }
         isHiding = true
         
-        let lifecycle = view as? CPViewWithLifecycleProtocol
-        lifecycle?.willDisappear()
+        popupView?.willDisappear()
         
         let dismissAnimator = animator ?? self.animator
         
         delegate?.hideAnimationWillPerformed()
-        dismissAnimator.performHideAnimation(view: view) { [weak self, weak lifecycle] in
-            self?.close()
-            lifecycle?.didDisappear()
+        dismissAnimator.performHideAnimation(view: view) { [weak self] in
+            self?.container.removeFromSuperview()
+            self?.popupView?.didDisappear()
+            self?.delegate?.hideAnimationDidPerformed()
             completion?()
+            
+            self?.reset()
         }
+    }
+    
+    /// Reset state to reuse (used for required priority when operation should delay)
+    private func reset() {
+        isHiding = false
     }
     
 }

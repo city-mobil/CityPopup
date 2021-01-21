@@ -107,7 +107,7 @@ extension CityPopup {
     ///   - animator: Animator which will animate view's motion.
     ///   - attributes: Attributes for the view.
     public func show(
-        popup: CPPopupViewProtocol,
+        popup: CPPopupView,
         animator: CPAnimatorProtocol = CPFadeAnimator(),
         attributes: CPAttributes = .init())
     {
@@ -136,7 +136,7 @@ extension CityPopup {
         
         getOperations(byTags: tags, rule: rule)
             .forEach { operation in
-                operation.popupPresentationModel.hide()
+                operation.hidePopup()
             }
     }
     
@@ -151,6 +151,13 @@ extension CityPopup {
     public func hide(byTags tags: String...) {
         tags.forEach { tag in
             hide(byTag: tag)
+        }
+    }
+    
+    /// Hide all popups.
+    public func hideAll() {
+        getAllOperations().forEach { operation in
+            operation.hidePopup()
         }
     }
     
@@ -219,7 +226,7 @@ extension CityPopup {
             return []
         }
         
-        return presentationDispatchService.operations(ofType: PresentOperation.self)
+        return getAllOperations()
             .filter { operation in
                 let operationsTags = operation.popupPresentationModel.attributes.tags
                 
@@ -231,6 +238,10 @@ extension CityPopup {
                     return tags == operationsTags
                 }
             }
+    }
+    
+    private func getAllOperations() -> [PresentOperation] {
+        return presentationDispatchService.operations(ofType: PresentOperation.self)
     }
     
 }

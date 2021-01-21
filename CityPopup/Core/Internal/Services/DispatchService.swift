@@ -10,17 +10,9 @@ import Foundation
 protocol DispatchServiceProtocol: AnyObject {
     
     /// Add an operation to the operation queue.
-    /// - Parameters:
-    ///   - task: Operation to process.
-    ///   - priority: Operation priority in the queue.
-    func addToQueue(task: Operation, priority: CPAttributes.Priority)
+    /// - Parameter task: Operation to process.
+    func addToQueue(task: Operation)
     
-    /// Cancels all popup operations in queue.
-    func cancelAllOperations()
-    
-    /// Cancels all active popup operations.
-    func cancelAllActiveOperations()
-
     /// Set maximum concurrent operations count. If new value is greater than the old value, then additional popups will show. If new value is lesser than the old value by N, then first N presented popups will be dismissed.
     /// - Parameter maxConcurrentOperationCount: Maximum concurrent operations count
     func setMaxConcurrentOperationCount(to maxConcurrentOperationCount: Int)
@@ -47,22 +39,8 @@ class DispatchService: DispatchServiceProtocol {
 // MARK: - DispatchServiceProtocol
 extension DispatchService {
     
-    func addToQueue(task: Operation, priority: CPAttributes.Priority) {
-        task.queuePriority = priority.operationQueuePriority
-        if priority == .required {
-            cancelAllActiveOperations()
-        }
+    func addToQueue(task: Operation) {
         operationQueue.addOperation(task)
-    }
-    
-    func cancelAllOperations() {
-        operationQueue.cancelAllOperations()
-    }
-    
-    func cancelAllActiveOperations() {
-        operationQueue.operations
-            .filter { $0.isExecuting }
-            .forEach { $0.cancel() }
     }
     
     func setMaxConcurrentOperationCount(to maxConcurrentOperationCount: Int) {

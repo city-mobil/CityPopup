@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class CPAlertView: UIView, CPPopupViewProtocol {
+public final class CPAlertView: CPPopupView {
     
     // MARK: - Private types
     private enum Spec {
@@ -23,6 +23,7 @@ public final class CPAlertView: UIView, CPPopupViewProtocol {
     private lazy var titleLabel = UILabel() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = style.titleFont
+        $0.textColor = style.titleColor
         $0.textAlignment = style.titleTextAlignment
         $0.numberOfLines = style.titleNumberOfLines
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -30,6 +31,7 @@ public final class CPAlertView: UIView, CPPopupViewProtocol {
     private lazy var messageLabel = UILabel() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.font = style.messageFont
+        $0.textColor = style.messageColor
         $0.textAlignment = style.messageTextAligment
         $0.numberOfLines = style.messageNumberOfLines
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -67,6 +69,12 @@ public final class CPAlertView: UIView, CPPopupViewProtocol {
         backgroundColor = style.backgroundColor
         layer.cornerRadius = style.cornerRadius
         clipsToBounds = true
+    }
+    
+    // MARK: - Lifecycle
+    public override func willAppear() {
+        super.willAppear()
+        setupLayout()
     }
     
 }
@@ -114,15 +122,6 @@ extension CPAlertView {
     ///   - dismissOnTap: A flag to determine will be the alert dismissed on actions tap.
     public func addActions(_ actions: [UIControl], dismissOnTap: Bool = true) {
         actions.forEach { self.addAction($0, dismissOnTap: dismissOnTap) }
-    }
-    
-}
-
-// MARK: - PopupViewProtocol
-extension CPAlertView {
-    
-    public func willAppear() {
-        setupLayout()
     }
     
 }
