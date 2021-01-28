@@ -205,6 +205,21 @@ extension CPToastView {
     
 }
 
+// MARK: - Public properties for testing
+extension CPToastView {
+    
+    public var titleLabelAccessibilityIdentifier: String? {
+        get { titleLabel.accessibilityIdentifier }
+        set { titleLabel.accessibilityIdentifier = newValue }
+    }
+    
+    public var messageLabelAccessibilityIdentifier: String? {
+        get { messageLabel.accessibilityIdentifier }
+        set { messageLabel.accessibilityIdentifier = newValue }
+    }
+    
+}
+
 // MARK: - Private setups
 extension CPToastView {
     
