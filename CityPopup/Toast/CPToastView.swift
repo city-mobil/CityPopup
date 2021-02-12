@@ -29,6 +29,12 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
     // MARK: - Public properties
     /// Handle tap on the toast.
     public var tapHandler: (() -> Void)?
+    public var leadingView: UIView? {
+        return leadingViewData?.view
+    }
+    public var trailingView: UIView? {
+        return trailingViewData?.view
+    }
     
     // MARK: - Private subviews
     private lazy var contentStackView = PassthroughStackView() ~> {
