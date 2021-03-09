@@ -24,6 +24,7 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
         let view: UIView
         let width: CGFloat
         let height: CGFloat?
+        let shouldFillOtherSide: Bool
     }
     
     // MARK: - Public properties
@@ -39,6 +40,13 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
     // MARK: - Private subviews
     private lazy var contentStackView = PassthroughStackView() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        // Enable layout to be able fill empty side if needed
+        $0.layoutMargins = .zero
+        $0.isLayoutMarginsRelativeArrangement = true
+        if #available(iOS 11.0, *) {
+            // Remove top margin
+            $0.insetsLayoutMarginsFromSafeArea = false
+        }
     }
     private lazy var textsStackView = UIStackView() ~> {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -75,6 +83,11 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
     private var movingDirection: CPDirection?
     private var initialCenterPosition = CGPoint.zero
     private var lastTouchPosition = CGPoint.zero
+    
+    // Computed
+    private var isRightToLeftDirection: Bool {
+        UIView.userInterfaceLayoutDirection(for: semanticContentAttribute) == .rightToLeft
+    }
     
     // MARK: - Init
     public init(title: String, message: String? = nil, style: CPToastStyle = .default) {
@@ -119,14 +132,17 @@ extension CPToastView {
     ///   - leadingView: The view to display.
     ///   - width: Width of the leading view. Pay attention on the value to not confront with other toast's content.
     ///   - height: Height of the leading view. Nil height means that the leading view should be fit into leading container.
-    public func add(leadingView: UIView, width: CGFloat, height: CGFloat? = nil) {
+    ///   - shouldFillOtherSide: A flag used to determine will be an empty view made with same size as the view created on the other side.
+    ///   Will be ignored if the other side view exists.
+    public func add(leadingView: UIView, width: CGFloat, height: CGFloat? = nil, shouldFillOtherSide: Bool = false) {
         leadingView.translatesAutoresizingMaskIntoConstraints = false
         leadingView.removeConstraints(constraints)
         
         leadingViewData = .init(
             view: leadingView,
             width: width,
-            height: height
+            height: height,
+            shouldFillOtherSide: shouldFillOtherSide
         )
     }
     
@@ -135,14 +151,17 @@ extension CPToastView {
     ///   - trailingView: The view to display.
     ///   - width: Width of the trailing view. Pay attention on the value to not confront with other toast's content.
     ///   - height: Height of the trailing view. Nil height means that the trailing view should be fit into trailing container.
-    public func add(trailingView: UIView, width: CGFloat, height: CGFloat? = nil) {
+    ///   - shouldFillOtherSide: A flag used to determine will be an empty view made with same size as the view created on the other side.
+    ///   Will be ignored if the other side view exists.
+    public func add(trailingView: UIView, width: CGFloat, height: CGFloat? = nil, shouldFillOtherSide: Bool = false) {
         trailingView.translatesAutoresizingMaskIntoConstraints = false
         trailingView.removeConstraints(constraints)
         
         trailingViewData = .init(
             view: trailingView,
             width: width,
-            height: height
+            height: height,
+            shouldFillOtherSide: shouldFillOtherSide
         )
     }
     
@@ -258,23 +277,52 @@ extension CPToastView {
         
         // Side container views
         let leadingContainer = setupSideContainer(side: .leading)
-        setupSideContainer(side: .trailing)
+        let trailingContainer = setupSideContainer(side: .trailing)
         
-        setupContentSpacing(leadingContainer: leadingContainer)
+        setupContentSpacing(leadingContainer: leadingContainer, trailingContainer: trailingContainer)
+        setupContentMargin()
     }
     
-    private func setupContentSpacing(leadingContainer: UIView?) {
+    private func setupContentSpacing(leadingContainer: UIView?, trailingContainer: UIView?) {
+        // Setup spacing between leading container and texts content
         if let leadingContainer = leadingContainer {
-            contentStackView.setSpacing(style.horizontalSpacingAfterLeadingContainer, after: leadingContainer)
+            let afterView = isRightToLeftDirection ? textsStackView : leadingContainer
+            contentStackView.setSpacing(style.horizontalSpacingAfterLeadingContainer, after: afterView)
         }
-        
+        // Setup spacing between trailing container and texts content
+        if let trailingContainer = trailingContainer {
+            let afterView = isRightToLeftDirection ? trailingContainer : textsStackView
+            contentStackView.setSpacing(style.horizontalSpacingAfterTitle, after: afterView)
+        }
         textsStackView.setSpacing(style.verticalSpacingAfterTitle, after: titleLabel)
-        contentStackView.setSpacing(style.horizontalSpacingAfterTitle, after: textsStackView)
     }
     
-    @discardableResult
+    private func setupContentMargin() {
+        if let leadingViewData = leadingViewData,
+           leadingViewData.shouldFillOtherSide,
+           trailingViewData == nil
+        {
+            let margin = style.horizontalSpacingAfterLeadingContainer + leadingViewData.width
+            if isRightToLeftDirection {
+                contentStackView.layoutMargins.left = margin
+            } else {
+                contentStackView.layoutMargins.right = margin
+            }
+        }
+        if let trailingViewData = trailingViewData,
+           trailingViewData.shouldFillOtherSide,
+           leadingViewData == nil
+        {
+            let margin = style.horizontalSpacingAfterTitle + trailingViewData.width
+            if isRightToLeftDirection {
+                contentStackView.layoutMargins.right = margin
+            } else {
+                contentStackView.layoutMargins.left = margin
+            }
+        }
+    }
+    
     private func setupSideContainer(side: Side) -> UIView? {
-        let isRightToLeftDirection = UIView.userInterfaceLayoutDirection(for: semanticContentAttribute) == .rightToLeft
         let floatViewData: FloatViewData?
         let shouldInsertFirst: Bool
         switch side {
