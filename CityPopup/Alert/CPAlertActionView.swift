@@ -71,7 +71,7 @@ extension CPAlertActionView {
     ///   - image: Required image.
     ///   - side: Side of the action object.
     ///   - contentMode: Determine how to image will be laid outed.
-    ///   - shouldFillOtherSide: A flag used to determine will be an empty view with same size as image view created on the other side.
+    ///   - shouldFillOtherSide: A flag used to determine will be an empty view made with same size as the image view created on the other side.
     ///   - tintColor: Specify some tint color for image. The image will be used with `.alwaysTemplate` rendering mode.
     public func add(
         image: UIImage,

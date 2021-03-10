@@ -39,7 +39,7 @@ extension UIStackView {
                 emptyView.heightAnchor.constraint(equalToConstant: spacing).isActive = true
                 
             @unknown default:
-                assertionFailure("Unsupported case")
+                break
             }
         }
     }
