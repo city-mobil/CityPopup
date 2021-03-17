@@ -75,6 +75,7 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
     private var leadingViewData: FloatViewData?
     private var trailingViewData: FloatViewData?
     private let style: CPToastStyle
+    private let shouldUsePressAnimation: Bool
     
     // Properties for the movement
     private var swipeHandler: ((CPDirection) -> Bool)?
@@ -90,10 +91,11 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
     }
     
     // MARK: - Init
-    public init(title: String, message: String? = nil, style: CPToastStyle = .default) {
+    public init(title: String, message: String? = nil, style: CPToastStyle = .default, shouldUsePressAnimation: Bool = true) {
         self.title = title
         self.message = message
         self.style = style
+        self.shouldUsePressAnimation = shouldUsePressAnimation
         
         super.init(frame: .zero)
         
@@ -375,7 +377,7 @@ extension CPToastView {
     
     private func pressAnimationShouldBegan() {
         guard tapHandler != nil else { return }
-        pressAnimation(isBeginning: true)
+        pressAnimationIfNeeded(isBeginning: true)
     }
     
     private func pressAnimationShouldEnd(withTouch touch: UITouch?) {
@@ -383,17 +385,17 @@ extension CPToastView {
         guard let location = touch?.location(in: self),
               bounds.contains(location)
         else {
-            pressAnimation(isBeginning: false)
+            pressAnimationIfNeeded(isBeginning: false)
             return
         }
         
         tapHandler?()
-        pressAnimation(isBeginning: false)
+        pressAnimationIfNeeded(isBeginning: false)
     }
     
     private func pressAnimationShoudCanceled() {
         guard tapHandler != nil else { return }
-        pressAnimation(isBeginning: false)
+        pressAnimationIfNeeded(isBeginning: false)
     }
     
     private func pressAnimationShouldContinued(withTouch touch: UITouch) {
@@ -403,10 +405,12 @@ extension CPToastView {
             return
         }
         
-        pressAnimation(isBeginning: false)
+        pressAnimationIfNeeded(isBeginning: false)
     }
     
-    private func pressAnimation(isBeginning: Bool) {
+    private func pressAnimationIfNeeded(isBeginning: Bool) {
+        guard shouldUsePressAnimation else { return }
+        
         let includingViews = [contentStackView] + contentStackView.arrangedSubviews
         playPressAnimation(
             scale: isBeginning ? 0.98 : 1,
