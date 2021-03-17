@@ -33,12 +33,10 @@ extension AnimatedPressViewProtocol {
         
         let backgroundColorAnimation = layer.createBackgroundColorAnimation(targetColor: backgroundColor.cgColor)
         
-        layer.removeAllAnimations()
         layer.add(scaleAnimation, forKey: Animation.scaleKey)
         layer.add(backgroundColorAnimation, forKey: Animation.backgroundKey)
         
         includingViews.forEach { view in
-            view.layer.removeAllAnimations()
             view.layer.add(backgroundColorAnimation, forKey: Animation.backgroundKey)
         }
     }
