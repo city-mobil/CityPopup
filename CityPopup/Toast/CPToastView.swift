@@ -14,8 +14,8 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
         static let minimumWidth: CGFloat = 200
         static let pressAnimationDuration: TimeInterval = 0.05
         static let moveAnimationDuration: TimeInterval = 0.3
-        static let swipeThresholdVerticalCoefficient: CGFloat = 0.1
-        static let swipeThresholdHorizontalCoefficient: CGFloat = 0.4
+        static let swipeThresholdVerticalCoefficient: CGFloat = 0.04
+        static let swipeThresholdHorizontalCoefficient: CGFloat = 0.2
     }
     private enum Side {
         case leading, trailing
