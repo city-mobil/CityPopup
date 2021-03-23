@@ -26,7 +26,6 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
         let view: UIView
         let width: CGFloat
         let height: CGFloat?
-        let margins: UIEdgeInsets
         let shouldFillOtherSide: Bool
     }
     
@@ -138,7 +137,6 @@ extension CPToastView {
     ///   - side: Some side to display the view.
     ///   - width: Width of the leading view. Pay attention on the value to not confront with other toast's content.
     ///   - height: Height of the leading view. Nil height means that the leading view should be fit into leading container.
-    ///   - margins: Content margins for the view container.
     ///   - shouldFillOtherSide: A flag used to determine will be an empty view made with same size as the view created on the other side.
     ///   Will be ignored if the other side view exists.
     public func add(
@@ -146,7 +144,6 @@ extension CPToastView {
         side: Side,
         width: CGFloat,
         height: CGFloat? = nil,
-        margins: UIEdgeInsets = .zero,
         shouldFillOtherSide: Bool = false)
     {
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -158,7 +155,6 @@ extension CPToastView {
                 view: view,
                 width: width,
                 height: height,
-                margins: margins,
                 shouldFillOtherSide: shouldFillOtherSide
             )
             
@@ -167,7 +163,6 @@ extension CPToastView {
                 view: view,
                 width: width,
                 height: height,
-                margins: margins,
                 shouldFillOtherSide: shouldFillOtherSide
             )
         }
@@ -310,8 +305,7 @@ extension CPToastView {
            leadingViewData.shouldFillOtherSide,
            trailingViewData == nil
         {
-            let leadingMargins = leadingViewData.margins.left + leadingViewData.margins.right
-            let margin = style.horizontalSpacingAfterLeadingContainer + leadingViewData.width + leadingMargins
+            let margin = style.horizontalSpacingAfterLeadingContainer + leadingViewData.width
             if isRightToLeftDirection {
                 contentStackView.layoutMargins.left = margin
             } else {
@@ -322,8 +316,7 @@ extension CPToastView {
            trailingViewData.shouldFillOtherSide,
            leadingViewData == nil
         {
-            let trailingMargins = trailingViewData.margins.left + trailingViewData.margins.right
-            let margin = style.horizontalSpacingAfterTitle + trailingViewData.width + trailingMargins
+            let margin = style.horizontalSpacingAfterTitle + trailingViewData.width
             if isRightToLeftDirection {
                 contentStackView.layoutMargins.right = margin
             } else {
@@ -351,7 +344,6 @@ extension CPToastView {
         container.translatesAutoresizingMaskIntoConstraints = false
         container.shouldPassthrough = true
         container.backgroundColor = .clear
-        container.layoutMargins = viewData.margins
         
         if shouldInsertFirst {
             contentStackView.insertArrangedSubview(container, at: 0)
@@ -362,18 +354,18 @@ extension CPToastView {
         let view = viewData.view
         container.addSubview(view)
         NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: container.layoutMarginsGuide.leadingAnchor),
-            view.topAnchor.constraint(equalTo: container.layoutMarginsGuide.topAnchor),
-            view.trailingAnchor.constraint(equalTo: container.layoutMarginsGuide.trailingAnchor),
+            view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            view.topAnchor.constraint(equalTo: container.topAnchor),
+            view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
             view.widthAnchor.constraint(equalToConstant: viewData.width)
         ])
         
         if let height = viewData.height {
             view.heightAnchor.constraint(equalToConstant: height).isActive = true
-            view.bottomAnchor.constraint(lessThanOrEqualTo: container.layoutMarginsGuide.bottomAnchor).isActive = true
+            view.bottomAnchor.constraint(lessThanOrEqualTo: container.bottomAnchor).isActive = true
             
         } else {
-            view.bottomAnchor.constraint(equalTo: container.layoutMarginsGuide.bottomAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
         }
         
         return container
