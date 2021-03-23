@@ -60,7 +60,7 @@ extension ToastsViewController {
         leadingImageView.contentMode = .scaleAspectFill
         leadingImageView.clipsToBounds = true
         leadingImageView.layer.cornerRadius = 8
-        toastView.add(leadingView: leadingImageView, width: 32, height: 32)
+        toastView.add(view: leadingImageView, side: .leading, width: 32, height: 32, shouldFillOtherSide: true)
 
         // Add tap action for toast
         toastView.tapHandler = {
@@ -150,7 +150,7 @@ extension ToastsViewController {
         let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Star"))
         leadingImageView.contentMode = .center
         leadingImageView.clipsToBounds = true
-        toastView.add(leadingView: leadingImageView, width: 32)
+        toastView.add(view: leadingImageView, side: .leading, width: 32)
         
         // Add swipe to hide recognition to toast with '.up' direction
         toastView.setHideSwipeGestureEnabled(withDirection: .up)
@@ -199,7 +199,7 @@ extension ToastsViewController {
         let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Star"))
         leadingImageView.contentMode = .center
         leadingImageView.clipsToBounds = true
-        toastView.add(leadingView: leadingImageView, width: 32)
+        toastView.add(view: leadingImageView, side: .leading, width: 32)
         
         // Add swipe to hide recognition to toast with '.left' direction
         toastView.setHideSwipeGestureEnabled(withDirection: .left)
@@ -249,7 +249,7 @@ extension ToastsViewController {
         let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Star"))
         leadingImageView.contentMode = .center
         leadingImageView.clipsToBounds = true
-        toastView.add(leadingView: leadingImageView, width: 32)
+        toastView.add(view: leadingImageView, side: .leading, width: 32)
 
         // Leading and trailing views support language directions.
         toastView.semanticContentAttribute = .forceRightToLeft
@@ -301,7 +301,7 @@ extension ToastsViewController {
         let leadingImageView = UIImageView(image: #imageLiteral(resourceName: "Star"))
         leadingImageView.contentMode = .center
         leadingImageView.clipsToBounds = true
-        toastView.add(leadingView: leadingImageView, width: 32)
+        toastView.add(view: leadingImageView, side: .leading, width: 32)
         
         // Leading and trailing views support language directions.
         toastView.semanticContentAttribute = .forceLeftToRight

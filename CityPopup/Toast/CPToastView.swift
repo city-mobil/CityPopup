@@ -9,6 +9,11 @@ import UIKit
 
 public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
     
+    // MARK: - Public types
+    public enum Side {
+        case leading, trailing
+    }
+    
     // MARK: - Private types
     private enum Spec {
         static let minimumWidth: CGFloat = 200
@@ -17,13 +22,11 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
         static let swipeThresholdVerticalCoefficient: CGFloat = 0.04
         static let swipeThresholdHorizontalCoefficient: CGFloat = 0.2
     }
-    private enum Side {
-        case leading, trailing
-    }
     private struct FloatViewData {
         let view: UIView
         let width: CGFloat
         let height: CGFloat?
+        let margins: UIEdgeInsets
         let shouldFillOtherSide: Bool
     }
     
@@ -129,42 +132,45 @@ public final class CPToastView: CPPopupView, AnimatedPressViewProtocol {
 // MARK: - Public methods
 extension CPToastView {
     
-    /// Add a view which will be displayed on leading edge of the toast.
+    /// Add a view which will be displayed on some side of the toast.
     /// - Parameters:
-    ///   - leadingView: The view to display.
+    ///   - view: The view to display.
+    ///   - side: Some side to display the view.
     ///   - width: Width of the leading view. Pay attention on the value to not confront with other toast's content.
     ///   - height: Height of the leading view. Nil height means that the leading view should be fit into leading container.
+    ///   - margins: Content margins for the view container.
     ///   - shouldFillOtherSide: A flag used to determine will be an empty view made with same size as the view created on the other side.
     ///   Will be ignored if the other side view exists.
-    public func add(leadingView: UIView, width: CGFloat, height: CGFloat? = nil, shouldFillOtherSide: Bool = false) {
-        leadingView.translatesAutoresizingMaskIntoConstraints = false
-        leadingView.removeConstraints(constraints)
+    public func add(
+        view: UIView,
+        side: Side,
+        width: CGFloat,
+        height: CGFloat? = nil,
+        margins: UIEdgeInsets = .zero,
+        shouldFillOtherSide: Bool = false)
+    {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.removeConstraints(constraints)
         
-        leadingViewData = .init(
-            view: leadingView,
-            width: width,
-            height: height,
-            shouldFillOtherSide: shouldFillOtherSide
-        )
-    }
-    
-    /// Add a view which will be displayed on trailing edge of the toast.
-    /// - Parameters:
-    ///   - trailingView: The view to display.
-    ///   - width: Width of the trailing view. Pay attention on the value to not confront with other toast's content.
-    ///   - height: Height of the trailing view. Nil height means that the trailing view should be fit into trailing container.
-    ///   - shouldFillOtherSide: A flag used to determine will be an empty view made with same size as the view created on the other side.
-    ///   Will be ignored if the other side view exists.
-    public func add(trailingView: UIView, width: CGFloat, height: CGFloat? = nil, shouldFillOtherSide: Bool = false) {
-        trailingView.translatesAutoresizingMaskIntoConstraints = false
-        trailingView.removeConstraints(constraints)
-        
-        trailingViewData = .init(
-            view: trailingView,
-            width: width,
-            height: height,
-            shouldFillOtherSide: shouldFillOtherSide
-        )
+        switch side {
+        case .leading:
+            leadingViewData = .init(
+                view: view,
+                width: width,
+                height: height,
+                margins: margins,
+                shouldFillOtherSide: shouldFillOtherSide
+            )
+            
+        case .trailing:
+            trailingViewData = .init(
+                view: view,
+                width: width,
+                height: height,
+                margins: margins,
+                shouldFillOtherSide: shouldFillOtherSide
+            )
+        }
     }
     
     /// Enable swipe gesture.
@@ -304,7 +310,8 @@ extension CPToastView {
            leadingViewData.shouldFillOtherSide,
            trailingViewData == nil
         {
-            let margin = style.horizontalSpacingAfterLeadingContainer + leadingViewData.width
+            let leadingMargins = leadingViewData.margins.left + leadingViewData.margins.right
+            let margin = style.horizontalSpacingAfterLeadingContainer + leadingViewData.width + leadingMargins
             if isRightToLeftDirection {
                 contentStackView.layoutMargins.left = margin
             } else {
@@ -315,7 +322,8 @@ extension CPToastView {
            trailingViewData.shouldFillOtherSide,
            leadingViewData == nil
         {
-            let margin = style.horizontalSpacingAfterTitle + trailingViewData.width
+            let trailingMargins = trailingViewData.margins.left + trailingViewData.margins.right
+            let margin = style.horizontalSpacingAfterTitle + trailingViewData.width + trailingMargins
             if isRightToLeftDirection {
                 contentStackView.layoutMargins.right = margin
             } else {
@@ -343,6 +351,7 @@ extension CPToastView {
         container.translatesAutoresizingMaskIntoConstraints = false
         container.shouldPassthrough = true
         container.backgroundColor = .clear
+        container.layoutMargins = viewData.margins
         
         if shouldInsertFirst {
             contentStackView.insertArrangedSubview(container, at: 0)
@@ -353,18 +362,18 @@ extension CPToastView {
         let view = viewData.view
         container.addSubview(view)
         NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            view.topAnchor.constraint(equalTo: container.topAnchor),
-            view.trailingAnchor.constraint(equalTo: container.trailingAnchor),
+            view.leadingAnchor.constraint(equalTo: container.layoutMarginsGuide.leadingAnchor),
+            view.topAnchor.constraint(equalTo: container.layoutMarginsGuide.topAnchor),
+            view.trailingAnchor.constraint(equalTo: container.layoutMarginsGuide.trailingAnchor),
             view.widthAnchor.constraint(equalToConstant: viewData.width)
         ])
         
         if let height = viewData.height {
             view.heightAnchor.constraint(equalToConstant: height).isActive = true
-            view.bottomAnchor.constraint(lessThanOrEqualTo: container.bottomAnchor).isActive = true
+            view.bottomAnchor.constraint(lessThanOrEqualTo: container.layoutMarginsGuide.bottomAnchor).isActive = true
             
         } else {
-            view.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
+            view.bottomAnchor.constraint(equalTo: container.layoutMarginsGuide.bottomAnchor).isActive = true
         }
         
         return container
