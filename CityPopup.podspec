@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name                   = "CityPopup"
-  spec.version                = "0.5"
+  spec.version                = "0.6"
   spec.summary                = "A popup display engine framework for iOS and iPadOS."
   spec.description            = <<-DESC
   CityPopup is a framework for iOS and iPadOS that is a popup display engine written in Swift.
