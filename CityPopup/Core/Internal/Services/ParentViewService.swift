@@ -15,7 +15,6 @@ final class ParentViewService {
     private struct BackgroundViewData {
         let backgroundView: UIView
         let animationDuration: TimeInterval
-        var isUsing = false
     }
     
     // MARK: - Private properties
@@ -58,27 +57,17 @@ extension ParentViewService {
         backgroundViewData = .init(backgroundView: backgroundView, animationDuration: animationDuration)
     }
     
-    func backgroundViewAnimate(shouldShow: Bool, completion: (() -> Void)? = nil) {
-        guard let backgroundViewData = backgroundViewData else {
-            completion?()
-            return
-        }
+    func backgroundViewAnimate(shouldShow: Bool) {
+        guard let backgroundViewData = backgroundViewData else { return }
+        
         UIView.animate(
             withDuration: backgroundViewData.animationDuration,
             delay: 0,
             options: [.curveEaseInOut, .beginFromCurrentState],
             animations: {
                 backgroundViewData.backgroundView.alpha = shouldShow ? 1 : 0
-            },
-            completion: { _ in
-                completion?()
             }
         )
-    }
-    
-    func stopUsingBackground() {
-        backgroundViewData?.backgroundView.removeFromSuperview()
-        backgroundViewData?.isUsing = false
     }
     
     func removeCreatedWindow() {
@@ -120,12 +109,10 @@ extension ParentViewService {
     
     private func layoutBackgroundView(onView view: UIView) {
         guard let backgroundView = backgroundViewData?.backgroundView,
-              backgroundViewData?.isUsing == false
+              backgroundView.superview == nil
         else {
             return
         }
-        
-        self.backgroundViewData?.isUsing = true
         
         view.addSubview(backgroundView)
         view.bringSubviewToFront(backgroundView)
