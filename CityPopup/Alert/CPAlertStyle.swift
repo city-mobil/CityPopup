@@ -19,6 +19,10 @@ public struct CPAlertStyle {
     
     // MARK: - Internal properties
     let cornerRadius: CGFloat
+    
+    @available(iOS 13.0, *)
+    private(set) lazy var cornerCurve: CALayerCornerCurve = .circular
+    
     let backgroundColor: UIColor
     
     let contentMargin: UIEdgeInsets
@@ -79,6 +83,48 @@ public struct CPAlertStyle {
         self.spacingAfterTitle = spacingAfterTitle
         self.spacingAfterMessage = spacingAfterMessage
         self.spacingBetweenActions = spacingBetweenActions
+    }
+    
+    @available(iOS 13.0, *)
+    public init(
+        cornerRadius: CGFloat = 8,
+        cornerCurve: CALayerCornerCurve = .circular,
+        backgroundColor: UIColor = CPColor.white_gray14,
+        contentMargin: UIEdgeInsets = .init(top: 24, left: 24, bottom: 24, right: 24),
+        coverViewHeight: CGFloat? = nil,
+        titleFont: UIFont = .boldSystemFont(ofSize: 24),
+        titleColor: UIColor = CPColor.black_white,
+        titleTextAlignment: NSTextAlignment = .center,
+        titleNumberOfLines: Int = 0,
+        messageFont: UIFont = .systemFont(ofSize: 16),
+        messageColor: UIColor = CPColor.black_white,
+        messageTextAligment: NSTextAlignment = .center,
+        messageNumberOfLines: Int = 0,
+        actionsAxis: ActionsAxis = .vertical,
+        spacingAfterCoverView: CGFloat = 24,
+        spacingAfterTitle: CGFloat = 24,
+        spacingAfterMessage: CGFloat = 24,
+        spacingBetweenActions: CGFloat = 16)
+    {
+        self.cornerRadius = cornerRadius
+        self.backgroundColor = backgroundColor
+        self.contentMargin = contentMargin
+        self.coverViewHeight = coverViewHeight
+        self.titleFont = titleFont
+        self.titleColor = titleColor
+        self.titleTextAlignment = titleTextAlignment
+        self.titleNumberOfLines = titleNumberOfLines
+        self.messageFont = messageFont
+        self.messageColor = messageColor
+        self.messageTextAligment = messageTextAligment
+        self.messageNumberOfLines = messageNumberOfLines
+        self.actionsAxis = actionsAxis
+        self.spacingAfterCoverView = spacingAfterCoverView
+        self.spacingAfterTitle = spacingAfterTitle
+        self.spacingAfterMessage = spacingAfterMessage
+        self.spacingBetweenActions = spacingBetweenActions
+        
+        self.cornerCurve = cornerCurve
     }
     
 }
