@@ -47,7 +47,7 @@ public final class CPAlertView: CPPopupView {
     // MARK: - Private properties
     private let title: String?
     private let message: String?
-    private let style: CPAlertStyle
+    private var style: CPAlertStyle
     
     // MARK: - Init
     public init(title: String?, message: String?, style: CPAlertStyle = .default) {
@@ -68,6 +68,9 @@ public final class CPAlertView: CPPopupView {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = style.backgroundColor
         layer.cornerRadius = style.cornerRadius
+        if #available(iOS 13.0, *) {
+            layer.cornerCurve = style.cornerCurve
+        }
         clipsToBounds = true
     }
     
