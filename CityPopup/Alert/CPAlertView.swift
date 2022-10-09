@@ -47,12 +47,14 @@ public final class CPAlertView: CPPopupView {
     // MARK: - Private properties
     private let title: String?
     private let message: String?
+    private let attributedMessage: NSAttributedString?
     private var style: CPAlertStyle
     
     // MARK: - Init
-    public init(title: String?, message: String?, style: CPAlertStyle = .default) {
+    public init(title: String?, message: String?, attributedMessage: NSAttributedString? = nil, style: CPAlertStyle = .default) {
         self.title = title
         self.message = message
+        self.attributedMessage = attributedMessage
         self.style = style
         
         super.init(frame: .zero)
@@ -179,6 +181,10 @@ extension CPAlertView {
             messageLabel.text = message
             contentStackView.addArrangedSubview(messageLabel)
             messageLabel.backgroundColor = backgroundColor
+        } else if let attributedMessage = attributedMessage {
+            messageLabel.attributedText = attributedMessage
+            contentStackView.addArrangedSubview(messageLabel)
+            messageLabel.backgroundColor = backgroundColor
         }
         
         if contentStackView.arrangedSubviews.isEmpty {
@@ -222,7 +228,7 @@ extension CPAlertView {
         if title != nil {
             contentStackView.setSpacing(style.spacingAfterTitle, after: titleLabel)
         }
-        if message != nil {
+        if message != nil || attributedMessage != nil {
             contentStackView.setSpacing(style.spacingAfterMessage, after: messageLabel)
         }
     }
