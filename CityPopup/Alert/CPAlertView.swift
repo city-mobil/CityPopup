@@ -51,14 +51,25 @@ public final class CPAlertView: CPPopupView {
     private var style: CPAlertStyle
     
     // MARK: - Init
-    public init(title: String?, message: String?, attributedMessage: NSAttributedString? = nil, style: CPAlertStyle = .default) {
+    public init(title: String?, message: String?, style: CPAlertStyle = .default) {
         self.title = title
         self.message = message
-        self.attributedMessage = attributedMessage
+        self.attributedMessage = nil
         self.style = style
         
         super.init(frame: .zero)
         
+        commonInit()
+    }
+    
+    public init(title: String?, attributedMessage: NSAttributedString?, style: CPAlertStyle = .default) {
+        self.title = title
+        self.message = nil
+        self.attributedMessage = attributedMessage
+        self.style = style
+
+        super.init(frame: .zero)
+
         commonInit()
     }
     
