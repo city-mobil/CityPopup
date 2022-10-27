@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
     "Stanislav Svorovsky" => "svorovsky@ya.ru"
   }
   spec.platform               = :ios
-  spec.ios.deployment_target  = "9.0"
+  spec.ios.deployment_target  = "13.0"
   spec.swift_version          = "5.3"
   spec.source                 = { :git => "https://github.com/city-mobil/CityPopup.git", :tag => spec.version.to_s }
   spec.framework              = "UIKit"
